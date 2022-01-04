@@ -19,7 +19,8 @@ class Flat
     #[ORM\Column(type: 'string', length: 30)]
     private $furnished;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'ownerflats')]
+    #[ORM\JoinColumn(nullable: false)]
     private $owner;
 
     #[ORM\Column(type: 'string', length: 60)]
@@ -46,9 +47,8 @@ class Flat
     #[ORM\Column(type: 'string', length: 30)]
     private $gender;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(nullable: false)]
-    private $flat_id;
+    #[ORM\Column(type: 'boolean')]
+    private $available;
 
     public function getId(): ?int
     {
@@ -79,12 +79,12 @@ class Flat
         return $this;
     }
 
-    public function getOwner(): ?bool
+    public function getOwner(): ?User
     {
         return $this->owner;
     }
 
-    public function setOwner(bool $owner): self
+    public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
 
@@ -187,14 +187,14 @@ class Flat
         return $this;
     }
 
-    public function getFlatId(): ?User
+    public function getAvailable(): ?bool
     {
-        return $this->flat_id;
+        return $this->available;
     }
 
-    public function setFlatId(?User $flat_id): self
+    public function setAvailable(bool $available): self
     {
-        $this->flat_id = $flat_id;
+        $this->available = $available;
 
         return $this;
     }

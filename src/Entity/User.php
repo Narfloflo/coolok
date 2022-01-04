@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
 class User
 {
     #[ORM\Id]
@@ -16,7 +15,7 @@ class User
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 30, nullable: true)]
     private $firstname;
 
     #[ORM\Column(type: 'string', length: 30, nullable: true)]
@@ -28,35 +27,35 @@ class User
     #[ORM\Column(type: 'string', length: 255)]
     private $password;
 
-    #[ORM\Column(type: 'text')]
-    private $roles;
+    #[ORM\Column(type: 'json', nullable: true)]
+    private $roles = [];
 
     #[ORM\Column(type: 'date', nullable: true)]
     private $birthday;
 
-    #[ORM\Column(type: 'string', length: 30)]
+    #[ORM\Column(type: 'string', length: 30, nullable: true)]
     private $gender;
 
-    #[ORM\Column(type: 'string', length: 60)]
+    #[ORM\Column(type: 'string', length: 60, nullable: true)]
     private $city;
 
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $description;
 
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $passions;
 
     #[ORM\Column(type: 'string', length: 20, nullable: true)]
-    private $options_search;
+    private $option_search;
 
-    #[ORM\Column(type: 'string', length: 20, nullable: true)]
+    #[ORM\Column(type: 'string', length: 20)]
     private $option_gender;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private $option_age_min;
+    private $option_age_max;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private $option_age_max;
+    private $option_age_min;
 
     #[ORM\Column(type: 'integer', nullable: true)]
     private $option_rent_min;
@@ -64,16 +63,26 @@ class User
     #[ORM\Column(type: 'integer', nullable: true)]
     private $option_rent_max;
 
-    #[ORM\OneToMany(targetEntity: FavoriteUser::class, mappedBy: 'user_id_a')]
-    private $favoriteUsers;
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Flat::class)]
+    private $ownerflats;
 
     #[ORM\ManyToMany(targetEntity: Flat::class)]
-    private $user_id;
+    #[ORM\JoinTable(name: "favorite_flat")]
+    private $favorite_flat;
+
+    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'users')]
+    #[ORM\JoinTable(name: "favorite_user")]
+    private $favorite_user;
+
+    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'favorite_user')]
+    private $users;
 
     public function __construct()
     {
-        $this->favoriteUsers = new ArrayCollection();
-        $this->user_id = new ArrayCollection();
+        $this->ownerflats = new ArrayCollection();
+        $this->favorite_flat = new ArrayCollection();
+        $this->favorite_user = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,12 +138,12 @@ class User
         return $this;
     }
 
-    public function getRoles(): ?string
+    public function getRoles(): ?array
     {
         return $this->roles;
     }
 
-    public function setRoles(string $roles): self
+    public function setRoles(?array $roles): self
     {
         $this->roles = $roles;
 
@@ -158,7 +167,7 @@ class User
         return $this->gender;
     }
 
-    public function setGender(string $gender): self
+    public function setGender(?string $gender): self
     {
         $this->gender = $gender;
 
@@ -170,7 +179,7 @@ class User
         return $this->city;
     }
 
-    public function setCity(string $city): self
+    public function setCity(?string $city): self
     {
         $this->city = $city;
 
@@ -182,7 +191,7 @@ class User
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -194,21 +203,21 @@ class User
         return $this->passions;
     }
 
-    public function setPassions(string $passions): self
+    public function setPassions(?string $passions): self
     {
         $this->passions = $passions;
 
         return $this;
     }
 
-    public function getOptionsSearch(): ?string
+    public function getOptionSearch(): ?string
     {
-        return $this->options_search;
+        return $this->option_search;
     }
 
-    public function setOptionsSearch(?string $options_search): self
+    public function setOptionSearch(?string $option_search): self
     {
-        $this->options_search = $options_search;
+        $this->option_search = $option_search;
 
         return $this;
     }
@@ -218,21 +227,9 @@ class User
         return $this->option_gender;
     }
 
-    public function setOptionGender(?string $option_gender): self
+    public function setOptionGender(string $option_gender): self
     {
         $this->option_gender = $option_gender;
-
-        return $this;
-    }
-
-    public function getOptionAgeMin(): ?int
-    {
-        return $this->option_age_min;
-    }
-
-    public function setOptionAgeMin(?int $option_age_min): self
-    {
-        $this->option_age_min = $option_age_min;
 
         return $this;
     }
@@ -245,6 +242,18 @@ class User
     public function setOptionAgeMax(?int $option_age_max): self
     {
         $this->option_age_max = $option_age_max;
+
+        return $this;
+    }
+
+    public function getOptionAgeMin(): ?int
+    {
+        return $this->option_age_min;
+    }
+
+    public function setOptionAgeMin(?int $option_age_min): self
+    {
+        $this->option_age_min = $option_age_min;
 
         return $this;
     }
@@ -274,27 +283,30 @@ class User
     }
 
     /**
-     * @return Collection|FavoriteUser[]
+     * @return Collection|Flat[]
      */
-    public function getFavoriteUsers(): Collection
+    public function getOwnerflats(): Collection
     {
-        return $this->favoriteUsers;
+        return $this->ownerflats;
     }
 
-    public function addFavoriteUser(FavoriteUser $favoriteUser): self
+    public function addOwnerflat(Flat $ownerflat): self
     {
-        if (!$this->favoriteUsers->contains($favoriteUser)) {
-            $this->favoriteUsers[] = $favoriteUser;
-            $favoriteUser->addUserIdA($this);
+        if (!$this->ownerflats->contains($ownerflat)) {
+            $this->ownerflats[] = $ownerflat;
+            $ownerflat->setOwner($this);
         }
 
         return $this;
     }
 
-    public function removeFavoriteUser(FavoriteUser $favoriteUser): self
+    public function removeOwnerflat(Flat $ownerflat): self
     {
-        if ($this->favoriteUsers->removeElement($favoriteUser)) {
-            $favoriteUser->removeUserIdA($this);
+        if ($this->ownerflats->removeElement($ownerflat)) {
+            // set the owning side to null (unless already changed)
+            if ($ownerflat->getOwner() === $this) {
+                $ownerflat->setOwner(null);
+            }
         }
 
         return $this;
@@ -303,23 +315,74 @@ class User
     /**
      * @return Collection|Flat[]
      */
-    public function getUserId(): Collection
+    public function getFavoriteFlat(): Collection
     {
-        return $this->user_id;
+        return $this->favorite_flat;
     }
 
-    public function addUserId(Flat $userId): self
+    public function addFavoriteFlat(Flat $favoriteFlat): self
     {
-        if (!$this->user_id->contains($userId)) {
-            $this->user_id[] = $userId;
+        if (!$this->favorite_flat->contains($favoriteFlat)) {
+            $this->favorite_flat[] = $favoriteFlat;
         }
 
         return $this;
     }
 
-    public function removeUserId(Flat $userId): self
+    public function removeFavoriteFlat(Flat $favoriteFlat): self
     {
-        $this->user_id->removeElement($userId);
+        $this->favorite_flat->removeElement($favoriteFlat);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getFavoriteUser(): Collection
+    {
+        return $this->favorite_user;
+    }
+
+    public function addFavoriteUser(self $favoriteUser): self
+    {
+        if (!$this->favorite_user->contains($favoriteUser)) {
+            $this->favorite_user[] = $favoriteUser;
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteUser(self $favoriteUser): self
+    {
+        $this->favorite_user->removeElement($favoriteUser);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(self $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addFavoriteUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(self $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeFavoriteUser($this);
+        }
 
         return $this;
     }
