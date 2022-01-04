@@ -77,6 +77,9 @@ class User
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'favorite_user')]
     private $users;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $picture;
+
     public function __construct()
     {
         $this->ownerflats = new ArrayCollection();
@@ -383,6 +386,18 @@ class User
         if ($this->users->removeElement($user)) {
             $user->removeFavoriteUser($this);
         }
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

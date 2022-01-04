@@ -50,6 +50,9 @@ class Flat
     #[ORM\Column(type: 'boolean')]
     private $available;
 
+    #[ORM\Column(type: 'json')]
+    private $images = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -195,6 +198,18 @@ class Flat
     public function setAvailable(bool $available): self
     {
         $this->available = $available;
+
+        return $this;
+    }
+
+    public function getImages(): ?array
+    {
+        return $this->images;
+    }
+
+    public function setImages(array $images): self
+    {
+        $this->images = $images;
 
         return $this;
     }
