@@ -1,14 +1,14 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{{ path('index') }}"><img src="https://coolokbucket.s3.eu-west-3.amazonaws.com/images/logo_coolok.png" style="height:30px;" alt="Logo Coolok"></a>
+            <a class="navbar-brand" href="{{ path('main_index') }}"><img src="https://coolokbucket.s3.eu-west-3.amazonaws.com/images/logo_coolok.png" style="height:30px;" alt="Logo Coolok"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('index') }}">Accueil</a>
+                    <a class="nav-link active" aria-current="page" href="{{ path('main_index') }}">Accueil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Coolokation</a>
@@ -17,11 +17,11 @@
                     <a class="nav-link" href="#">Mes favoris</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Mon compte</a>
+                    <a class="nav-link" href="{{ path('user_profil') }}">Mon compte</a>
                 </li>
                 </ul>
                 <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Rechercher une ville, un logement" aria-label="Search">
+                <input class="form-control me-2" type="search" placeholder="Votre recherche..." aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Rechercher</button>
                 </form>
             </div>
