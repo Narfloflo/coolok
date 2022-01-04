@@ -7,6 +7,9 @@
     --color-clear : #A8A3A3;
 
 }
+a{
+    text-decoration: none;
+}
 body{
     background-color: var(--color-bg);
     min-height: 100vh;

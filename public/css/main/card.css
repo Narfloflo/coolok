@@ -1,3 +1,13 @@
+.sub-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.sub-header a{
+    color: var(--color-dark);
+}
+
 .card-flat-top{
     position: relative;
 }
