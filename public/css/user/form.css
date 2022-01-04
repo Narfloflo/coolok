@@ -1,0 +1,56 @@
+form.form-box{
+    max-width: 450px;
+    margin: 60px auto;
+}
+
+form .form-row{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+form .form-row > div{
+    flex: 1;
+}
+
+form label{
+    font-size: 1.2rem;
+}
+
+form input:not([type="checkbox"]), form textarea, form select{
+    box-sizing: border-box;
+    padding: 5px;
+    font-size: 1.2rem;
+    width: 100%;
+}
+
+a{
+    text-decoration: none;
+    color: #FCA311;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+}
+
+.new{
+    color: #011627;
+    background-color: rgb(250, 249, 249);
+    border-color: #FCA311;
+}
+
+.register{
+    display: flex;
+    justify-content: center;
+}
+
+.button{
+    background-color: #011627;
+    color: rgb(250, 249, 249);
+}
+
+.form-end{
+    display: flex;
+    justify-content: center;
+}
