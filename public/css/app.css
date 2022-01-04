@@ -1,11 +1,20 @@
 /* global css */
 :root{
     --color-bg: rgb(250, 249, 249);
+    --color-primary : #FC5E5E;
+    --color-secondary : #FCA311;
+    --color-dark : #011627;
+    --color-clear : #A8A3A3;
+
 }
 body{
     background-color: var(--color-bg);
     min-height: 600px;
     position: relative;
+}
+
+header{
+    border-bottom: 1px solid grey;
 }
 
 .footer{
