@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} {% endblock %}
+{% block title %}Profil - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/user/form.css') }}">
+{% endblock %}
 
 {% block body %}
-
-<main>
-    page user
-</main>
-{% endblock %}
+<h1>Profil</h1>
