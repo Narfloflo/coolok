@@ -2,18 +2,33 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\FlatRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('', name:'flat_')]
 class FlatController extends AbstractController
 {
-    #[Route('/flat', name: 'flat')]
+    private $flatRepository;
+
+    public function __construct(
+        FlatRepository $flatRepository,
+    ){
+        $this->flatRepository = $flatRepository;
+    }
+
+    #[Route('/colocation', name: 'allFlat')]
     public function index(): Response
     {
+        $allFlat = $this->flatRepository->findBy(
+            ['available' => 1],
+            ['id' => 'DESC'],
+            
+        );
+
         return $this->render('flat/index.html.twig', [
-            'controller_name' => 'FlatController',
+            'allFlat' => $allFlat,
         ]);
     }
 
