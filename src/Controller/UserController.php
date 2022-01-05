@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('', name:'user_')]
 class UserController extends AbstractController
 {
+
     #[Route('/connexion', name: 'login')]
     public function login(): Response
     {

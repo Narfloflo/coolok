@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\FlatRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\FlatRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FlatRepository::class)]
 class Flat
@@ -13,9 +14,15 @@ class Flat
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[Assert\NotBlank(
+        message: 'Vous devez saisir un type de logement'
+    )]
     #[ORM\Column(type: 'string', length: 30)]
     private $type;
 
+    #[Assert\NotBlank(
+        message: 'Vous devez saisir ce champ'
+    )]
     #[ORM\Column(type: 'string', length: 30)]
     private $furnished;
 
@@ -23,32 +30,76 @@ class Flat
     #[ORM\JoinColumn(nullable: false)]
     private $owner;
 
+    #[Assert\NotBlank(
+        message: 'Veuillez indiquer une ville.'
+    )]
     #[ORM\Column(type: 'string', length: 60)]
     private $city;
-
+    
+    #[Assert\GreaterThan(
+        value: 0,
+        message: 'La surface doit être supérieur à 0.'
+    )]
     #[ORM\Column(type: 'integer')]
     private $surface;
 
+    #[Assert\GreaterThan(
+        value: 0,
+        message: 'Vous devez indiquer le nombre de pièces.'
+    )]
     #[ORM\Column(type: 'integer')]
     private $rooms;
 
+    #[Assert\GreaterThanOrEqual(
+        value: 0,
+        message: 'Vous devez indiquer le nombre de place disponible.'
+    )]
     #[ORM\Column(type: 'integer')]
     private $free_space;
 
+    #[Assert\GreaterThan(
+        value: 0,
+        message: 'Vous devez indiquer le nombre de place total.'
+    )]
     #[ORM\Column(type: 'integer')]
     private $total_space;
 
+    #[Assert\GreaterThanOrEqual(
+        value: 0,
+        message: 'Vous devez indiquer le montant du loyer par personne.'
+    )]
     #[ORM\Column(type: 'integer')]
     private $rent;
 
+    #[Assert\Length(
+        min: 10,
+        max: 1000,
+        minMessage: 'Votre description doit contenir au minimum {{ limit }} caractères',
+        maxMessage: 'Votre description doit contenir au maximum {{ limit }} caractères',
+    )]
     #[ORM\Column(type: 'text')]
     private $description;
 
+    #[Assert\NotBlank(
+        message: 'Veuillez indiquer une préférence'
+    )]
     #[ORM\Column(type: 'string', length: 30)]
     private $gender;
 
+    #[Assert\NotBlank(
+        message: 'Veuillez indiquer une sa disponiblité'
+    )]
     #[ORM\Column(type: 'boolean')]
     private $available;
+
+    #[Assert\File(
+        maxSize: '2M',
+        mimeTypes: ['image/jpeg', 'image/png'],
+        mimeTypesMessage: 'Veuillez transferer un fichier image valide',
+        maxSizeMessage: 'Ce fichier est trop volumineux: ({{ size }} {{ suffix }}). Poids maximum: {{ limit }} {{ suffix }}.'
+    )]
+    #[ORM\Column(type: 'json')]
+    private $images = [];
 
     public function getId(): ?int
     {
@@ -195,6 +246,18 @@ class Flat
     public function setAvailable(bool $available): self
     {
         $this->available = $available;
+
+        return $this;
+    }
+
+    public function getImages(): ?array
+    {
+        return $this->images;
+    }
+
+    public function setImages(array $images): self
+    {
+        $this->images = $images;
 
         return $this;
     }
