@@ -1,0 +1,79 @@
+.desac{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.delete{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.supp{
+    color: grey;
+}
+
+.perso{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+button{
+    border-color: grey;
+    background-color: rgb(250, 249, 249);
+    color: grey;
+    justify-content: center;
+}
+
+.langue{
+    text-align: center;
+    padding: 30px 10px;
+}
+
+.langue h2{
+    margin-bottom: 30px;
+}
+
+.langue article{
+    display: inline-block;
+    margin: 0 30px;
+}
+
+.langue article img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+h3{
+    font-size: 15px;
+}
+
+.img{
+    border-color: #FCA311;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+hr{
+    color: #FCA311;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+}
+
+a{
+    text-decoration: none;
+    color: #FCA311;
+}
+
+.me{
+    display: flex;
+    justify-content: center;
+}

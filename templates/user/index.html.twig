@@ -3,8 +3,65 @@
 {% block title %}Profil - {{ parent() }}{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/user/form.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/user/profil.css') }}">
 {% endblock %}
 
 {% block body %}
 <h1>Profil</h1>
+
+    <div class="img">
+        <img src="#" alt="photo de profil">
+    </div>
+    <div class="me">
+        <p>John Doe - 32 ans</p>
+    </div>
+    <div class="me">
+        <ion-icon name="location-outline"></ion-icon>
+        <p>Villeneuve d'Ascq</p>
+    </div>
+    <hr>
+<h2>A propos de moi</h2>
+    <div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus optio commodi exercitationem iste odio accusantium cum alias dolorum id hic, amet, sint maxime iure. Assumenda at voluptates tempore blanditiis repudiandae!</p>
+    </div>
+<h2>Passions</h2>
+    <div>
+        <p>Football - Cinéma - Cuisine asiatique</p>
+    </div>
+<h2>Date de naissance</h2>
+    <div>
+        <p>01 / 01 / 1990</p>
+    </div>
+    <hr>
+
+<section class="langue">
+    <h2>Je parle</h2>
+        <article>
+            <img src="#" alt="Drapeau FR">
+            <h3>Français</h3>
+        </article>
+        <article>
+            <img src="#" alt="Drapeau GR">
+            <h3>Allemand</h3>
+        </article>
+        <article>
+            <img src="#" alt="Drapeau RU">
+            <h3>Russe</h3>
+        </article>
+</section>
+    <div class="perso">
+        <h2>Mon logement</h2>
+            <a href="#"><ion-icon name="chevron-forward-outline"></ion-icon></a>
+    </div>
+    <div class="perso">
+        <h2>Mes préférences</h2>
+            <a href="#"><ion-icon name="chevron-forward-outline"></ion-icon></a>
+    </div>
+    <div class="desac">
+        <button type="button" class="btn btn-outline-secondary">Désactiver le compte</button>
+    </div>
+    <div class="delete">
+        <a class="supp" href="#">Supprimer le compte</a>
+    </div>
+
+{% endblock %}
