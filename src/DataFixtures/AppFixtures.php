@@ -28,7 +28,6 @@ class AppFixtures extends Fixture
             $user->setOptionRentMin(250);
             $user->setOptionRentMax(500);
             $user->setPicture('https://t3.ftcdn.net/jpg/01/97/11/64/240_F_197116416_hpfTtXSoJMvMqU99n6hGP4xX0ejYa4M7.jpg');
-
             
             $flat = new Flat();
             $flat->setType('Appartement');

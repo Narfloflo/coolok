@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+#[UniqueEntity('email', 'Cette adresse email est déjà utilisée.')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
 {
@@ -21,15 +24,35 @@ class User
     #[ORM\Column(type: 'string', length: 30, nullable: true)]
     private $lastname;
 
+    #[Assert\NotBlank(
+        message: 'Vous devez saisir une adresse email.'
+    )]
+    #[Assert\Email(
+        message: 'Vous devez saisir une adresse email valide.',
+    )]
     #[ORM\Column(type: 'string', length: 255)]
     private $email;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $password;
 
+    #[Assert\NotBlank(
+        message: 'Vous devez saisir un mot de passe.'
+    )]
+    #[Assert\Length(
+        min: 8,
+        max: 50,
+        minMessage: 'Votre mot de passe doit contenir minimum {{ limit }} caractères',
+        maxMessage: 'Votre mot de passe doit contenir au maximum {{ limit }} caractères',
+    )]
+    #[Assert\Regex('/^(?=.*[A-Za-z])(?=.*\d)(?=.*?[@$!%*#?&])/', message: 'Votre mot de passe doit contenir au minimum 1 chiffre, 1 lettre et 1 caractère spécial')]
+    #[Assert\NotCompromisedPassword(message: 'Ce mot de passe semble avoir déjà été compromis lors d\'une fuite de donnée d\'un autre service.')]
+    private$plainPassword;
+
     #[ORM\Column(type: 'json', nullable: true)]
     private $roles = [];
 
+    #[Assert\LessThanOrEqual('- 15 years', message: 'Vous devez avor plus de 15ans pour utiliser ce service')]
     #[ORM\Column(type: 'date', nullable: true)]
     private $birthday;
 
@@ -39,9 +62,21 @@ class User
     #[ORM\Column(type: 'string', length: 60, nullable: true)]
     private $city;
 
+    #[Assert\Length(
+        min: 10,
+        max: 1000,
+        minMessage: 'Votre description doit contenir au minimum {{ limit }} caractères',
+        maxMessage: 'Votre description doit contenir au maximum {{ limit }} caractères',
+    )]
     #[ORM\Column(type: 'text', nullable: true)]
     private $description;
 
+    #[Assert\Length(
+        min: 3,
+        max: 1000,
+        minMessage: 'Ce champ doit contenir au minimum {{ limit }} caractères',
+        maxMessage: 'Votre description doit contenir au maximum {{ limit }} caractères',
+    )]
     #[ORM\Column(type: 'text', nullable: true)]
     private $passions;
 
@@ -51,12 +86,22 @@ class User
     #[ORM\Column(type: 'string', length: 20)]
     private $option_gender;
 
+    #[Assert\GreaterThan(propertyPath : 'option_age_min')]
+    #[Assert\Positive]
     #[ORM\Column(type: 'integer', nullable: true)]
     private $option_age_max;
 
+    #[Assert\GreaterThanOrEqual(
+        value: 15,
+        message: 'Age minimum : 15 ans'
+    )]
     #[ORM\Column(type: 'integer', nullable: true)]
     private $option_age_min;
 
+    #[Assert\GreaterThanOrEqual(        
+        value: 0,
+        message: 'Loyer minimum : 0'
+        )]
     #[ORM\Column(type: 'integer', nullable: true)]
     private $option_rent_min;
 
@@ -77,6 +122,12 @@ class User
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'favorite_user')]
     private $users;
 
+    #[Assert\File(
+        maxSize: '2M',
+        mimeTypes: ['image/jpeg', 'image/png'],
+        mimeTypesMessage: 'Veuillez transferer un fichier image valide',
+        maxSizeMessage: 'Ce fichier est trop volumineux: ({{ size }} {{ suffix }}). Poids maximum: {{ limit }} {{ suffix }}.'
+    )]
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $picture;
 
@@ -137,6 +188,18 @@ class User
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }
