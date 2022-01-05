@@ -131,6 +131,9 @@ class User
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $picture;
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $available;
+
     public function __construct()
     {
         $this->ownerflats = new ArrayCollection();
@@ -461,6 +464,18 @@ class User
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getAvailable(): ?bool
+    {
+        return $this->available;
+    }
+
+    public function setAvailable(?bool $available): self
+    {
+        $this->available = $available;
 
         return $this;
     }
