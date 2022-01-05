@@ -19,7 +19,7 @@
                 <div class="card h-100">
                     <div class="card-flat-top">
                         <span class="freeplace">{{ flat.freespace }} {{ (flat.freespace < 2) ? 'place' : 'places' }}</span>
-                        <strong class="rent">{{ flat.rent  }}</strong>
+                        <strong class="rent">{{ flat.rent |format_currency('EUR', {fraction_digit: 0}) }}</strong>
                         <img src="{{ flat.images[0] }}"  alt="Colocation {{ flat.type }} {{ flat.city }} {{ flat.surface }} m2">
                     </div>
                 <div class="card-flat-info">
@@ -94,7 +94,7 @@
                 <div class="card h-100">
                     <div class="card-flat-top">
                         <span class="freeplace">{{ flat.freespace }} {{ (flat.freespace < 2) ? 'place' : 'places' }}</span>
-                        <strong class="rent">{{ flat.rent }}</strong>
+                        <strong class="rent">{{ flat.rent |format_currency('EUR', {fraction_digit: 0}) }}</strong>
                         <img src="{{ flat.images[0] }}"  alt="Colocation {{ flat.type }} {{ flat.city }} {{ flat.surface }} m2">
                     </div>
                 <div class="card-flat-info">
@@ -128,7 +128,7 @@
                 <div class="card h-100">
                     <div class="card-flat-top">
                         <span class="freeplace">{{ flat.freespace }} {{ (flat.freespace < 2) ? 'place' : 'places' }}</span>
-                        <strong class="rent">{{ flat.rent }}</strong>
+                        <strong class="rent">{{ flat.rent |format_currency('EUR', {fraction_digit: 0}) }}</strong>
                         <img src="{{ flat.images[0] }}"  alt="Colocation {{ flat.type }} {{ flat.city }} {{ flat.surface }} m2">
                     </div>
                 <div class="card-flat-info">
