@@ -6,11 +6,11 @@
 
 {% block body %}
 
-<h1 class="text-center fs-3 my-4">Retrouvez les dernières colocations</h1>
+<h1 class="text-center fs-3 my-4">Retrouvez les colocations meublées</h1>
 
 
 <div class="row row-cols-2 row-cols-lg-4 g-4">
-    {% for flat in allFlat %}
+    {% for flat in furnishedFlat %}
     <div class="col">
         <a href="#" class="link-card">
             <div class="card h-100">
@@ -34,7 +34,6 @@
         </a>
     </div>
     {% endfor %}
-
 </div>
 
 {% endblock %}

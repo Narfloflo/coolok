@@ -32,6 +32,36 @@ class FlatController extends AbstractController
         ]);
     }
 
+    #[Route('/mixColocation', name: 'mixedFlat')]
+    public function showMix(): Response
+    {
+        $mixedFlat = $this->flatRepository->findBy(
+            ['gender' => 'all',
+            'available' => 1
+            ],
+            ['id' => 'DESC'],
+        );
+
+        return $this->render('flat/mixed.html.twig', [
+            'mixedFlat' => $mixedFlat,
+        ]);
+    }
+    
+    #[Route('/furnishedColocation', name: 'furnishedFlat')]
+    public function showFurnished(): Response
+    {
+        $furnishedFlat = $this->flatRepository->findBy(
+            ['furnished' => 'yes',
+            'available' => 1
+            ],
+            ['id' => 'DESC'],
+        );
+
+        return $this->render('flat/furnished.html.twig', [
+            'furnishedFlat' => $furnishedFlat,
+        ]);
+    }
+
     #[Route('/show', name: 'show')]
     public function show(): Response
     {
