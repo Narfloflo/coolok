@@ -3,96 +3,503 @@
 {% block title %}{{ parent() }} - Trouver une colocation, un colocataire facilement et gratuitement{% endblock %}
 {% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/main/card.css') }}">{% endblock %}
 {% block body %}
-<h1>Trouvez votre colocation en 1 clic</h1>
+<h1 class="text-center fs-3 my-4">Trouvez votre colocation en 1 clic</h1>
 <main class="container">
-    <div class="row mb-4">
-        <div class="col sub-header">
-            <h2 class="mb-0">Nouveau logements</h2>
+    <div class="row mb-2">
+        <div class="col header-section">
+            <h2 class="fs-5">Derniers logements</h2>
             <a href="">Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></a>
         </div>
     </div>
     
-
-    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
         <div class="col">
-            <div class="card h-100">
-                <div class="card-flat-top">
-                    <span class="freeplace">1 place</span>
-                    <span class="rent">399€</span>
-                    <img src="https://via.placeholder.com/600x300" class="" alt="...">
+            <a href="#" class="link-card">
+                <div class="card h-100">
+                    <div class="card-flat-top">
+                        <span class="freeplace">1 place</span>
+                        <strong class="rent">399€</strong>
+                        <img src="https://via.placeholder.com/600x300" class="" alt="...">
+                    </div>
+                <div class="card-flat-info">
+                    <div>
+                        <h3 class="card-flat-title">Appartement</h3>
+                        <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                    </div>
+                    <div>
+                        <span class="flat-surface">65m2</span>
+                        <span class="flat-place">3pers</span>
+                    </div>
                 </div>
-            <div class="card-flat-info">
-                <div>
-                    <h3 class="card-flat-title">Appartement</h3>
-                    <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                <!-- <button class="btn-see-more"><span class="see-more">Découvrir </span></button> -->
                 </div>
-                <div>
-                    <span class="flat-surface">65m2</span>
-                    <span class="flat-place">3pers</span>
-                </div>
-            </div>
-            </div>
+            </a>
+            
         </div>
         <div class="col">
-            <div class="card h-100">
-                <div class="card-flat-top">
-                    <span class="freeplace">1 place</span>
-                    <span class="rent">399€</span>
-                    <img src="https://via.placeholder.com/600x300" class="" alt="...">
+            <a href="#" class="link-card">
+                <div class="card h-100">
+                    <div class="card-flat-top">
+                        <span class="freeplace">1 place</span>
+                        <strong class="rent">399€</strong>
+                        <img src="https://via.placeholder.com/600x300" class="" alt="...">
+                    </div>
+                <div class="card-flat-info">
+                    <div>
+                        <h3 class="card-flat-title">Appartement</h3>
+                        <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                    </div>
+                    <div>
+                        <span class="flat-surface">65m2</span>
+                        <span class="flat-place">3pers</span>
+                    </div>
                 </div>
-            <div class="card-flat-info">
-                <div>
-                    <h3 class="card-flat-title">Appartement</h3>
-                    <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                <!-- <button class="btn-see-more"><span class="see-more">Découvrir </span></button> -->
                 </div>
-                <div>
-                    <span class="flat-surface">65m2</span>
-                    <span class="flat-place">3pers</span>
-                </div>
-            </div>
-            </div>
+            </a>
+            
         </div>
         <div class="col">
-            <div class="card h-100">
-                <div class="card-flat-top">
-                    <span class="freeplace">1 place</span>
-                    <span class="rent">399€</span>
-                    <img src="https://via.placeholder.com/600x300" class="" alt="...">
+            <a href="#" class="link-card">
+                <div class="card h-100">
+                    <div class="card-flat-top">
+                        <span class="freeplace">1 place</span>
+                        <strong class="rent">399€</strong>
+                        <img src="https://via.placeholder.com/600x300" class="" alt="...">
+                    </div>
+                <div class="card-flat-info">
+                    <div>
+                        <h3 class="card-flat-title">Appartement</h3>
+                        <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                    </div>
+                    <div>
+                        <span class="flat-surface">65m2</span>
+                        <span class="flat-place">3pers</span>
+                    </div>
                 </div>
-            <div class="card-flat-info">
-                <div>
-                    <h3 class="card-flat-title">Appartement</h3>
-                    <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                <!-- <button class="btn-see-more"><span class="see-more">Découvrir </span></button> -->
                 </div>
-                <div>
-                    <span class="flat-surface">65m2</span>
-                    <span class="flat-place">3pers</span>
-                </div>
-            </div>
-            </div>
+            </a>
+            
         </div>
         <div class="col">
-            <div class="card h-100">
-                <div class="card-flat-top">
-                    <span class="freeplace">1 place</span>
-                    <span class="rent">399€</span>
-                    <img src="https://via.placeholder.com/600x300" class="" alt="...">
+            <a href="#" class="link-card">
+                <div class="card h-100">
+                    <div class="card-flat-top">
+                        <span class="freeplace">1 place</span>
+                        <strong class="rent">399€</strong>
+                        <img src="https://via.placeholder.com/600x300" class="" alt="...">
+                    </div>
+                <div class="card-flat-info">
+                    <div>
+                        <h3 class="card-flat-title">Appartement</h3>
+                        <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                    </div>
+                    <div>
+                        <span class="flat-surface">65m2</span>
+                        <span class="flat-place">3pers</span>
+                    </div>
                 </div>
-            <div class="card-flat-info">
-                <div>
-                    <h3 class="card-flat-title">Appartement</h3>
-                    <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                <!-- <button class="btn-see-more"><span class="see-more">Découvrir </span></button> -->
                 </div>
-                <div>
-                    <span class="flat-surface">65m2</span>
-                    <span class="flat-place">3pers</span>
-                </div>
-            </div>
-            </div>
+            </a>
+            
         </div>
     </div>
-    
+
+    <div class="row mt-5 mb-2">
+        <div class="col header-section">
+            <h2 class="fs-5">Les nouveaux coolok</h2>
+            <a href="">Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></a>
+        </div>
+    </div>
+
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 row-cols-lg-6 g-4">
+        <div class="col">
+            <a href="#" class="link-card">
+                <div>
+                    <div class="card-user-top">
+                        <img src="https://via.placeholder.com/200x200" alt="...">
+                    </div>
+                    <div class="card-user-info">
+                        <div>
+                            <h3 class="card-user-title">Pierre L.</h3>
+                        </div>
+                        <div>
+                            <span class="card-user-subtitle">Lomme</span>
+                            <span class="user-age">26 ans</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div>
+                    <div class="card-user-top">
+                        <img src="https://via.placeholder.com/200x200" alt="...">
+                    </div>
+                    <div class="card-user-info">
+                        <div>
+                            <h3 class="card-user-title">Pierre L.</h3>
+                        </div>
+                        <div>
+                            <span class="card-user-subtitle">Lomme</span>
+                            <span class="user-age">26 ans</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div>
+                    <div class="card-user-top">
+                        <img src="https://via.placeholder.com/200x200" alt="...">
+                    </div>
+                    <div class="card-user-info">
+                        <div>
+                            <h3 class="card-user-title">Pierre L.</h3>
+                        </div>
+                        <div>
+                            <span class="card-user-subtitle">Lomme</span>
+                            <span class="user-age">26 ans</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div>
+                    <div class="card-user-top">
+                        <img src="https://via.placeholder.com/200x200" alt="...">
+                    </div>
+                    <div class="card-user-info">
+                        <div>
+                            <h3 class="card-user-title">Pierre L.</h3>
+                        </div>
+                        <div>
+                            <span class="card-user-subtitle">Lomme</span>
+                            <span class="user-age">26 ans</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div>
+                    <div class="card-user-top">
+                        <img src="https://via.placeholder.com/200x200" alt="...">
+                    </div>
+                    <div class="card-user-info">
+                        <div>
+                            <h3 class="card-user-title">Pierre L.</h3>
+                        </div>
+                        <div>
+                            <span class="card-user-subtitle">Lomme</span>
+                            <span class="user-age">26 ans</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div>
+                    <div class="card-user-top">
+                        <img src="https://via.placeholder.com/200x200" alt="...">
+                    </div>
+                    <div class="card-user-info">
+                        <div>
+                            <h3 class="card-user-title">Pierre L.</h3>
+                        </div>
+                        <div>
+                            <span class="card-user-subtitle">Lomme</span>
+                            <span class="user-age">26 ans</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="px-4 py-5 mt-5 text-center">
+        <img class="d-block mx-auto mb-4 logo-min" src="https://coolokbucket.s3.eu-west-3.amazonaws.com/images/logo_coolok.png" alt="Logo">
+        <h3 class="fs-4 fw-bold">Le concept Coolok</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-2">Partagez bien plus qu'un loyer ! Avec Coolok, trouvez la colocation de vos rêves en un clic. Découvrez les logements proches de vous et rencontrez vos futurs colocataires. Construisez la colocation qui vous ressemble et qui vous rassemble. </p>
+        </div>
+    </div>
+
+    <div class="row mt-5 mb-2">
+        <div class="col header-section">
+            <h2 class="fs-5">Colocations mixte</h2>
+            <a href="">Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></a>
+        </div>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <div class="col">
+            <a href="#" class="link-card">
+                <div class="card h-100">
+                    <div class="card-flat-top">
+                        <span class="freeplace">1 place</span>
+                        <strong class="rent">399€</strong>
+                        <img src="https://via.placeholder.com/600x300" class="" alt="...">
+                    </div>
+                <div class="card-flat-info">
+                    <div>
+                        <h3 class="card-flat-title">Appartement</h3>
+                        <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                    </div>
+                    <div>
+                        <span class="flat-surface">65m2</span>
+                        <span class="flat-place">3pers</span>
+                    </div>
+                </div>
+                <!-- <button class="btn-see-more"><span class="see-more">Découvrir </span></button> -->
+                </div>
+            </a>
+            
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div class="card h-100">
+                    <div class="card-flat-top">
+                        <span class="freeplace">1 place</span>
+                        <strong class="rent">399€</strong>
+                        <img src="https://via.placeholder.com/600x300" class="" alt="...">
+                    </div>
+                <div class="card-flat-info">
+                    <div>
+                        <h3 class="card-flat-title">Appartement</h3>
+                        <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                    </div>
+                    <div>
+                        <span class="flat-surface">65m2</span>
+                        <span class="flat-place">3pers</span>
+                    </div>
+                </div>
+                <!-- <button class="btn-see-more"><span class="see-more">Découvrir </span></button> -->
+                </div>
+            </a>
+            
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div class="card h-100">
+                    <div class="card-flat-top">
+                        <span class="freeplace">1 place</span>
+                        <strong class="rent">399€</strong>
+                        <img src="https://via.placeholder.com/600x300" class="" alt="...">
+                    </div>
+                <div class="card-flat-info">
+                    <div>
+                        <h3 class="card-flat-title">Appartement</h3>
+                        <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                    </div>
+                    <div>
+                        <span class="flat-surface">65m2</span>
+                        <span class="flat-place">3pers</span>
+                    </div>
+                </div>
+                <!-- <button class="btn-see-more"><span class="see-more">Découvrir </span></button> -->
+                </div>
+            </a>
+            
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div class="card h-100">
+                    <div class="card-flat-top">
+                        <span class="freeplace">1 place</span>
+                        <strong class="rent">399€</strong>
+                        <img src="https://via.placeholder.com/600x300" class="" alt="...">
+                    </div>
+                <div class="card-flat-info">
+                    <div>
+                        <h3 class="card-flat-title">Appartement</h3>
+                        <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                    </div>
+                    <div>
+                        <span class="flat-surface">65m2</span>
+                        <span class="flat-place">3pers</span>
+                    </div>
+                </div>
+                <!-- <button class="btn-see-more"><span class="see-more">Découvrir </span></button> -->
+                </div>
+            </a>
+            
+        </div>
+    </div>
+
+    <div class="row mt-5 mb-2">
+        <div class="col header-section">
+            <h2 class="fs-5">Colocations meublées</h2>
+            <a href="">Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></a>
+        </div>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <div class="col">
+            <a href="#" class="link-card">
+                <div class="card h-100">
+                    <div class="card-flat-top">
+                        <span class="freeplace">1 place</span>
+                        <strong class="rent">399€</strong>
+                        <img src="https://via.placeholder.com/600x300" class="" alt="...">
+                    </div>
+                <div class="card-flat-info">
+                    <div>
+                        <h3 class="card-flat-title">Appartement</h3>
+                        <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                    </div>
+                    <div>
+                        <span class="flat-surface">65m2</span>
+                        <span class="flat-place">3pers</span>
+                    </div>
+                </div>
+                <!-- <button class="btn-see-more"><span class="see-more">Découvrir </span></button> -->
+                </div>
+            </a>
+            
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div class="card h-100">
+                    <div class="card-flat-top">
+                        <span class="freeplace">1 place</span>
+                        <strong class="rent">399€</strong>
+                        <img src="https://via.placeholder.com/600x300" class="" alt="...">
+                    </div>
+                <div class="card-flat-info">
+                    <div>
+                        <h3 class="card-flat-title">Appartement</h3>
+                        <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                    </div>
+                    <div>
+                        <span class="flat-surface">65m2</span>
+                        <span class="flat-place">3pers</span>
+                    </div>
+                </div>
+                <!-- <button class="btn-see-more"><span class="see-more">Découvrir </span></button> -->
+                </div>
+            </a>
+            
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div class="card h-100">
+                    <div class="card-flat-top">
+                        <span class="freeplace">1 place</span>
+                        <strong class="rent">399€</strong>
+                        <img src="https://via.placeholder.com/600x300" class="" alt="...">
+                    </div>
+                <div class="card-flat-info">
+                    <div>
+                        <h3 class="card-flat-title">Appartement</h3>
+                        <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                    </div>
+                    <div>
+                        <span class="flat-surface">65m2</span>
+                        <span class="flat-place">3pers</span>
+                    </div>
+                </div>
+                <!-- <button class="btn-see-more"><span class="see-more">Découvrir </span></button> -->
+                </div>
+            </a>
+            
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div class="card h-100">
+                    <div class="card-flat-top">
+                        <span class="freeplace">1 place</span>
+                        <strong class="rent">399€</strong>
+                        <img src="https://via.placeholder.com/600x300" class="" alt="...">
+                    </div>
+                <div class="card-flat-info">
+                    <div>
+                        <h3 class="card-flat-title">Appartement</h3>
+                        <span class="card-flat-subtitle">Villeneuve d'Ascq</span>
+                    </div>
+                    <div>
+                        <span class="flat-surface">65m2</span>
+                        <span class="flat-place">3pers</span>
+                    </div>
+                </div>
+                <!-- <button class="btn-see-more"><span class="see-more">Découvrir </span></button> -->
+                </div>
+            </a>
+            
+        </div>
+    </div>
+
+    <div class="row mt-5 mb-2 text-center">
+        <div class="col">
+            <h2 class="fs-5">Colocations par ville</h2>
+        </div>
+    </div>
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 row-cols-lg-6 g-4">
+        <div class="col">
+            <a href="#" class="link-card">
+                <div class="card-city-top">
+                    <img src="https://via.placeholder.com/200x200" alt="...">
+                </div>
+                <h3 class="card-city-name">Lille</h3>
+            </a>
+
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div class="card-city-top">
+                    <img src="https://via.placeholder.com/200x200" alt="...">
+                </div>
+                <h3 class="card-city-name">Lille</h3>
+            </a>
+
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div class="card-city-top">
+                    <img src="https://via.placeholder.com/200x200" alt="...">
+                </div>
+                <h3 class="card-city-name">Lille</h3>
+            </a>
+
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div class="card-city-top">
+                    <img src="https://via.placeholder.com/200x200" alt="...">
+                </div>
+                <h3 class="card-city-name">Lille</h3>
+            </a>
+
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div class="card-city-top">
+                    <img src="https://via.placeholder.com/200x200" alt="...">
+                </div>
+                <h3 class="card-city-name">Lille</h3>
+            </a>
+
+        </div>
+        <div class="col">
+            <a href="#" class="link-card">
+                <div class="card-city-top">
+                    <img src="https://via.placeholder.com/200x200" alt="...">
+                </div>
+                <h3 class="card-city-name">Lille</h3>
+            </a>
+
+        </div>
+    </div>
 
 
 </main>
 {% endblock %}
+

@@ -1,18 +1,21 @@
-.sub-header{
+.header-section{
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
 }
 
-.sub-header a{
+.header-section a{
     color: var(--color-dark);
+}
+
+.link-card:hover{
+    text-decoration: none;
 }
 
 .card-flat-top{
     position: relative;
 }
 
-.card-flat-top span{
+.card-flat-top span, strong{
     position: absolute;
     color: white;
     padding: 0 10px 0 10px;
@@ -20,21 +23,21 @@
 }
 
 .card-flat-top span:first-child{
-    top: 5px;
+    top: 10px;
     right: 10px;
     background-color: var(--color-primary);
 }
 
-.card-flat-top span:nth-child(2){
+.card-flat-top strong{
     left: 10px;
-    bottom: 5px;
+    bottom: 10px;
     background-color: var(--color-secondary);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 400;
 }
 
 .card-flat-top img{
     width: 100%;
-    object-fit: cover;
 }
 .card-flat-info{
     display: flex;
@@ -61,4 +64,56 @@
     border-left: 1px solid var(--color-clear);
     padding-left : 5px;
     font-size: 0.9rem;
+    color: var(--color-clear);
+}
+
+.card-user-top{
+    position: relative;
+}
+
+.card-user-top img{
+    width: 100%;
+    border-radius: 50%;
+}
+
+.card-user-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0.5rem 0 0.5rem 0;
+    padding-left: 5px;
+}
+
+.card-user-title{
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-dark);
+    margin-bottom: 0;
+}
+
+.card-user-info div:last-child{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-user-subtitle{
+    font-size: 0.8rem;
+}
+
+.user-age{
+    font-size: 0.7rem;
+    color: var(--color-clear);
+    align-self: flex-end;
+}
+
+.card-city-top img{
+    width: 100%;
+    border-radius: 50%;
+}
+
+.card-city-name{
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-top: 5px;
 }
