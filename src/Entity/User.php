@@ -2,27 +2,24 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[UniqueEntity('email', 'Cette adresse email est déjà utilisée.')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+#[ORM\Table(name: '`user`')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
-
-    #[ORM\Column(type: 'string', length: 30, nullable: true)]
-    private $firstname;
-
-    #[ORM\Column(type: 'string', length: 30, nullable: true)]
-    private $lastname;
 
     #[Assert\NotBlank(
         message: 'Vous devez saisir une adresse email.'
@@ -30,11 +27,20 @@ class User
     #[Assert\Email(
         message: 'Vous devez saisir une adresse email valide.',
     )]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
     private $email;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'json')]
+    private $roles = [];
+
+    #[ORM\Column(type: 'string')]
     private $password;
+
+    #[ORM\Column(type: 'string', length: 50, nullable:true)]
+    private $firstname;
+
+    #[ORM\Column(type: 'string', length: 50, nullable:true)]
+    private $lastname;
 
     #[Assert\NotBlank(
         message: 'Vous devez saisir un mot de passe.'
@@ -48,9 +54,6 @@ class User
     #[Assert\Regex('/^(?=.*[A-Za-z])(?=.*\d)(?=.*?[@$!%*#?&])/', message: 'Votre mot de passe doit contenir au minimum 1 chiffre, 1 lettre et 1 caractère spécial')]
     #[Assert\NotCompromisedPassword(message: 'Ce mot de passe semble avoir déjà été compromis lors d\'une fuite de donnée d\'un autre service.')]
     private$plainPassword;
-
-    #[ORM\Column(type: 'json', nullable: true)]
-    private $roles = [];
 
     #[Assert\LessThanOrEqual('- 15 years', message: 'Vous devez avor plus de 15ans pour utiliser ce service')]
     #[ORM\Column(type: 'date', nullable: true)]
@@ -83,7 +86,7 @@ class User
     #[ORM\Column(type: 'string', length: 20, nullable: true)]
     private $option_search;
 
-    #[ORM\Column(type: 'string', length: 20)]
+    #[ORM\Column(type: 'string', length: 20, nullable: true)]
     private $option_gender;
 
     #[Assert\GreaterThan(propertyPath : 'option_age_min')]
@@ -183,18 +186,6 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
@@ -203,18 +194,6 @@ class User
     public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
-
-        return $this;
-    }
-
-    public function getRoles(): ?array
-    {
-        return $this->roles;
-    }
-
-    public function setRoles(?array $roles): self
-    {
-        $this->roles = $roles;
 
         return $this;
     }
@@ -478,5 +457,77 @@ class User
         $this->available = $available;
 
         return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }

@@ -8,23 +8,29 @@
 
 {% block body %}
 <h1>Inscription</h1>
-<form method="post" class="form-box">
 
+    {{ form_start(form) }}
     <div class="form-row">
         <div>
-            <label for="emailInput"></label>
-            <input type="email" name="_email" id="emailInput" placeholder="Adresse email">
+            {{ form_row(form.email) }}
         </div>
     </div>
     <div class="form-row">
         <div>
-            <label for="passwordInput"></label>
-            <input type="password" name="_password" id="passwordInput" placeholder="Mot de passe">
+            {{ form_row(form.plainPassword) }}
         </div>
     </div>
+    <div class="form-row">
+        <div>
+            {{ form_errors(form.cgu) }}
+            {{ form_widget(form.cgu) }}
+            {{ form_label(form.cgu) }}
+        </div>
+    </div>
+
     <div class="form-end">
-        <button type="button" class="btn btn-outline-warning">M'inscrire</button>
+        {{ form_row(form.submit) }}
     </div>
-</form>
+    {{ form_end(form) }}
 
 {% endblock %}
