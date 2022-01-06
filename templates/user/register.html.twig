@@ -5,20 +5,21 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/user/form.css') }}">
 {% endblock %}
+{% block script %} <script src="{{ asset('js/form.js') }} " defer></script> {% endblock %}
 
 {% block body %}
 <h1>Inscription</h1>
 
     {{ form_start(form) }}
     <div class="form-row">
-        <div>
-            {{ form_row(form.email) }}
-        </div>
+        {{ form_row(form.email) }}
+    </div>
+    <div class="form-row form-password">
+        {{ form_row(form.plainPassword) }}
+        <span class="show-password"><i id="toggle_show" class="fas fa-eye"></i></span>
     </div>
     <div class="form-row">
-        <div>
-            {{ form_row(form.plainPassword) }}
-        </div>
+        {{ form_row(form.birthday) }}
     </div>
     <div class="form-row">
         <div>
@@ -27,10 +28,16 @@
             {{ form_label(form.cgu) }}
         </div>
     </div>
-
     <div class="form-end">
         {{ form_row(form.submit) }}
     </div>
     {{ form_end(form) }}
+
+    <div class="outform">
+        <a href="{{ path('user_login') }}" class="btn-outline">Créer un compte</a>
+        <a href="#">Mot de passe oublié ?</a>
+    
+    </div>
+
 
 {% endblock %}

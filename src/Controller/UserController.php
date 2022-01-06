@@ -49,7 +49,7 @@ class UserController extends AbstractController
             $this->em->persist($user);
             $this->em->flush();
 
-            // $this->addFlash('notice', 'Votre compte à bien été créé, vous pouvez dés à présent vous connecter');
+            $this->addFlash('notice', 'Votre compte à bien été créé, vous pouvez dés à présent vous connecter');
             return $this->redirectToRoute('main_index');
         }
 
