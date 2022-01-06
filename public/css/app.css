@@ -32,8 +32,10 @@ header{
     color: white;
     background-color: var(--color-dark);
     border-radius: 30px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
-    width: 200px;
+    padding: 10px 15px 10px 15px;
+    text-align: center;
+    width: 250px;
+    height: 50px;
 }
 /* .btn-see-more{
     border-radius: 10px;
@@ -170,4 +172,45 @@ header{
     .nav-bottom{
         display: flex;
     }
+}
+
+
+
+.notification-manager{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    max-width: 350px;
+}
+
+.notification{
+    padding: 10px 5px 10px 20px;;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    color: white;
+    transition: opacity 500ms;
+    display: flex;
+}
+.notification span{
+    flex: 1;
+}
+.notification .notification-close{
+    border-left: 1px solid white;
+    padding: 8px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.notification.n-notice{
+    background-color: #27ae60;
+}
+
+.notification.n-error{
+    background-color: #c0392b;
+}
+.notification.n-info{
+    background-color: #1195ec;
 }

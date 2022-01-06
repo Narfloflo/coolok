@@ -33,9 +33,11 @@
     </div>
     {{ form_end(form) }}
 
+    <div class="outform">
+        <a href="{{ path('user_login') }}" class="btn-outline">Créer un compte</a>
+        <a href="#">Mot de passe oublié ?</a>
     
+    </div>
 
-    <a href="{{ path('user_login') }}" class="btn-outline">Créer un compte</a>
-    <a href="#">Mot de passe oublié ?</a>
 
 {% endblock %}
