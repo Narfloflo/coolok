@@ -18,7 +18,7 @@ class FlatController extends AbstractController
         $this->flatRepository = $flatRepository;
     }
 
-    #[Route('/colocation', name: 'allFlat')]
+    #[Route('/colocations', name: 'allFlat')]
     public function index(): Response
     {
         $allFlat = $this->flatRepository->findBy(
@@ -62,7 +62,7 @@ class FlatController extends AbstractController
         ]);
     }
 
-    #[Route('/show{id}', name: 'show', requirements: ['id' => '\d+'])]
+    #[Route('/colocations/{id}', name: 'show', requirements: ['id' => '\d+'])]
     public function show($id): Response
     {
         $showFlat = $this->flatRepository->find($id);
