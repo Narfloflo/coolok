@@ -1,0 +1,33 @@
+.photo{
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+}
+
+.img{
+    display: flex;
+    justify-content: center;
+}
+
+.me{
+    display: flex;
+}
+
+strong{
+    font-size: 32px;
+}
+
+.search p{
+    color: #FC5E5E;
+    font-size: 16px;
+}
+
+.chat{
+    object-fit: cover;
+    justify-content: center;
+    align-items: center;
+}
+
+.description p{
+    color: grey;
+}

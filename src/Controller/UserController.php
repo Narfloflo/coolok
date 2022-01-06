@@ -73,4 +73,12 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
         ]);
     }
+
+    #[Route('/voir_profil', name: 'viewProfil')]
+    public function viewProfil(): Response
+    {
+        return $this->render('user/view_user.html.twig', [
+            'controller_name' => 'UserController',
+        ]);
+    }
 }
