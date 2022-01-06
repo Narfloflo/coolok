@@ -12,7 +12,7 @@
 <div class="row row-cols-2 row-cols-lg-4 g-4">
     {% for flat in mixedFlat %}
     <div class="col">
-        <a href="#" class="link-card">
+        <a href="{{ path('flat_show', {id: flat.id}) }}" class="link-card">
             <div class="card h-100">
                 <div class="card-flat-top">
                     <span class="freeplace">{{ flat.freespace }} {{ (flat.freespace < 2) ? 'place' : 'places' }}</span>

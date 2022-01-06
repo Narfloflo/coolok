@@ -56,6 +56,7 @@ class Flat
     )]
     #[ORM\Column(type: 'integer')]
     private $free_space;
+    //private $freeSpace;
 
     #[Assert\GreaterThan(
         value: 0,

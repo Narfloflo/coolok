@@ -1,0 +1,10 @@
+.carousel {
+    width: 800px;
+}
+
+.carousel-item {
+    height: 500px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}

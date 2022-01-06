@@ -1,33 +1,70 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ parent() }} - Trouver une colocation, un colocataire facilement et gratuitement{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/flat/flat.css') }}">{% endblock %}
+
 {% block body %}
 <div class="d-flex justify-content-center">
-    <img src="https://via.placeholder.com/800x500" class="" alt="...">
+    
+
+
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            {% for key, image in flat.images %}
+            <div {% if key == 0 %} class="carousel-item active" {% else %} class="carousel-item" {% endif %} style="background-image: url({{image}})">
+                <!-- <img src= {{ image|e }}  class="img-fluid" alt="..."> -->
+            </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+
+
+    <!-- {% for key, image in flat.images %}
+
+        <div>
+            <img src= {{ image|e }}  class="d-block w-100" alt="...">
+        </div>
+
+    {% endfor %} -->
+    
 </div>
 
 <br>
 
-<h1>Maison - 120m² - 12Pers</h1>
-<p>Proposé par Josie</p>
+<h1>{{ flat.type }} - {{ flat.surface }}m² - {{ flat.totalSpace }}Pers</h1>
+<p>Proposé par {{flat.owner.firstname}}</p>
 
 <br>
-
+ 
 <div class="d-flex justify-content-between">
     <h2>
-        <ion-icon name="location-outline"></ion-icon> Roubaix
+        <ion-icon name="location-outline"></ion-icon> {{ flat.city }}
     </h2>
     <p class="badge bg-warning w-25 p-3 fs-3">
-        420€/pers
+        {{ flat.rent }}€/pers
     </p>
 </div>
 
 <div>
     <p class="badge bg-danger rounded-pill p-2 fs-5">
-        Non meublé
+       {{ flat.furnished }}
     </p>
     <p class="badge bg-danger rounded-pill p-2 fs-5">
-        Lgbtqi+ Friendly
+        {{ flat.gender }}
     </p>
 </div>
 
@@ -36,7 +73,13 @@
 
 <div>
     <span>
-        2 places disponibles
+
+        {% if flat.freeSpace > 1 %}
+       {{ flat.freeSpace }} places disponibles
+        {% else %}
+        {{ flat.freeSpace }} place disponible
+        {% endif %}
+        
     </span>
 </div>
 
@@ -44,14 +87,14 @@
 
 <div class="d-flex">
     <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius necessitatibus quae, dolorum ipsam at unde incidunt eaque dolores excepturi qui optio illo nulla ex praesentium asperiores? Adipisci corporis dolorum ea!
+        {{ flat.description }}    
     </p>
 </div>
 
 <div class="d-flex justify-content-center">
     <p class="btn btn-outline-danger border border-dark rounded-pill p-2">
         <ion-icon name="chatbox-ellipses-outline"></ion-icon>
-        Contacter Josie
+        Contacter {{flat.owner.firstname}}
         <ion-icon name="chevron-forward-outline"></ion-icon>
     </p>
 </div>

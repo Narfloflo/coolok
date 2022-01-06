@@ -62,11 +62,12 @@ class FlatController extends AbstractController
         ]);
     }
 
-    #[Route('/show', name: 'show')]
-    public function show(): Response
+    #[Route('/show{id}', name: 'show', requirements: ['id' => '\d+'])]
+    public function show($id): Response
     {
+        $showFlat = $this->flatRepository->find($id);
         return $this->render('flat/show.html.twig', [
-            'controller_name' => 'FlatController',
+            'flat' => $showFlat,
         ]);
     }
 }
