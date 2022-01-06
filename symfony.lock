@@ -1,4 +1,10 @@
 {
+    "async-aws/core": {
+        "version": "1.13.0"
+    },
+    "async-aws/ses": {
+        "version": "1.4.1"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.4"
     },
@@ -240,6 +246,15 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "symfony/amazon-mailer": {
+        "version": "5.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "9648db3ecae5c8a6b1a5f74715d3907124348815"
+        }
+    },
     "symfony/asset": {
         "version": "v5.4.0"
     },
@@ -348,6 +363,15 @@
             "src/Controller/.gitignore",
             "src/Kernel.php"
         ]
+    },
+    "symfony/google-mailer": {
+        "version": "5.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "f8fd4ddb9b477510f8f4bce2b9c054ab428c0120"
+        }
     },
     "symfony/http-client": {
         "version": "v5.4.2"
