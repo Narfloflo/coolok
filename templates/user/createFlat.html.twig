@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Creation Logement - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/user/form.css') }}">
+{% endblock %}
+
+{% block body %}
+<h1>Création Logement</h1>
+
+<form method="post" class="form-box">
+        <div class="form-error">
+            
+        </div>
+    <div class="form-row">
+        <div>
+            <label for="emailInput"></label>
+            <input type="adress" name="_adress_logement" id="adressInput" placeholder="Adresse Logement">
+        </div>
+    </div>
+    <div class="form-end">
+        <button type="button" class="btn btn-dark">Ajoute le Logement</button>
+    </div>
+
+    <input type="hidden" name="_token" value="{{ csrf_token('authenticate') }}">
+</form>
+
+{% endblock %}
