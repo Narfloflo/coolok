@@ -8,7 +8,7 @@
 {% block script %} <script src="{{ asset('js/form.js') }} " defer></script> {% endblock %}
 
 {% block body %}
-<h1>Inscription</h1>
+<h1 class="h3 my-3 font-weight-normal">Inscription</h1>
     <div class="form">
         {{ form_start(form) }}
         <div class="form-row">
@@ -35,9 +35,7 @@
     </div>
     
     <div class="outform">
-        <a href="{{ path('user_register') }}" class="btn-outline">Créer un compte</a>
-        <a href="#">Mot de passe oublié ?</a>
-    
+        <a href="{{ path('user_login') }}" class="btn-outline">Connexion</a>
     </div>
 
 

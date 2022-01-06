@@ -5,12 +5,16 @@
 }
 
 form.form-box{
+    display: flex;
+    flex-direction: column;
+    align-items:stretch;
+    width: 100%;
     max-width: 450px;
-    margin: 60px auto;
 }
 
 form .form-row{
     display: flex;
+    flex-direction: column;
     gap: 10px;
     margin-bottom: 20px;
 }
@@ -88,4 +92,5 @@ h1{
 .input-round{
     border-radius: 30px;
     border: 1px solid var(--color-clear);
+    height: 3.2rem;
 }

@@ -50,7 +50,7 @@ class UserController extends AbstractController
             $this->em->flush();
 
             $this->addFlash('notice', 'Votre compte à bien été créé, vous pouvez dés à présent vous connecter');
-            return $this->redirectToRoute('main_index');
+            return $this->redirectToRoute('user_login');
         }
 
         return $this->render('user/register.html.twig', [
