@@ -26,6 +26,15 @@ header{
     border-bottom: 1px solid #F5F5F5;
 }
 
+
+.btn-validate{
+    border: none;
+    color: white;
+    background-color: var(--color-dark);
+    border-radius: 30px;
+    padding: 0.5rem 3rem 0.5rem 3rem;
+    width: 200px;
+}
 /* .btn-see-more{
     border-radius: 10px;
     border: 1px solid var(--color-clear);
