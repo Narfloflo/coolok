@@ -20,13 +20,22 @@ class UserType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'label' => 'E-mail',
+                'attr' => [
+                    'class' => 'input-round',
+                ]
             ])
             ->add('plainPassword', PasswordType::class, [
                 'label' => 'Mot de passe',
+                'attr' => [
+                    'class' => 'input-round',
+                ]
             ])
             ->add('birthday', BirthdayType::class, [
                 'label' => 'Date de naissance',
                 'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'input-round',
+                ]
             ])
             ->add('cgu', CheckboxType::class, [
                 'label' => 'J\'accepte les conditions générales d\'utilisation',
