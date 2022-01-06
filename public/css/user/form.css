@@ -1,3 +1,9 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 form.form-box{
     max-width: 450px;
     margin: 60px auto;
@@ -40,10 +46,6 @@ h1{
     margin-top: 30px;
 }
 
-.button{
-    background-color: #011627;
-    color: rgb(250, 249, 249);
-}
 
 .form-end{
     display: flex;
@@ -51,10 +53,39 @@ h1{
     margin-top: 50px;
 }
 
-.btn{
-    color: #011627;
+
+.form-password{
+    position : relative;
 }
 
-.btn-dark{
-    color: rgb(250, 249, 249);
+.show-password{
+    position: absolute;
+    right: 10px;
+    bottom: 0.6rem;
+}
+
+.btn-outline{
+        border: 1px solid var(--color-secondary);
+        color: var(--color-dark);
+        background-color: white;
+        border-radius: 30px;
+        padding: 10px 15px 10px 15px;
+        text-align: center;
+        width: 250px;
+        height: 50px;
+}
+
+.outform{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.outform a{
+    margin-top : 1rem;
+}
+
+.input-round{
+    border-radius: 30px;
+    border: 1px solid var(--color-clear);
 }

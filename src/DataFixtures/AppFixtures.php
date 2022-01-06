@@ -11,7 +11,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        for($i = 0; $i < 3; $i++){
+        for($i = 4; $i < 20; $i++){
             $user = new User();
             $user->setFirstname('John');
             $user->setLastname('Doe' . $i);

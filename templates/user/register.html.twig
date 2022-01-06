@@ -5,26 +5,40 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/user/form.css') }}">
 {% endblock %}
+{% block script %} <script src="{{ asset('js/form.js') }} " defer></script> {% endblock %}
 
 {% block body %}
 <h1>Inscription</h1>
-<form method="post" class="form-box">
+    <div class="form">
+        {{ form_start(form) }}
+        <div class="form-row">
+            {{ form_row(form.email) }}
+        </div>
+        <div class="form-row form-password">
+            {{ form_row(form.plainPassword) }}
+            <span class="show-password"><i id="toggle_show" class="fas fa-eye"></i></span>
+        </div>
+        <div class="form-row">
+            {{ form_row(form.birthday) }}
+        </div>
+        <div class="form-row">
+            <div>
+                {{ form_errors(form.cgu) }}
+                {{ form_widget(form.cgu) }}
+                {{ form_label(form.cgu) }}
+            </div>
+        </div>
+        <div class="form-end">
+            {{ form_row(form.submit) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+    
+    <div class="outform">
+        <a href="{{ path('user_register') }}" class="btn-outline">Créer un compte</a>
+        <a href="#">Mot de passe oublié ?</a>
+    
+    </div>
 
-    <div class="form-row">
-        <div>
-            <label for="emailInput"></label>
-            <input type="email" name="_email" id="emailInput" placeholder="Adresse email">
-        </div>
-    </div>
-    <div class="form-row">
-        <div>
-            <label for="passwordInput"></label>
-            <input type="password" name="_password" id="passwordInput" placeholder="Mot de passe">
-        </div>
-    </div>
-    <div class="form-end">
-        <button type="button" class="btn btn-outline-warning">M'inscrire</button>
-    </div>
-</form>
 
 {% endblock %}
