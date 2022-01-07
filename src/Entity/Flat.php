@@ -102,6 +102,9 @@ class Flat
     #[ORM\Column(type: 'json')]
     private $images = [];
 
+    #[ORM\Column(type: 'string', length: 8, nullable: true)]
+    private $Zipcode;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -259,6 +262,18 @@ class Flat
     public function setImages(array $images): self
     {
         $this->images = $images;
+
+        return $this;
+    }
+
+    public function getZipcode(): ?string
+    {
+        return $this->Zipcode;
+    }
+
+    public function setZipcode(?string $Zipcode): self
+    {
+        $this->Zipcode = $Zipcode;
 
         return $this;
     }

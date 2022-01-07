@@ -155,60 +155,17 @@
         </div>
     </div>
     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 row-cols-lg-6 g-4">
+        {% for city in flatBiggestCity %}
         <div class="col">
             <a href="#" class="link-card">
                 <div class="card-city-top">
                     <img src="https://via.placeholder.com/200x200" alt="...">
                 </div>
-                <h3 class="card-city-name">Lille</h3>
+                <h3 class="card-city-name">{{ city.city }}</h3>
+                <span>{{ city.length }} logements<span>
             </a>
-
         </div>
-        <div class="col">
-            <a href="#" class="link-card">
-                <div class="card-city-top">
-                    <img src="https://via.placeholder.com/200x200" alt="...">
-                </div>
-                <h3 class="card-city-name">Lille</h3>
-            </a>
-
-        </div>
-        <div class="col">
-            <a href="#" class="link-card">
-                <div class="card-city-top">
-                    <img src="https://via.placeholder.com/200x200" alt="...">
-                </div>
-                <h3 class="card-city-name">Lille</h3>
-            </a>
-
-        </div>
-        <div class="col">
-            <a href="#" class="link-card">
-                <div class="card-city-top">
-                    <img src="https://via.placeholder.com/200x200" alt="...">
-                </div>
-                <h3 class="card-city-name">Lille</h3>
-            </a>
-
-        </div>
-        <div class="col">
-            <a href="#" class="link-card">
-                <div class="card-city-top">
-                    <img src="https://via.placeholder.com/200x200" alt="...">
-                </div>
-                <h3 class="card-city-name">Lille</h3>
-            </a>
-
-        </div>
-        <div class="col">
-            <a href="#" class="link-card">
-                <div class="card-city-top">
-                    <img src="https://via.placeholder.com/200x200" alt="...">
-                </div>
-                <h3 class="card-city-name">Lille</h3>
-            </a>
-
-        </div>
+        {% endfor %}
     </div>
 
 

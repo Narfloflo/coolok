@@ -53,11 +53,14 @@ class MainController extends AbstractController
             4,
         );
 
+        $biggestCity = $this->flatRepository->flatBiggestCity(6);
+
         return $this->render('main/index.html.twig', [
             'lastFlat' => $lastFlat,
             'newUser' => $newUser,
             'mixedFlat' => $mixedFlat,
             'furnishedFlat' => $furnishedFlat,
+            'flatBiggestCity' => $biggestCity,
         ]);
     }
 }

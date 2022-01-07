@@ -20,6 +20,22 @@ class FlatRepository extends ServiceEntityRepository
     }
 
     // /**
+    //  * Return cities with the most flat
+    //  */
+    public function flatBiggestCity(int $maxLimit)
+    {
+        $stmt = $this->createQueryBuilder('flat');
+        $stmt->select(array('flat.city', 'flat.available' ,'count(flat.city) AS length'));
+        $stmt->where('flat.available LIKE :available');
+        $stmt->groupBy('flat.city');
+        $stmt->orderBy('count(flat.city)', 'DESC');
+        $stmt->setMaxResults($maxLimit);
+        $stmt->setParameter('available', 1);
+
+        return $stmt->getQuery()->getResult();
+    }
+    
+    // /**
     //  * @return Flat[] Returns an array of Flat objects
     //  */
     /*

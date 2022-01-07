@@ -87,7 +87,7 @@ header{
 .nav-bottom {
     width: 100%;
     height: 70px;
-    background-color: rgb(252, 252, 252);
+    background-color: #F5F5F5;
     position: relative;
     display: flex;
     justify-content: center;
@@ -159,30 +159,6 @@ header{
     border: 6px solid var(--color-bg);
     transition: 0.5s;
 }
-
-/* .nav-indicator::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -22px;
-    width: 20px;
-    height: 20px;
-    background: transparent;
-    border-top-right-radius: 20px;
-    box-shadow: 1px -10px 0 0 var(--color-bg);
-}
-
-.nav-indicator::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: -22px;
-    width: 20px;
-    height: 20px;
-    background: transparent;
-    border-top-left-radius: 20px;
-    box-shadow: 0px -10px 0 0 var(--color-bg);
-} */
 
 .nav-bottom ul li:nth-child(1).nav-active ~ .nav-indicator{
     transform:translateX(calc(70px * 0))
