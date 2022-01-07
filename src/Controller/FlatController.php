@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('', name:'flat_')]
+#[Route('/colocations', name:'flat_')]
 class FlatController extends AbstractController
 {
     private $flatRepository;
@@ -18,7 +18,7 @@ class FlatController extends AbstractController
         $this->flatRepository = $flatRepository;
     }
 
-    #[Route('/colocations', name: 'allFlat')]
+    #[Route('', name: 'allFlat')]
     public function index(): Response
     {
         $allFlat = $this->flatRepository->findBy(
@@ -32,7 +32,7 @@ class FlatController extends AbstractController
         ]);
     }
 
-    #[Route('/mixColocation', name: 'mixedFlat')]
+    #[Route('/mixte', name: 'mixedFlat')]
     public function showMix(): Response
     {
         $mixedFlat = $this->flatRepository->findBy(
@@ -47,7 +47,7 @@ class FlatController extends AbstractController
         ]);
     }
     
-    #[Route('/furnishedColocation', name: 'furnishedFlat')]
+    #[Route('/meublees', name: 'furnishedFlat')]
     public function showFurnished(): Response
     {
         $furnishedFlat = $this->flatRepository->findBy(
@@ -62,7 +62,7 @@ class FlatController extends AbstractController
         ]);
     }
 
-    #[Route('/colocations/{id}', name: 'show', requirements: ['id' => '\d+'])]
+    #[Route('/{id}', name: 'show', requirements: ['id' => '\d+'])]
     public function show($id): Response
     {
         $showFlat = $this->flatRepository->find($id);
