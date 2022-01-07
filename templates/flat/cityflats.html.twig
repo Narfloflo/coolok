@@ -1,5 +1,3 @@
-{% set currentPath = path(app.request.attributes.get('_route'),
-                    app.request.attributes.get('_route_params')) %}
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ parent() }} - Trouver une colocation, un colocataire facilement et gratuitement{% endblock %}
@@ -8,10 +6,10 @@
 
 {% block body %}
 
-<h1 class="text-center fs-3 my-4">Colocations à {{ app.request.pathinfo }} </h1>
+<h1 class="text-center fs-3 my-4">{{ cityFlats ? 'Colocations à ' ~ cityFlats[0].city : 'Oups' }}  </h1>
 
 
-{% if cityFlats|length > 0 %}
+{% if cityFlats %}
 <div class="row row-cols-2 row-cols-lg-4 g-4">
     {% for flat in cityFlats %}
     <article class="col">
