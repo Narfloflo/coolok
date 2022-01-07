@@ -70,4 +70,19 @@ class FlatController extends AbstractController
             'flat' => $showFlat,
         ]);
     }
+
+    #[Route('/{city}', name: 'cityFlat', requirements: ['city' => '.*'])]
+    public function showFlatByCity($city): Response
+    {
+        $showFlatByCity = $this->flatRepository->findBy(
+            ['city' => $city,
+            'available' => 1
+            ],
+            ['id' => 'DESC'],
+        );
+
+        return $this->render('flat/cityflats.html.twig', [
+            'cityFlats' => $showFlatByCity,
+        ]);
+    }
 }

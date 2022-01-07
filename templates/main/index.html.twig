@@ -157,7 +157,7 @@
     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 row-cols-lg-6 g-4">
         {% for key, city in flatBiggestCity %}
         <div class="col">
-            <a href="#" class="link-card">
+            <a href="{{ path('flat_cityFlat', {city: city.city}) }}" class="link-card">
                 <div class="card-city-top">
                     <img src="https://coolokbucket.s3.eu-west-3.amazonaws.com/images/city/city{{key}}.png" alt="...">
                 </div>
