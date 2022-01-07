@@ -70,10 +70,10 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/creation_logement', name: 'createFlat')]
-    public function createFlat(): Response
+    #[Route('/creation_logement', name: 'AddFlat')]
+    public function AddFlat(): Response
     {
-        return $this->render('user/createFlat.html.twig', [
+        return $this->render('user/AddFlat.html.twig', [
             'controller_name' => 'UserController',
         ]);
     }

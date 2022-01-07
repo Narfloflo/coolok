@@ -78,6 +78,9 @@ header{
     width: 200px;
 }
 
+.empty-list{
+    text-align: center;
+}
 .footer{
     width: 100%;
     position:fixed;

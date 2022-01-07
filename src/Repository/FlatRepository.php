@@ -34,6 +34,19 @@ class FlatRepository extends ServiceEntityRepository
 
         return $stmt->getQuery()->getResult();
     }
+
+    public function search(string $q)
+    {
+        $stmt = $this->createQueryBuilder('e');
+
+    
+
+            $stmt->where('e.city LIKE :query');
+            $stmt->setParameter(':query', '%' . $q . '%');
+        
+
+        return $stmt->getQuery()->getResult();
+    }
     
     // /**
     //  * @return Flat[] Returns an array of Flat objects
