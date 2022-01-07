@@ -26,21 +26,18 @@
                 <label for="inputEmail">Adresse email</label>
                 <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="input-round" autocomplete="email" required autofocus>
             </div>
-
             <div class="form-row">
                 <label for="inputPassword">Mot de passe</label>
                 <input type="password" name="password" id="inputPassword" class="input-round" autocomplete="current-password" required>
             </div>
-        
             <input type="hidden" name="_csrf_token"
                 value="{{ csrf_token('authenticate') }}"
             >
-        
-            {# <div class="checkbox mb-3">
+            <div class="checkbox mb-3">
                 <label>
                     <input type="checkbox" name="_keep_login" checked/> Se souvenir de moi 
                 </label>
-            </div> #}
+            </div>
             <div class="outform">
                 <button class="btn-validate" type="submit">
                     Connexion
@@ -48,7 +45,6 @@
                 <a href="{{ path('user_register') }}" class="btn-outline">Créer un compte</a>
                 <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
             </div>
-
         </form>
         {% endif %}
     </div>
