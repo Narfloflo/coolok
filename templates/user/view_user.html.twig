@@ -7,12 +7,11 @@
 {% endblock %}
 
 {% block body %}
-
     <div class="img">
         <img class="photo" src="{{ user.picture }}" alt="Photo {{ user.firstname }}">
     </div>
     <div class="me">
-        <p><strong>{{ user.firstname }} {{ user.lastname }}</strong> - 26 ans</p>
+        <p><strong>{{ user.firstname }} {{ user.lastname }}</strong> - {{ userAge }} ans</p>
     </div>
     <div class="search">
         <!-- <p>Cherche un(e) coolokataire</p> -->

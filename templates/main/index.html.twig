@@ -48,7 +48,7 @@
         </div>
     </div>
     <div class="row row-cols-2 row-cols-sm-3  row-cols-lg-6 g-4">
-        {% for user in newUser %}
+        {% for key, user in newUser %}
         <div class="col">
             <a href="{{ path('user_view_Profil',{ id:user.id }) }}" class="link-card">
                 <div class="user-card">
@@ -61,7 +61,7 @@
                         </div>
                         <div>
                             <span class="card-user-subtitle">{{ user.city|u.truncate(20, '...') }}</span>
-                            <span class="user-age">26 ans</span>
+                            <span class="user-age">{{ usersAge[key]}} ans</span>
                         </div>
                     </div>
                 </div>

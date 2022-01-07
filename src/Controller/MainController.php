@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Length;
 
 #[Route('', name: 'main_')]
 class MainController extends AbstractController
@@ -37,6 +38,15 @@ class MainController extends AbstractController
             6,
         );
 
+        $newUserAge = [];
+        for($i = 0; $i < count($newUser); $i++){
+            $birthday = $newUser[$i]->getBirthday()->getTimestamp();
+            $userAge = round((time() - $birthday) / 31556952);
+
+            $newUserAge[] = $userAge;
+        }
+
+
         $mixedFlat = $this->flatRepository->findBy(
             ['gender' => 'all',
             'available' => 1
@@ -61,6 +71,7 @@ class MainController extends AbstractController
             'mixedFlat' => $mixedFlat,
             'furnishedFlat' => $furnishedFlat,
             'flatBiggestCity' => $biggestCity,
+            'usersAge' => $newUserAge,
         ]);
     }
 }

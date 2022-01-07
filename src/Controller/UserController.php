@@ -80,10 +80,15 @@ class UserController extends AbstractController
 
 
     #[Route('/profil/{id}', name: 'view_Profil', requirements: ['id' => '\d+'])]
-    public function view_Profil($id): Response
+    public function view_Profil($id, User $user): Response
     {
         $view_Profil = $this->userRepository->find($id);
+
+        $birthday = $view_Profil->getBirthday()->getTimestamp();
+        $userAge = round((time() - $birthday) / 31556952);
+        
         return $this->render('user/view_user.html.twig', [
+            'userAge' => $userAge,
             'user' => $view_Profil,
         ]);
     }
