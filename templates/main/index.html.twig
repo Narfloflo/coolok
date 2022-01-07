@@ -25,7 +25,7 @@
                     <div class="card-flat-info">
                         <div>
                             <h3 class="card-flat-title">{{ flat.type }}</h3>
-                            <span class="card-flat-subtitle">{{ flat.city }}</span>
+                            <span class="card-flat-subtitle">{{ flat.city|u.truncate(20, '...') }}</span>
                         </div>
                         <div>
                             <span class="flat-surface">{{ flat.surface }} m2</span>
@@ -60,7 +60,7 @@
                             <h3 class="card-user-title">{{ user.firstname }} {{ user.lastname|u.truncate(1) }}.</h3>
                         </div>
                         <div>
-                            <span class="card-user-subtitle">{{ user.city }}</span>
+                            <span class="card-user-subtitle">{{ user.city|u.truncate(20, '...') }}</span>
                             <span class="user-age">26 ans</span>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                     <div class="card-flat-info">
                         <div>
                             <h3 class="card-flat-title">{{ flat.type }}</h3>
-                            <span class="card-flat-subtitle">{{ flat.city }}</span>
+                            <span class="card-flat-subtitle">{{ flat.city|u.truncate(20, '...')  }}</span>
                         </div>
                         <div>
                             <span class="flat-surface">{{ flat.surface }} m2</span>
@@ -134,7 +134,7 @@
                     <div class="card-flat-info">
                         <div>
                             <h3 class="card-flat-title">{{ flat.type }}</h3>
-                            <span class="card-flat-subtitle">{{ flat.city }}</span>
+                            <span class="card-flat-subtitle">{{ flat.city|u.truncate(20, '...')  }}</span>
                         </div>
                         <div>
                             <span class="flat-surface">{{ flat.surface }} m2</span>
@@ -155,20 +155,18 @@
         </div>
     </div>
     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 row-cols-lg-6 g-4">
-        {% for city in flatBiggestCity %}
+        {% for key, city in flatBiggestCity %}
         <div class="col">
             <a href="#" class="link-card">
                 <div class="card-city-top">
-                    <img src="https://via.placeholder.com/200x200" alt="...">
+                    <img src="https://coolokbucket.s3.eu-west-3.amazonaws.com/images/city/city{{key}}.png" alt="...">
                 </div>
-                <h3 class="card-city-name">{{ city.city }}</h3>
-                <span>{{ city.length }} logements<span>
+                <h3 class="card-city-name">{{ city.city|u.truncate(20, '...')  }}</h3>
+                <p class="card-city-length">{{ city.length }} {{ (city.length < 2) ? 'logement' : 'logements' }} <ion-icon name="chevron-forward-outline"></ion-icon><p>
             </a>
         </div>
         {% endfor %}
     </div>
-
-
 </main>
 {% endblock %}
 
