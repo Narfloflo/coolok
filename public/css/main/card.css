@@ -11,6 +11,10 @@
     text-decoration: none;
 }
 
+.card:hover{
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+}
+
 .card-flat-top{
     position: relative;
 }
@@ -124,4 +128,17 @@
     font-size: 1.2rem;
     font-weight: 400;
     margin-top: 5px;
+}
+
+.btn-see-more{
+    border-radius: 20px;
+    border: 1px solid var(--color-dark);
+    color: var(--color-secondary);
+    background-color: white;
+    margin: 0.5rem 1rem 1rem 1rem;
+    padding: 0.4rem 0;
+    width: 150px;
+    height: 35px;
+    font-size: 0.8rem;
+    align-self: center;
 }
