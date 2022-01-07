@@ -38,6 +38,42 @@ header{
     height: 50px;
 }
 
+.btn-search{
+    border-radius: 10px;
+    background-color: white;
+    color: var(--color-dark);
+    border: 1px solid var(--color-secondary);
+    width: 200px;
+}
+
+.btn-search:hover{
+    background-color: var(--color-secondary);
+    color: white;
+    border: none;
+}
+
+.form-search{
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 10px;
+}
+
+.form-search:focus{
+    outline-color: var(--color-clear);
+}
+
+
 .logo-min{
     width: 200px;
 }
@@ -57,7 +93,6 @@ header{
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    
 }
 
 .nav-bottom ul {
