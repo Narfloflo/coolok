@@ -26,9 +26,13 @@
                 </li>
                 {% endif %}
                 </ul>
-                <form class="d-flex">
-                <input class="form-search me-2" type="search" placeholder="Votre recherche..." aria-label="Search">
-                <button class="btn-search" type="submit">Rechercher</button>
+                <form class="d-flex" action="{{ path('search') }}" method="get">
+
+                    <label for="search" hidden>Saisir votre recherche</label>
+                    <input type="search" id="search" name="query" placeholder="Saisir votre recherche" aria-label="Saisir votre recherche">
+                
+                    <button type="submit" aria-label="Rechercher">Rechercher</button>
+                
                 </form>
             </div>
             </div>

@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Form\SearchBarType;
 use App\Repository\FlatRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -62,6 +64,8 @@ class FlatController extends AbstractController
         ]);
     }
 
+
+
     #[Route('/{id}', name: 'show', requirements: ['id' => '\d+'])]
     public function show($id): Response
     {
@@ -70,6 +74,7 @@ class FlatController extends AbstractController
             'flat' => $showFlat,
         ]);
     }
+
 
     #[Route('/{city}', name: 'cityFlat', requirements: ['city' => '.*'])]
     public function showFlatByCity($city): Response
@@ -85,4 +90,5 @@ class FlatController extends AbstractController
             'cityFlats' => $showFlatByCity,
         ]);
     }
+
 }

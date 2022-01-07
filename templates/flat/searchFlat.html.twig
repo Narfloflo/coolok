@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Trouver une colocation, un colocataire facilement et gratuitement{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/main/card.css') }}">{% endblock %}
+
+{% block body %}
+{# 
+{{ form_start(searchFlat) }}
+
+{{form_row(searchFlat.query)}}
+{{form_row(searchFlat.submit)}}
+
+{{ form_end(searchFlat) }} #}
+
+
+<form action="{{ url('search') }}" method="get">
+
+    <label for="search" hidden>Saisir votre recherche</label>
+    <input type="search" id="search" name="query" placeholder="Saisir votre recherche" aria-label="Saisir votre recherche">
+
+    <button type="submit" aria-label="Rechercher">X</button>
+
+</form>
+
+{# coolok.com/search.php?q=lille  #}
+
+
+
+{% for flat in flats %}
+    <div class="col">
+        <a href="{{ path('flat_show', {id: flat.id}) }}" class="link-card">
+            <div class="card h-100">
+                <div class="card-flat-top">
+                    <span class="freeplace">{{ flat.freespace }} {{ (flat.freespace < 2) ? 'place' : 'places' }}</span>
+                    <strong class="rent">{{ flat.rent |format_currency('EUR', {fraction_digit: 0}) }}</strong>
+                    <img src="{{ flat.images[0] }}"  alt="Colocation {{ flat.type }} {{ flat.city }} {{ flat.surface }} m2">
+                </div>
+            <div class="card-flat-info">
+                <div>
+                    <h3 class="card-flat-title">{{ flat.type }}</h3>
+                    <span class="card-flat-subtitle">{{ flat.city }}</span>
+                </div>
+                <div>
+                    <span class="flat-surface">{{ flat.surface }} m2</span>
+                    <span class="flat-place">{{ flat.totalspace }} pers</span>
+                </div>
+            </div>
+            <!-- <button class="btn-see-more"><span class="see-more">Découvrir </span></button> -->
+            </div>
+        </a>
+    </div>
+{% endfor %}
+
+{% endblock %}
