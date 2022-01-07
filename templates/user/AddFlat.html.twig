@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="{{ asset('css/user/form.css') }}">
 {% endblock %}
 
+{% block script %}
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCPNnOtaburBLkxWi5AKIhwF58oFvWway0"></script>
+<script defer src="{{ asset('js/flat.js')}} "></script>
+{% endblock %}
+
+
 {% block body %}
 <h1>Création Logement</h1>
 
@@ -15,10 +21,13 @@
         </div>
     <div class="form-row">
         <div>
-            <label for="emailInput"></label>
-            <input type="adress" name="_adress_logement" id="adressInput" placeholder="Adresse Logement">
+            <label for="city_autocomplete"></label>
+            <input type="adress" name="city_autocomplete" id="city_autocomplete" placeholder="Ville">
+            <input type="text" id="city" name="city">
+            <input type="text" id="zipcode" name="zipcode" />
         </div>
     </div>
+
     <div class="form-end">
         <button type="button" class="btn btn-dark">Ajoute le Logement</button>
     </div>
