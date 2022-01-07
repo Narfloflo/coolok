@@ -37,7 +37,7 @@
                 </a>
             </li>
             <li id="nav-profil" class="nav-bottom-list {{ app.request.get('_route') == 'user_profil' ? 'nav-active' }}">
-                <a href="{{ path('user_profil') }}">
+                <a href="{{ path('user_profil', {id:user.id}) }}">
                     <span class="nav-bottom-icon">
                         <ion-icon name="person-outline"></ion-icon>
                     </span>

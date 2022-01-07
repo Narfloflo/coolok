@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,11 +17,13 @@ class UserController extends AbstractController
 {
     private $em;
     private $hasher;
+    private $userRepository;
 
-    public function __construct(EntityManagerInterface $em, UserPasswordHasherInterface $hasher)
+    public function __construct(EntityManagerInterface $em, UserPasswordHasherInterface $hasher, UserRepository $userRepository)
     {
         $this->em = $em;
         $this->hasher = $hasher;
+        $this->userRepository = $userRepository;
     }
 
     #[Route('/connexion', name: 'login')]
@@ -58,11 +61,12 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/profil', name: 'profil')]
-    public function profil(): Response
+    #[Route('/compte/{id}', name: 'profil', requirements: ['id' => '\d+'])]
+    public function compte($id): Response
     {
+        $profil = $this->userRepository->find($id);
         return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
+            'user' => $profil,
         ]);
     }
 
@@ -74,11 +78,13 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/voir_profil', name: 'viewProfil')]
-    public function viewProfil(): Response
+
+    #[Route('/profil/{id}', name: 'view_Profil', requirements: ['id' => '\d+'])]
+    public function view_Profil($id): Response
     {
+        $view_Profil = $this->userRepository->find($id);
         return $this->render('user/view_user.html.twig', [
-            'controller_name' => 'UserController',
+            'user' => $view_Profil,
         ]);
     }
 }

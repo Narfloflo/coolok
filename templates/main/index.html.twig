@@ -50,7 +50,7 @@
     <div class="row row-cols-2 row-cols-sm-3  row-cols-lg-6 g-4">
         {% for user in newUser %}
         <div class="col">
-            <a href="/voir_profil" class="link-card">
+            <a href="{{ path('user_view_Profil',{ id:user.id }) }}" class="link-card">
                 <div class="user-card">
                     <div class="card-user-top">
                         <img src="{{ user.picture }}" alt="Photo {{ user.firstname }}">

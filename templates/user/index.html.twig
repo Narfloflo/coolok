@@ -10,27 +10,27 @@
 <h1>Profil</h1>
 
     <div class="img">
-        <img src="#" alt="photo de profil">
+        <img class="photo" src="{{ user.picture }}" alt="Photo {{ user.firstname }}">
     </div>
     <div class="me">
-        <p>John Doe - 32 ans</p>
+        <p><strong>{{ user.firstname }} {{ user.lastname }}</strong> - 32 ans</p>
     </div>
     <div class="me">
         <ion-icon name="location-outline"></ion-icon>
-        <p>Villeneuve d'Ascq</p>
+        <p>{{ user.city }}</p>
     </div>
     <hr>
-<h2>A propos de moi</h2>
+<h2>À propos de moi</h2>
     <div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus optio commodi exercitationem iste odio accusantium cum alias dolorum id hic, amet, sint maxime iure. Assumenda at voluptates tempore blanditiis repudiandae!</p>
+        <p>{{ user.description }}</p>
     </div>
 <h2>Passions</h2>
     <div>
-        <p>Football - Cinéma - Cuisine asiatique</p>
+        <p>{{ user.passions }}</p>
     </div>
 <h2>Date de naissance</h2>
     <div>
-        <p>01 / 01 / 1990</p>
+        <p>{{ user.birthday }}</p>
     </div>
     <hr>
 
