@@ -64,7 +64,12 @@ class UserController extends AbstractController
     #[Route('/compte/{id}', name: 'profil', requirements: ['id' => '\d+'])]
     public function compte($id): Response
     {
+        // Allow access if User id = User connected
         $profil = $this->userRepository->find($id);
+        if ($profil !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
         return $this->render('user/index.html.twig', [
             'user' => $profil,
         ]);
