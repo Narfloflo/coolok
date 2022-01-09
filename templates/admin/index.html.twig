@@ -1,0 +1,8 @@
+{% extends '@!EasyAdmin/layout.html.twig' %}
+{% block  content %}
+<p>Bonjour {{ app.user.firstname ? app.user.firstname : app.user.email }}.</p>
+<p></p>
+<p>Bienvenue sur votre interface d'administration Coolok.</p>
+<p></p>
+<p>Nous sommes le {{ "now"|date("d/m/Y") }} et il est {{ "now"|date('H:i') }}</p>
+{% endblock %}
