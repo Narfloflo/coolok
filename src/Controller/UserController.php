@@ -26,20 +26,20 @@ class UserController extends AbstractController
         $this->userRepository = $userRepository;
     }
 
-    #[Route('/connexion', name: 'login')]
-    public function login(): Response
-    {
-        return $this->render('user/login.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
-    }
+    // #[Route('/connexion', name: 'login')]
+    // public function login(): Response
+    // {
+    //     return $this->render('user/login.html.twig', [
+    //         'controller_name' => 'UserController',
+    //     ]);
+    // }
 
     #[Route('/inscription', name: 'register')]
     public function register(Request $request): Response
     {
-        // if($this->getUser()){
-        //     return $this->disallowAccess();
-        // }
+        if($this->getUser()){
+            return $this->disallowAccess();
+        }
 
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -91,5 +91,11 @@ class UserController extends AbstractController
             'userAge' => $userAge,
             'user' => $view_Profil,
         ]);
+    }
+
+    private function disallowAccess(): Response
+    {
+        $this->addFlash('info', 'Vous êtes déjà connecté, déconnectez vous pour changer de compte');
+        return $this->redirectToRoute('main_index');
     }
 }

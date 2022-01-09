@@ -3,6 +3,11 @@ security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_MODERATOR, ROLE_ORGANIZER]
+        ROLE_MODERATOR: ROLE_USER
+        ROLE_ORGANIZER: ROLE_USER
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         app_user_provider:
