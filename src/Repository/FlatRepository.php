@@ -42,11 +42,35 @@ class FlatRepository extends ServiceEntityRepository
     
 
             $stmt->where('e.city LIKE :query');
+            $stmt->orWhere('e.furnished LIKE :query');
+
             $stmt->setParameter(':query', '%' . $q . '%');
         
 
         return $stmt->getQuery()->getResult();
+
+        
+
+        }
     }
+
+
+    // public function searchFurnished(string $q)
+    // {
+    //     if(!empty($criteria['query'])){
+    //         $stmt->leftJoin('e.place', 'p');
+
+    //         $stmt->where('e.city LIKE :query');
+    //         $stmt->orWhere('e.description LIKE :query');
+    //         $stmt->orWhere('p.name LIKE :query');
+    //         $stmt->setParameter('query', '%' . $criteria['query'] . '%');
+    //     }
+
+    //     if(!empty($criteria['furnished'])){
+    //         $stmt->andWhere('e.furnished = :furnished');
+    //         $stmt->setParameter('furnished', $criteria['furnished']);
+    //     }
+    // }
     
     // /**
     //  * @return Flat[] Returns an array of Flat objects
@@ -76,4 +100,3 @@ class FlatRepository extends ServiceEntityRepository
         ;
     }
     */
-}

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Flat;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -20,6 +21,7 @@ class SearchBarType extends AbstractType
                 'placeholder' => 'Rechercher',
             ],
         ])
+       
         // ->add('submit', SubmitType::class, [
         //     'label' => '<i class="fas fa-search"></i>',
         //     'label_html' => true,
