@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\FlatRepository;
 use App\Repository\UserRepository;
+use App\Service\TestService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,12 +22,14 @@ class UserController extends AbstractController
     private $userRepository;
     private $flatRepository;
 
-    public function __construct(EntityManagerInterface $em, UserPasswordHasherInterface $hasher, UserRepository $userRepository, FlatRepository $flatRepository)
+    public function __construct(EntityManagerInterface $em, UserPasswordHasherInterface $hasher, UserRepository $userRepository, FlatRepository $flatRepository, TestService $test)
     {
         $this->em = $em;
         $this->hasher = $hasher;
         $this->userRepository = $userRepository;
         $this->flatRepository = $flatRepository;
+
+        $this->test = $test;
 
     }
 
@@ -41,6 +44,9 @@ class UserController extends AbstractController
     #[Route('/inscription', name: 'register')]
     public function register(Request $request): Response
     {
+
+        // dd($this->test->yep());
+
         if($this->getUser()){
             return $this->disallowAccess();
         }
