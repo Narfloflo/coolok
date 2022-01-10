@@ -20,3 +20,25 @@
 .sub-title span i{
     color: var(--color-primary);
 }
+
+.badgeounnet{
+    display: flex;
+    border: solid;
+    border-color: #ffc107;
+    color: white;
+    border-radius: 15px;
+    width: 170px;
+    height: 20px;
+    padding: 25px;
+    text-align: center;
+    align-content: space-around;
+    align-items: center;
+}
+@media (max-width: 650px) {
+    .badge-price{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+    
+}
