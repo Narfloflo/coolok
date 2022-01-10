@@ -39,14 +39,16 @@ class FlatRepository extends ServiceEntityRepository
     {
         $stmt = $this->createQueryBuilder('e');
 
-    
 
             $stmt->where('e.city LIKE :query');
             $stmt->orWhere('e.furnished LIKE :query');
+            $stmt->orWhere('e.rent LIKE :query');
+            $stmt->orWhere('e.gender LIKE :query');
+            $stmt->orWhere('e.free_space LIKE :query');
 
             $stmt->setParameter(':query', '%' . $q . '%');
         
-
+        
         return $stmt->getQuery()->getResult();
 
         
