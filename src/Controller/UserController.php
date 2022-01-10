@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\FlatRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,12 +19,15 @@ class UserController extends AbstractController
     private $em;
     private $hasher;
     private $userRepository;
+    private $flatRepository;
 
-    public function __construct(EntityManagerInterface $em, UserPasswordHasherInterface $hasher, UserRepository $userRepository)
+    public function __construct(EntityManagerInterface $em, UserPasswordHasherInterface $hasher, UserRepository $userRepository, FlatRepository $flatRepository)
     {
         $this->em = $em;
         $this->hasher = $hasher;
         $this->userRepository = $userRepository;
+        $this->flatRepository = $flatRepository;
+
     }
 
     // #[Route('/connexion', name: 'login')]
@@ -61,6 +65,29 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/colocataires', name: 'coloc')]
+    public function showAllUser(): Response 
+    {
+        $allNewUser = $this->userRepository->findBy(
+            ['available' => 1],
+            ['id' => 'DESC'],
+        );
+        // dd(count($allNewUser));
+        $allUserAge = [];
+        for($i = 0; $i < count($allNewUser); $i++){
+            $birthday = $allNewUser[$i]->getBirthday()->getTimestamp();
+            $userAge = round((time() - $birthday) / 31556952);
+
+            $allUserAge[] = $userAge;
+        }
+
+        return $this->render('user/all_users.html.twig', [
+            'allUser' => $allNewUser,
+            'allUserAge' => $allUserAge,
+        ]);
+    }
+
+
     #[Route('/compte/{id}', name: 'profil', requirements: ['id' => '\d+'])]
     public function compte($id): Response
     {
@@ -75,15 +102,27 @@ class UserController extends AbstractController
         ]);
     }
 
-    // #[Route('/compte/{id}/favoris', name: 'favorite', requirements: ['id' => '\d+'])]
-    // public function favorites($id) : Response
-    // {
-    //     $favoritesFlat = $this->userRepository->findFavorite($id);
+    #[Route('/compte/{id}/favoris', name: 'favorites', requirements: ['id' => '\d+'])]
+    public function showFavorites($id) : Response
+    {
+        $profil = $this->userRepository->find($id);
+        $favoritesUser = $profil->getFavoriteUser();
+        $favoritesFlat = $profil->getFavoriteFlat();
 
-    //     return $this->render('user/index.html.twig', [
-    //         'favoritesFlat' => $favoritesFlat,
-    //     ]);
-    // }
+        $favoritesUserAge = [];
+        for($i = 0; $i < count($favoritesUser); $i++){
+            $birthday = $favoritesUser[$i]->getBirthday()->getTimestamp();
+            $userAge = round((time() - $birthday) / 31556952);
+
+            $favoritesUserAge[] = $userAge;
+        }
+
+        return $this->render('user/favorites.html.twig', [
+            'favoritesUser' => $favoritesUser,
+            'favoritesUserAge' => $favoritesUserAge,
+            'favoritesFlat' => $favoritesFlat,
+        ]);
+    }
 
 
     #[Route('/creation_logement', name: 'AddFlat')]
@@ -121,7 +160,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/profil/{id}/favorite', name: 'favorite', requirements: ['id' => '\d+'])]
+    #[Route('/profil/{id}/success', name: 'favorite', requirements: ['id' => '\d+'])]
     public function favoriteUser($id) : Response
     {
         $profilToAdd = $this->userRepository->find($id);

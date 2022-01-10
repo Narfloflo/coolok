@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes favoris - {{ parent() }}{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/main/card.css') }}">{% endblock %}
+
+
+{% block body %}
+
+<h1 class="text-center fs-3 mt-4">Derniers cooloks inscrits</h1>
+<div class="row row-cols-2 row-cols-sm-3  row-cols-lg-6 g-4">
+    {% for key, user in allUser %}
+    <div class="col">
+        <a href="{{ path('user_view_Profil',{ id:user.id }) }}" class="link-card">
+            <div class="user-card">
+                <div class="card-user-top">
+                    <img src="{{ user.picture }}" alt="Photo {{ user.firstname }}">
+                </div>
+                <div class="card-user-info">
+                    <div>
+                        <h3 class="card-user-title">{{ user.firstname }} {{ user.lastname|u.truncate(1) }}.</h3>
+                    </div>
+                    <div>
+                        <span class="card-user-subtitle">{{ user.city|u.truncate(20, '...') }}</span>
+                        <span class="user-age">{{ allUserAge[key]}} ans</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

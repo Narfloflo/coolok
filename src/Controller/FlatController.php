@@ -97,7 +97,7 @@ class FlatController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/favorite', name: 'favorite', requirements: ['id' => '\d+'])]
+    #[Route('/{id}/success', name: 'favorite', requirements: ['id' => '\d+'])]
     public function favoriteFlat($id) : Response 
     {
         $flat = $this->flatRepository->find($id);
