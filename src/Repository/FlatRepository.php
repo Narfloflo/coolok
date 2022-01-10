@@ -51,7 +51,10 @@ class FlatRepository extends ServiceEntityRepository
         
         return $stmt->getQuery()->getResult();
 
-        
+        if(!empty($criteria['flat'])){
+            $stmt->andWhere('e.flat = :flat');
+            $stmt->setParameter('flat', $criteria['flat']);
+        }
 
         }
     }

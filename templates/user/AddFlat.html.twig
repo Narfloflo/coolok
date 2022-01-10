@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Creation Logement - {{ parent() }}{% endblock %}
+{% block title %}
+    {{ isNew ? 'Créer' : 'Modifier' }} Logement - {{ parent() }}
+{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/user/form.css') }}">
