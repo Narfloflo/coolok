@@ -46,10 +46,28 @@
 <br>
 
 <h1>{{ flat.type }} - {{ flat.surface }}m² - {{ flat.totalSpace }}Pers</h1>
-<p>Proposé par {{flat.owner.firstname}}</p>
+<div class="sub-title">
+    <p>Proposé par {{flat.owner.firstname}}</p>
+    <span>
+        {% if app.user %}
+        <a href="{{ path('flat_favorite', { id:flat.id })}} ">
+            {% if isFav %}
+            <i class="fas fa-heart"></i>
+            {% else %}
+            <i class="far fa-heart"></i>
+            {% endif %}
+        {% else %}
+        <a href="{{ path('user_login') }} ">
+            <i class="far fa-heart"></i>
+        {% endif %}
+            
+        </a>
+
+    </span>
+</div>
+
 
 <br>
- 
 <div class="d-flex justify-content-between">
     <h2>
         <ion-icon name="location-outline"></ion-icon> {{ flat.city }}

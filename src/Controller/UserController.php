@@ -75,6 +75,17 @@ class UserController extends AbstractController
         ]);
     }
 
+    // #[Route('/compte/{id}/favoris', name: 'favorite', requirements: ['id' => '\d+'])]
+    // public function favorites($id) : Response
+    // {
+    //     $favoritesFlat = $this->userRepository->findFavorite($id);
+
+    //     return $this->render('user/index.html.twig', [
+    //         'favoritesFlat' => $favoritesFlat,
+    //     ]);
+    // }
+
+
     #[Route('/creation_logement', name: 'AddFlat')]
     public function AddFlat(): Response
     {

@@ -8,3 +8,15 @@
     background-position: center;
     background-size: cover;
 }
+
+.sub-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sub-title span{
+    font-size: 1.5rem;
+}
+.sub-title span i{
+    color: var(--color-primary);
+}
