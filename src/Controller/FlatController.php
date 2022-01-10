@@ -80,8 +80,8 @@ class FlatController extends AbstractController
         $flat = $this->flatRepository->find($id);
         if($this->getUser()){
             $user = $this->getUser();
-        $favoriteFlat = $user->getFavoriteFlat();
-        if($favoriteFlat->contains($flat)){
+        $favoritesFlat = $user->getFavoriteFlat();
+        if($favoritesFlat->contains($flat)){
             $isFav = true;
         }else{
             $isFav = false;
@@ -89,7 +89,6 @@ class FlatController extends AbstractController
         }else{
             $isFav = false;
         }
-        
 
         $showFlat = $this->flatRepository->find($id);
         return $this->render('flat/show.html.twig', [
@@ -99,16 +98,16 @@ class FlatController extends AbstractController
     }
 
     #[Route('/{id}/favorite', name: 'favorite', requirements: ['id' => '\d+'])]
-    public function favoriteflat($id) : Response 
+    public function favoriteFlat($id) : Response 
     {
         $flat = $this->flatRepository->find($id);
         if(!$this->getUser()){
             return $this->redirectToRoute('user_login');
         }
         $user = $this->getUser();
-        $favoriteFlat = $user->getFavoriteFlat();
+        $favoritesFlat = $user->getFavoriteFlat();
 
-        if($favoriteFlat->contains($flat)){
+        if($favoritesFlat->contains($flat)){
             $user->removeFavoriteFlat($flat);
             $this->addFlash('notice', 'Ce logement a été supprimé de vos favoris');
         }else{
