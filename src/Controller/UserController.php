@@ -4,9 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use App\Repository\FlatRepository;
 use App\Repository\UserRepository;
-use App\Service\TestService;
+use App\Service\UserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,33 +19,23 @@ class UserController extends AbstractController
     private $em;
     private $hasher;
     private $userRepository;
-    private $flatRepository;
+    private $userService;
 
-    public function __construct(EntityManagerInterface $em, UserPasswordHasherInterface $hasher, UserRepository $userRepository, FlatRepository $flatRepository, TestService $test)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        UserPasswordHasherInterface $hasher,
+        UserRepository $userRepository,
+        UserService $userService
+    ){
         $this->em = $em;
         $this->hasher = $hasher;
         $this->userRepository = $userRepository;
-        $this->flatRepository = $flatRepository;
-
-        $this->test = $test;
-
+        $this->userService = $userService;
     }
-
-    // #[Route('/connexion', name: 'login')]
-    // public function login(): Response
-    // {
-    //     return $this->render('user/login.html.twig', [
-    //         'controller_name' => 'UserController',
-    //     ]);
-    // }
 
     #[Route('/inscription', name: 'register')]
     public function register(Request $request): Response
     {
-
-        // dd($this->test->yep());
-
         if($this->getUser()){
             return $this->disallowAccess();
         }
@@ -78,14 +67,7 @@ class UserController extends AbstractController
             ['available' => 1],
             ['id' => 'DESC'],
         );
-        // dd(count($allNewUser));
-        $allUserAge = [];
-        for($i = 0; $i < count($allNewUser); $i++){
-            $birthday = $allNewUser[$i]->getBirthday()->getTimestamp();
-            $userAge = round((time() - $birthday) / 31556952);
-
-            $allUserAge[] = $userAge;
-        }
+        $allUserAge = $this->userService->calculAges($allNewUser);
 
         return $this->render('user/all_users.html.twig', [
             'allUser' => $allNewUser,
@@ -95,7 +77,7 @@ class UserController extends AbstractController
 
 
     #[Route('/compte/{id}', name: 'profil', requirements: ['id' => '\d+'])]
-    public function compte($id): Response
+    public function compte(int $id): Response
     {
         // Allow access if User id = User connected
         $profil = $this->userRepository->find($id);
@@ -109,19 +91,13 @@ class UserController extends AbstractController
     }
 
     #[Route('/compte/{id}/favoris', name: 'favorites', requirements: ['id' => '\d+'])]
-    public function showFavorites($id) : Response
+    public function showFavorites(int $id) : Response
     {
         $profil = $this->userRepository->find($id);
         $favoritesUser = $profil->getFavoriteUser();
         $favoritesFlat = $profil->getFavoriteFlat();
 
-        $favoritesUserAge = [];
-        for($i = 0; $i < count($favoritesUser); $i++){
-            $birthday = $favoritesUser[$i]->getBirthday()->getTimestamp();
-            $userAge = round((time() - $birthday) / 31556952);
-
-            $favoritesUserAge[] = $userAge;
-        }
+        $favoritesUserAge = $this->userService->calculAges($favoritesUser);
 
         return $this->render('user/favorites.html.twig', [
             'favoritesUser' => $favoritesUser,
@@ -139,14 +115,11 @@ class UserController extends AbstractController
         ]);
     }
 
-
     #[Route('/profil/{id}', name: 'view_Profil', requirements: ['id' => '\d+'])]
     public function view_Profil($id, User $user): Response
     {
         $view_Profil = $this->userRepository->find($id);
-
-        $birthday = $view_Profil->getBirthday()->getTimestamp();
-        $userAge = round((time() - $birthday) / 31556952);
+        $userAge = $this->userService->calculAge($view_Profil);
         
         if($this->getUser()){
             $user = $this->getUser();
