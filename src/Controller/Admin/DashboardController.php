@@ -19,7 +19,7 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
          //return parent::index();
-         return $this->render('admin/index.html.twig');
+        return $this->render('admin/index.html.twig');
     }
 
     public function configureDashboard(): Dashboard
@@ -31,7 +31,8 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class);
-        yield MenuItem::linkToCrud('Logements', 'fas fa-list', Flat::class);
+        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
+        yield MenuItem::linkToCrud('Logements', 'fas fa-house-user', Flat::class);
+        yield MenuItem::linkToUrl('Retour sur Coolok', 'fas fa-globe', '../');
     }
 }
