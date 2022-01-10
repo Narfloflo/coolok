@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Voir profil - {{ parent() }}{% endblock %}
+{% block title %}{{ user.firstname }} {{ user.lastname|u.truncate(1) }}. {{ userAge }}ans sur {{ parent() }}.fr{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/user/user.css') }}">
@@ -10,8 +10,22 @@
     <div class="img">
         <img class="photo" src="{{ user.picture }}" alt="Photo {{ user.firstname }}">
     </div>
-    <div class="me">
-        <p><strong>{{ user.firstname }} {{ user.lastname }}</strong> - {{ userAge }} ans</p>
+    <div class="me subtitle">
+        <p><strong>{{ user.firstname }} {{ user.lastname|u.truncate(1) }}.</strong> - {{ userAge }} ans</p>
+        <span>
+            {% if app.user %}
+            <a href="{{ path('user_favorite', { id:user.id })}} ">
+                {% if isFav %}
+                <i class="fas fa-heart"></i>
+                {% else %}
+                <i class="far fa-heart"></i>
+                {% endif %}
+            {% else %}
+            <a href="{{ path('user_login') }} ">
+                <i class="far fa-heart"></i>
+            {% endif %}
+            </a>
+        </span>
     </div>
     <div class="search">
         <!-- <p>Cherche un(e) coolokataire</p> -->

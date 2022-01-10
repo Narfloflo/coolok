@@ -13,6 +13,16 @@
     display: flex;
 }
 
+.subtitle{
+    justify-content: space-between!important;
+}
+.subtitle span{
+    font-size: 1.5rem;
+}
+.subtitle span i{
+    color: var(--color-primary);
+}
+
 strong{
     font-size: 32px;
 }

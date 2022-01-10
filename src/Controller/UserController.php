@@ -103,10 +103,45 @@ class UserController extends AbstractController
         $birthday = $view_Profil->getBirthday()->getTimestamp();
         $userAge = round((time() - $birthday) / 31556952);
         
+        if($this->getUser()){
+            $user = $this->getUser();
+        $favoritesUser = $user->getFavoriteUser();
+        if($favoritesUser->contains($view_Profil)){
+            $isFav = true;
+        }else{
+            $isFav = false;
+        }
+        }else{
+            $isFav = false;
+        }
         return $this->render('user/view_user.html.twig', [
             'userAge' => $userAge,
             'user' => $view_Profil,
+            'isFav' => $isFav,
         ]);
+    }
+
+    #[Route('/profil/{id}/favorite', name: 'favorite', requirements: ['id' => '\d+'])]
+    public function favoriteUser($id) : Response
+    {
+        $profilToAdd = $this->userRepository->find($id);
+        if(!$this->getUser()){
+            return $this->redirectToRoute('user_login');
+        }
+        $user = $this->getUser();
+        $favoritesuser = $user->getFavoriteUser();
+
+        if($favoritesuser->contains($profilToAdd)){
+            $user->removeFavoriteUser($profilToAdd);
+            $this->addFlash('notice', 'Ce profil a été supprimé de vos favoris');
+        }else{
+            $user->addFavoriteUser($profilToAdd);
+            $this->addFlash('notice', 'Ce profil a été ajouté à vos favoris');
+        }
+        $this->em->persist($user);
+        $this->em->flush();
+
+        return $this->redirectToRoute('user_view_Profil', ['id' => $id]);
     }
 
     private function disallowAccess(): Response
