@@ -84,7 +84,15 @@
     <p class="badge bg-danger rounded-pill p-2 fs-5">
         {{ flat.gender }}
     </p>
+    {% if is_granted('ROLE_ADMIN') %}
+        <p>
+        <!-- lien a mettre pour edition de contenu, par defaut role_admin  -->
+        editer
+        </p>
+    {% endif %}
+    
 </div>
+
 
 <br>
 <br>
