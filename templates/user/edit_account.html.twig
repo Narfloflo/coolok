@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer mon profil - {{ parent() }}{% endblock %}
+{% block stylesheets %}{% endblock %}
+
+
+{% block body %}
+
+<h1 class="text-center fs-3 mt-4">Mon Compte</h1>
+{% if profil.firstname == null %}
+<p>Renseignez vos informations afin de pouvoir contacter des cooloks et être visible des utilisateurs</p>
+{% endif %}
+<div class="container">
+    <div class="row">
+        <div class="d-flex justify-content-center">
+            <div class="col col-md-6">
+                {{ form_start(form) }}
+                <div class="form_group">
+                    {{ form_row(form.firstname) }}
+                </div>
+                <div class="form_group">
+                    {{ form_row(form.lastname) }}
+                </div>
+                <div class="form_group">
+                    {{ form_row(form.gender) }}
+                </div>
+                <div class="form_group">
+                    {{ form_row(form.city) }}
+                </div>
+                <div class="form_group">
+                    {{ form_row(form.description) }}
+                </div>
+                <div class="form_group">
+                    {{ form_row(form.passions) }}
+                </div>
+                <div class="form_group">
+                    {{ form_row(form.option_search) }}
+                </div>
+                <div class="form_group">
+                    {{ form_row(form.picture) }}
+                </div>
+                <div class="form_check">
+                    {{ form_row(form.available) }}
+                </div>
+                <div class="form_group">
+                    {{ form_row(form.submit) }}
+                </div>
+    
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

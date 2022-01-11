@@ -4,14 +4,19 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use App\Repository\UserRepository;
 use App\Service\UserService;
+use App\Form\EditAccountType;
+use App\Repository\UserRepository;
+use App\Service\FileUploaderService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 
 #[Route('', name:'user_')]
 class UserController extends AbstractController
@@ -25,12 +30,13 @@ class UserController extends AbstractController
         EntityManagerInterface $em,
         UserPasswordHasherInterface $hasher,
         UserRepository $userRepository,
-        UserService $userService
+        UserService $userService,
     ){
         $this->em = $em;
         $this->hasher = $hasher;
         $this->userRepository = $userRepository;
         $this->userService = $userService;
+        // $this->fileUploader = $fileUploader;
     }
 
     #[Route('/inscription', name: 'register')]
@@ -76,24 +82,60 @@ class UserController extends AbstractController
     }
 
 
-    #[Route('/compte/{id}', name: 'profil', requirements: ['id' => '\d+'])]
-    public function compte(int $id): Response
+    #[Route('/compte', name: 'profil')]
+    public function compte(): Response
     {
         // Allow access if User id = User connected
-        $profil = $this->userRepository->find($id);
-        if ($profil !== $this->getUser()) {
+        if (!$this->getUser()) {
             throw $this->createAccessDeniedException();
         }
 
-        return $this->render('user/index.html.twig', [
-            'user' => $profil,
+        // if($this->getUser()->getFirstname() === null){
+        //     return $this->redirectToRoute('user_edit');
+        // }else{
+            return $this->render('user/index.html.twig', [
+                'user' => $this->getUser(),
+            ]);
+        // }
+    }
+
+    #[Route('/compte/edit', name: 'edit')]
+    public function edit(Request $request, FileUploaderService $fileUploader) : Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(EditAccountType::class, $user);
+        
+        $form->handleRequest($request);
+        // dd($form);
+        if($form->isSubmitted() && $form->isValid()){
+            // Upload picture file via service
+            
+            $pictureFile = $form->get('picture')->getData();
+            // dd($pictureFile);
+            if ($pictureFile) {
+            $pictureFileName = $fileUploader->upload($pictureFile);
+            $user->setPicture($pictureFileName);
+            }
+
+            $this->em->persist($user);
+            $this->em->flush();
+
+            $message = sprintf('Votre profil est désormais à jour');
+            $this->addFlash('notice', $message);
+
+            return $this->redirectToRoute('user_profil');
+        }
+
+        return $this->render('user/edit_account.html.twig', [
+            'form' => $form->createView(),
+            'profil' => $user,
         ]);
     }
 
-    #[Route('/compte/{id}/favoris', name: 'favorites', requirements: ['id' => '\d+'])]
-    public function showFavorites(int $id) : Response
+    #[Route('/compte/favoris', name: 'favorites')]
+    public function showFavorites() : Response
     {
-        $profil = $this->userRepository->find($id);
+        $profil = $this->getUser();
         $favoritesUser = $profil->getFavoriteUser();
         $favoritesFlat = $profil->getFavoriteFlat();
 
@@ -159,7 +201,7 @@ class UserController extends AbstractController
         $this->em->persist($user);
         $this->em->flush();
 
-        return $this->redirectToRoute('user_view_Profil', ['id' => $id]);
+        return $this->redirectToRoute('user_view_Profil');
     }
 
     private function disallowAccess(): Response

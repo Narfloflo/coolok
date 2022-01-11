@@ -1,14 +1,12 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Profil - {{ parent() }}{% endblock %}
+{% block title %}Mon Compte - {{ parent() }}{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/user/profil.css') }}">
 {% endblock %}
 
 {% block body %}
-<h1>Profil</h1>
-
+<h1>Mon profil</h1>
     <div class="img">
         <img class="photo" src="{{ user.picture }}" alt="Photo {{ user.firstname }}">
     </div>
