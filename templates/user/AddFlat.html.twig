@@ -15,7 +15,7 @@
 
 
 {% block body %}
-<h1>Création Logement</h1>
+<h1>{{ isNew ? 'Création' : 'Modification' }} Logement</h1>
 
 <form method="post" class="form-box">
         <div class="form-error">

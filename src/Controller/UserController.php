@@ -128,7 +128,7 @@ class UserController extends AbstractController
 
 
     #[Route('/creation_logement', name: 'AddFlat')]
-    #[Route('/{id}/edit_logement', name: 'editFlat', requirements: ['id' => '\d+'])]
+    #[Route('/edit_logement/{id}', name: 'editFlat', requirements: ['id' => '\d+'])]
 
     public function AddFlat(Request $request, Flat $flat = null): Response
     {

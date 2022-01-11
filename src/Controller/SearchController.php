@@ -26,8 +26,10 @@ class SearchController extends AbstractController
         $searchFlat->handleRequest($request);
         //$searchCriteria = $searchFlat->getData();
         $q = $request->query->get('query');
+        $option = $request->query->get('searchAdv');
 
-        $flats = $this->flatRepository->search($q);
+
+        $flats = $this->flatRepository->search($q, $option);
 
         return $this->render('flat/searchFlat.html.twig', [
             'flats' => $flats,

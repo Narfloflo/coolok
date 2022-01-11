@@ -84,13 +84,13 @@
     {% endif %}
     
     {% if is_granted('ROLE_ADMIN') %}
-        <p>
+        <p class="badge bg-danger rounded-pill p-2 fs-5">
         <!-- lien a mettre pour edition de contenu, par defaut role_admin  -->
-        <a href="{{ path('user_editFlat', {
-            id: flat.id
-        }) }}" class="button">
-            Éditer
-        </a>
+
+            <a href="{{ path('user_editFlat', {id: flat.id}) }}">
+                <i class="far fa-edit"></i> Éditer
+            </a>
+
         </p>
     {% endif %}
     
