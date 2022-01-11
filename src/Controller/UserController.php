@@ -106,13 +106,16 @@ class UserController extends AbstractController
         if (!$this->getUser()) {
             throw $this->createAccessDeniedException();
         }
-
         $user = $this->getUser();
-        $picture = $user->getPicture();
-        dump($picture);
+
+        if($user->getPicture() != null){
+            $hadPicture = false;
+        }else{
+            $hadPicture = 'is_null($builder->getData()->getId())';
+        }
+
         $form = $this->createForm(EditAccountType::class, $user, [
-            'picture' => $picture,
-            'test' => 'coucou'
+            'picture' => $hadPicture,
         ]);
 
         $form->handleRequest($request);

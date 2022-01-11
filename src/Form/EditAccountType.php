@@ -45,7 +45,7 @@ class EditAccountType extends AbstractType
                 ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Vous devez saisir un nom. (Il ne sera masqué sur votre profil publique.)'
+                        'message' => 'Vous devez saisir un nom. (Il sera masqué sur votre profil publique.)'
                     ]),
                 ],
             ])
@@ -119,7 +119,7 @@ class EditAccountType extends AbstractType
             ->add('picture', FileType::class, [
                 'label' => 'Photo de profil',
                 'mapped' => false,
-                'required'=> $options['picture'] ? is_null($builder->getData()->getId()) : false,
+                'required'=> $options['picture'],
                 'attr' => [
                     'class' => 'form-control-file',
                 ],
