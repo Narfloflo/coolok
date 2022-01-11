@@ -6,15 +6,22 @@
 
 {% block body %}
 
-<h1 class="text-center fs-3 mt-4">Mon Compte</h1>
+
 
 <div class="container">
     <div class="row">
         <div class="d-flex justify-content-center">
-
             <div class="col col-md-6">
                 {% if profil.firstname == null %}
+                <h1 class="text-center fs-2 mt-3">Mon profil</h1>
                 <p>Renseignez vos informations afin de pouvoir contacter des cooloks et être visible des utilisateurs.</p>
+                {% else %}
+                <div class="d-flex justify-content-between mt-3">
+                    <h1 class="text-center fs-2">Editer</h1>
+                    <a class="align-self-center fs-4 ms-3" href="{{ path('user_profil') }}">
+                        Annuler <ion-icon name="close-outline"></ion-icon>
+                    </a>
+                </div>
                 {% endif %}
                 {{ form_start(form) }}
                 {% if profil.picture %}
@@ -49,7 +56,6 @@
                 <div class="form_group">
                     {{ form_row(form.submit) }}
                 </div>
-    
                 {{ form_end(form) }}
             </div>
         </div>

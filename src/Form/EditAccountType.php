@@ -28,7 +28,7 @@ class EditAccountType extends AbstractType
                 'label' => 'Prénom' . $options['test'],
                 'attr' => [
                     'placeholder' => 'Camille',
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-4',
                 ],
                 'constraints' => [
                     new NotBlank([
@@ -41,7 +41,7 @@ class EditAccountType extends AbstractType
                 'label' => 'Nom',
                 'attr' => [
                     'placeholder' => 'Dupont',
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-4',
                 ],
                 'constraints' => [
                     new NotBlank([
@@ -53,7 +53,7 @@ class EditAccountType extends AbstractType
                 'label' => 'Votre emplacement',
                 'attr' => [
                     'placeholder' => 'Paris',
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-4',
                 ],
                 'constraints' => [
                     new NotBlank([
@@ -65,7 +65,7 @@ class EditAccountType extends AbstractType
             ->add('description', TextareaType::class, [
                 'attr' => [
                     'rows' => 5,
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-4',
                     'placeholder' => 'Je commence prochainement mes études sur la région de Lille, c\'est pourquoi je suis à la recherche d\'une colocation. Idéalement en centre ville ou proche d\'un métro...'
                 ],
                 'constraints' => [
@@ -84,7 +84,7 @@ class EditAccountType extends AbstractType
             ->add('passions', TextareaType::class, [
                 'attr' => [
                     'rows' => 2,
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-4',
                     'placeholder' => 'Football, Lecture, Cuisine asiatique...'
                 ],
                 'constraints' => [
@@ -108,7 +108,7 @@ class EditAccountType extends AbstractType
                     'Les deux' => 'un logement et des colocataires',
                 ],
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-4',
                 ],
             ])
             // ->add('option_gender')
@@ -121,7 +121,7 @@ class EditAccountType extends AbstractType
                 'mapped' => false,
                 'required'=> $options['picture'],
                 'attr' => [
-                    'class' => 'form-control-file',
+                    'class' => 'form-control-file my-4',
                 ],
                 'constraints' => [
                     new File([
@@ -141,13 +141,13 @@ class EditAccountType extends AbstractType
                     'Non' => 0,
                 ],
                 'attr' => [
-                    'class' => 'form-checklabel',
+                    'class' => 'form-checklabel mb-4',
                 ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer',
                 'attr' => [
-                    'class' => 'btn btn-outline-success',
+                    'class' => 'btn btn-outline-success mb-4',
                 ]
             ])
         ;

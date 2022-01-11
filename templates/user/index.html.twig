@@ -6,62 +6,76 @@
 {% endblock %}
 
 {% block body %}
-<h1>Mon profil</h1>
-    <div class="img">
-        <img class="photo" src="/uploads/images/{{ user.picture }}" alt="Photo {{ user.firstname }}">
+<div class="container">
+    <div class="row">
+        <div class="d-flex justify-content-center">
+            <div class="col col-lg-6">
+                <div class="d-flex justify-content-between mt-3">
+                    <h1 class="text-center fs-2">Mon profil</h1>
+                    <a class="align-self-center fs-4 ms-3" href="{{ path('user_edit') }}">
+                        Modifier <ion-icon name="create-outline"></ion-icon>
+                    </a>
+                </div>
+                <div class="img">
+                    <img class="photo" src="/uploads/images/{{ user.picture }}" alt="Photo {{ user.firstname }}">
+                </div>
+                <div class="me text-center">
+                    <p><strong>{{ user.firstname }} {{ user.lastname }}</strong> - 32 ans</p>
+                </div>
+                <div class="me fs-4">
+                    <ion-icon name="location-outline"></ion-icon>{{ user.city }}
+                </div>
+                <hr>
+            <h2>À propos de moi</h2>
+                <div>
+                    <p>{{ user.description }}</p>
+                </div>
+            <h2>Passions</h2>
+                <div>
+                    <p>{{ user.passions }}</p>
+                </div>
+            <h2>Date de naissance</h2>
+                <div>
+                    <p>{{ user.birthday|date("m/d/Y") }}</p>
+                </div>
+                <hr>
+            {# 
+            <section class="langue">
+                <h2>Je parle</h2>
+                    <article>
+                        <img src="#" alt="Drapeau FR">
+                        <h3>Français</h3>
+                    </article>
+                    <article>
+                        <img src="#" alt="Drapeau GR">
+                        <h3>Allemand</h3>
+                    </article>
+                    <article>
+                        <img src="#" alt="Drapeau RU">
+                        <h3>Russe</h3>
+                    </article>
+            </section> #}
+                <div class="perso">
+                    <h2>Mon logement</h2>
+                    <a href="#"><ion-icon name="chevron-forward-outline"></ion-icon></a>
+                </div>
+                <h3>Pas encore de Logement ?</h3>
+                <a href="{{ path('user_AddFlat') }}"><button type="button" class="btn btn-success">Ajoute un logement ici</button></a>
+                {# <div class="perso">
+                    <h2>Mes préférences</h2>
+                        <a href="#"><ion-icon name="chevron-forward-outline"></ion-icon></a>
+                </div> #}
+                <div class="desac">
+                    <button type="button" class="btn btn-outline-secondary"><a href="{{ path('user_desactivation') }}">Désactiver</a></button>
+                </div>
+                <div class="delete">
+                    <a class="supp" href="#">Supprimer le compte</a>
+                </div>
+            </div>
+        </div> 
+
     </div>
-    <div class="me">
-        <p><strong>{{ user.firstname }} {{ user.lastname }}</strong> - 32 ans</p>
-    </div>
-    <div class="me">
-        <ion-icon name="location-outline"></ion-icon>
-        <p>{{ user.city }}</p>
-    </div>
-    <hr>
-<h2>À propos de moi</h2>
-    <div>
-        <p>{{ user.description }}</p>
-    </div>
-<h2>Passions</h2>
-    <div>
-        <p>{{ user.passions }}</p>
-    </div>
-<h2>Date de naissance</h2>
-    <div>
-        <p>{{ user.birthday|date("m/d/Y") }}</p>
-    </div>
-    <hr>
-{# 
-<section class="langue">
-    <h2>Je parle</h2>
-        <article>
-            <img src="#" alt="Drapeau FR">
-            <h3>Français</h3>
-        </article>
-        <article>
-            <img src="#" alt="Drapeau GR">
-            <h3>Allemand</h3>
-        </article>
-        <article>
-            <img src="#" alt="Drapeau RU">
-            <h3>Russe</h3>
-        </article>
-</section> #}
-    <div class="perso">
-        <h2>Mon logement</h2>
-        <a href="#"><ion-icon name="chevron-forward-outline"></ion-icon></a>
-    </div>
-    <h3>Pas encore de Logement ?</h3>
-    <a href="{{ path('user_AddFlat') }}"><button type="button" class="btn btn-success">Ajoute un logement ici</button></a>
-    {# <div class="perso">
-        <h2>Mes préférences</h2>
-            <a href="#"><ion-icon name="chevron-forward-outline"></ion-icon></a>
-    </div> #}
-    <div class="desac">
-        <button type="button" class="btn btn-outline-secondary"><a href="{{ path('user_desactivation') }}">Désactiver</a></button>
-    </div>
-    <div class="delete">
-        <a class="supp" href="#">Supprimer le compte</a>
-    </div>
+</div>
+    
 
 {% endblock %}
