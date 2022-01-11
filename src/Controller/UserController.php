@@ -158,6 +158,19 @@ class UserController extends AbstractController
     }
 
 
+    #[Route('/compte/desactivate', name: 'desactivation')]
+    public function desactivation() : Response
+    {
+        $profil = $this->getUser();
+        $profil->setAvailable(false);
+        
+        $this->em->persist($profil);
+        $this->em->flush();
+
+        return $this->redirectToRoute('user_profil');
+    }
+
+
     #[Route('/creation_logement', name: 'AddFlat')]
     #[Route('/edit_logement/{id}', name: 'editFlat', requirements: ['id' => '\d+'])]
 
