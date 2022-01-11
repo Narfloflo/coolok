@@ -173,6 +173,18 @@ class UserController extends AbstractController
         return $this->redirectToRoute('user_profil');
     }
 
+    #[Route('/compte/activate', name: 'activation')]
+    public function activation() : Response
+    {
+        $profil = $this->getUser();
+        $profil->setAvailable(true);
+        
+        $this->em->persist($profil);
+        $this->em->flush();
+
+        return $this->redirectToRoute('user_profil');
+    }
+
 
     #[Route('/creation_logement', name: 'AddFlat')]
     #[Route('/edit_logement/{id}', name: 'editFlat', requirements: ['id' => '\d+'])]
