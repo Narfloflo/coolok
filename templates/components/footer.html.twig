@@ -20,12 +20,16 @@
                     <span class="nav-bottom-text">Accueil</span>
                 </a>
             </li>
-            <li id="nav-coolok" class="nav-bottom-list">
-                <a href="#">
+            <li id="nav-coolok" class="nav-bottom-list {{ app.request.get('_route') == 'user_favorites' ? 'nav-active' }}">
+                {% if app.user %}
+                <a href="{{ path('user_favorites', {id:app.user.id}) }}">
+                {% else %}
+                <a href="{{ path('user_login') }}">
+                {% endif %}
                     <span class="nav-bottom-icon">
-                        <svg xmlns='http://www.w3.org/2000/svg' width='24px' height='24px'><path d="M15,2c-1.6,0-3.1,0.7-4.2,1.7c0.8,0.2,1.5,0.5,2.1,0.9C13.5,4.2,14.2,4,15,4c2.2,0,4,1.8,4,4v5c0,2.2-1.8,4-4,4s-4-1.8-4-4  V9.5c-0.5-0.6-1.2-1-2-1V13c0,3.3,2.7,6,6,6s6-2.7,6-6V8C21,4.7,18.3,2,15,2z"/><path d="M9,22c1.6,0,3.1-0.7,4.2-1.7c-0.8-0.2-1.5-0.5-2.1-0.9C10.5,19.8,9.8,20,9,20c-2.2,0-4-1.8-4-4v-5c0-2.2,1.8-4,4-4  s4,1.8,4,4v3.5c0.5,0.6,1.2,1,2,1V11c0-3.3-2.7-6-6-6s-6,2.7-6,6v5C3,19.3,5.7,22,9,22z"/></svg>
+                        <ion-icon name="heart-outline"></ion-icon>
                     </span>
-                    <span class="nav-bottom-text">Coolok</span>
+                    <span class="nav-bottom-text">Favoris</span>
                 </a>
             </li>
             <li id="nav-search" class="nav-bottom-list">
@@ -48,7 +52,12 @@
                     <span class="nav-bottom-text">Profil</span>
                 </a>
             </li>
+            {% if app.request.get('_route') == 'main_index' 
+            or app.request.get('_route') == 'user_favorites' 
+            or app.request.get('_route') == 'user_profil' 
+            %}
             <div class="nav-indicator"></div>
+            {% endif %}
         </ul>
     </div>
 </div>

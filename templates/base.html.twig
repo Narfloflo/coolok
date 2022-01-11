@@ -17,6 +17,15 @@
         {% block stylesheets %}{% endblock %}
         {% block script %}{% endblock %}
         <script src="{{ asset('js/app.js') }} " defer></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-C62CYL0E73"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-C62CYL0E73');
+        </script>
     </head>
     <body>
         {% include "components/header.html.twig" %}

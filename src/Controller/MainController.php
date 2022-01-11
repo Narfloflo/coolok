@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\FlatRepository;
 use App\Repository\UserRepository;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,13 +15,16 @@ class MainController extends AbstractController
 {
     private $flatRepository;
     private $userRepository;
+    private $userService;
 
     public function __construct(
         FlatRepository $flatRepository,
         UserRepository $userRepository,
+        UserService $userService,
     ){
         $this->flatRepository = $flatRepository;
         $this->userRepository = $userRepository;
+        $this->userService = $userService;
     }
 
     #[Route('/', name: 'index')]
@@ -38,14 +42,7 @@ class MainController extends AbstractController
             6,
         );
 
-        $newUserAge = [];
-        for($i = 0; $i < count($newUser); $i++){
-            $birthday = $newUser[$i]->getBirthday()->getTimestamp();
-            $userAge = round((time() - $birthday) / 31556952);
-
-            $newUserAge[] = $userAge;
-        }
-
+        $newUserAge = $this->userService->calculAges($newUser);
 
         $mixedFlat = $this->flatRepository->findBy(
             ['gender' => 'all',

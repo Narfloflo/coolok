@@ -53,7 +53,7 @@
             <div class="card-flat-info">
                 <div>
                     <h3 class="card-flat-title">{{ flat.type }}</h3>
-                    <span class="card-flat-subtitle">{{ flat.city }}</span>
+                    <span class="card-flat-subtitle">{{ flat.city|u.truncate(20, '...') }}</span>
                 </div>
                 <div>
                     <span class="flat-surface">{{ flat.surface }} m2</span>
