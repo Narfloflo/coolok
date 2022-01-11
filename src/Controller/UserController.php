@@ -91,13 +91,13 @@ class UserController extends AbstractController
             throw $this->createAccessDeniedException();
         }
 
-        // if($this->getUser()->getFirstname() === null){
-        //     return $this->redirectToRoute('user_edit');
-        // }else{
+        if($this->getUser()->getFirstname() === null){
+            return $this->redirectToRoute('user_edit');
+        }else{
             return $this->render('user/index.html.twig', [
                 'user' => $this->getUser(),
             ]);
-        // }
+        }
     }
 
     #[Route('/compte/edit', name: 'edit')]

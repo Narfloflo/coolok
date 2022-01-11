@@ -31,7 +31,7 @@
         <p>{{ user.birthday|date("m/d/Y") }}</p>
     </div>
     <hr>
-
+{# 
 <section class="langue">
     <h2>Je parle</h2>
         <article>
@@ -46,17 +46,17 @@
             <img src="#" alt="Drapeau RU">
             <h3>Russe</h3>
         </article>
-</section>
+</section> #}
     <div class="perso">
         <h2>Mon logement</h2>
         <a href="#"><ion-icon name="chevron-forward-outline"></ion-icon></a>
     </div>
     <h3>Pas encore de Logement ?</h3>
     <a href="{{ path('user_AddFlat') }}"><button type="button" class="btn btn-success">Ajoute un logement ici</button></a>
-    <div class="perso">
+    {# <div class="perso">
         <h2>Mes préférences</h2>
             <a href="#"><ion-icon name="chevron-forward-outline"></ion-icon></a>
-    </div>
+    </div> #}
     <div class="desac">
         <button type="button" class="btn btn-outline-secondary">Désactiver le compte</button>
     </div>

@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class EditAccountType extends AbstractType
 {
@@ -61,10 +62,11 @@ class EditAccountType extends AbstractType
                 ],
 
             ])
-            ->add('description', TextType::class, [
+            ->add('description', TextareaType::class, [
                 'attr' => [
                     'rows' => 5,
                     'class' => 'form-control',
+                    'placeholder' => 'Je commence prochainement mes études sur la région de Lille, c\'est pourquoi je suis à la recherche d\'une colocation. Idéalement en centre ville ou proche d\'un métro...'
                 ],
                 'constraints' => [
                     new NotBlank([
@@ -79,10 +81,11 @@ class EditAccountType extends AbstractType
                 ],
 
             ])
-            ->add('passions', TextType::class, [
+            ->add('passions', TextareaType::class, [
                 'attr' => [
                     'rows' => 2,
                     'class' => 'form-control',
+                    'placeholder' => 'Football, Lecture, Cuisine asiatique...'
                 ],
                 'constraints' => [
                     new NotBlank([
