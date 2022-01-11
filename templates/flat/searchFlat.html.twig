@@ -13,14 +13,29 @@
 {{ form_end(searchFlat) }} #}
 
 
-<!-- <form action="{{ url('search') }}" method="get">
+<form action="{{ url('search') }}" method="get">
 
     <label for="search" hidden>Saisir votre recherche</label>
-    <input type="search" id="search" name="query" placeholder="Saisir votre recherche" aria-label="Saisir votre recherche">
+    <input type="search" id="search" name="query" class="form-search" placeholder="Saisir votre recherche" aria-label="Saisir votre recherche">
 
-    <button type="submit" aria-label="Rechercher">X</button>
+    <input type="checkbox" id="furnished" name="searchAdv" value="furnished">
+    <label for="furnished">Meublé</label>
 
-</form> -->
+    <input type="checkbox" id="space" name="searchAdv" value="space">
+    <label for="space">Place disponible</label>
+
+    <input type="checkbox" id="surface" name="searchAdv" value="surface">
+    <label for="space">Surface</label>
+
+    <input type="checkbox" id="rent" name="searchAdv" value="rent">
+    <label for="rent">Loyer</label>
+
+    <input type="checkbox" id="gender" name="searchAdv" value="gender">
+    <label for="gender">Préférence genre</label>
+
+    <button type="submit" class="btn-search" aria-label="Rechercher">Rechercher</button>
+
+</form>
 
 {# coolok.com/search.php?q=lille  #}
 

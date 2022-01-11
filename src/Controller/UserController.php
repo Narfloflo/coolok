@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Flat;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\AddFlatType;
+use App\Repository\FlatRepository;
 use App\Service\UserService;
 use App\Form\EditAccountType;
 use App\Repository\UserRepository;
@@ -150,14 +153,40 @@ class UserController extends AbstractController
 
 
     #[Route('/creation_logement', name: 'AddFlat')]
-    public function AddFlat(): Response
+    #[Route('/edit_logement/{id}', name: 'editFlat', requirements: ['id' => '\d+'])]
+
+    public function AddFlat(Request $request, Flat $flat = null): Response
     {
+        if($flat){
+            $isNew = false;
+        }else{
+            $flat = new Flat();
+            $flat->setOwner($this->getUser());
+            $isNew = true;
+        }
+        $form = $this->createForm(AddFlatType::class, $flat);
+        
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $this->mediaService->handleEvent($flat);
+            $this->em->persist($flat);
+            $this->em->flush();
+
+            $message = sprintf('Votre logement à bien été %s', $isNew ? 'créé' : 'modifié');
+            $this->addFlash('notice', $message);
+            return $this->redirectToRoute('flat_show', [
+                'id' => $flat->getId(),
+            ]);
+        }
+
         return $this->render('user/AddFlat.html.twig', [
-            'controller_name' => 'UserController',
+        'form' => $form->createView(),
+        'isNew' => $isNew
         ]);
     }
 
     #[Route('/profil/{id}', name: 'view_Profil', requirements: ['id' => '\d+'])]
+    
     public function view_Profil($id, User $user): Response
     {
         $view_Profil = $this->userRepository->find($id);
