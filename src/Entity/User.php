@@ -125,12 +125,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'favorite_user')]
     private $users;
 
-    #[Assert\File(
-        maxSize: '2M',
-        mimeTypes: ['image/jpeg', 'image/png'],
-        mimeTypesMessage: 'Veuillez transferer un fichier image valide',
-        maxSizeMessage: 'Ce fichier est trop volumineux: ({{ size }} {{ suffix }}). Poids maximum: {{ limit }} {{ suffix }}.'
-    )]
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $picture;
 

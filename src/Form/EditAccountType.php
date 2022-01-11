@@ -48,17 +48,6 @@ class EditAccountType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('gender', ChoiceType::class, [
-                'label' => 'Vous êtes ?',
-                'choices'  => [
-                    'Un homme' => 'men',
-                    'Une femme' => 'women',
-                    'Autre' => 'other',
-                ],
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-            ])
             ->add('city', TextType::class, [
                 'label' => 'Votre emplacement',
                 'attr' => [
@@ -111,9 +100,9 @@ class EditAccountType extends AbstractType
             ->add('option_search', ChoiceType::class, [
                 'label' => 'Vous recherchez ?',
                 'choices'  => [
-                    'Une colocation' => 'flat',
-                    'Un(e) colocatair(e)' => 'roommate',
-                    'Les deux' => 'both',
+                    'Un logement' => 'un logement',
+                    'Un(e) colocatair(e)' => 'un(e) colocatair(e)',
+                    'Les deux' => 'un logement et des colocataires',
                 ],
                 'attr' => [
                     'class' => 'form-control',
@@ -127,7 +116,7 @@ class EditAccountType extends AbstractType
             ->add('picture', FileType::class, [
                 'label' => 'Photo de profil',
                 'mapped' => false,
-                'required' => 'false',
+                'required'=> is_null($builder->getData()->getId()),
                 'attr' => [
                     'class' => 'form-control-file',
                 ],

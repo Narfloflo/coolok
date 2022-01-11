@@ -15,9 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
@@ -105,16 +103,19 @@ class UserController extends AbstractController
     #[Route('/compte/edit', name: 'edit')]
     public function edit(Request $request, FileUploaderService $fileUploader) : Response
     {
+        if (!$this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $user = $this->getUser();
         $form = $this->createForm(EditAccountType::class, $user);
-        
+
         $form->handleRequest($request);
-        // dd($form);
+        
         if($form->isSubmitted() && $form->isValid()){
             // Upload picture file via service
             
             $pictureFile = $form->get('picture')->getData();
-            // dd($pictureFile);
             if ($pictureFile) {
             $pictureFileName = $fileUploader->upload($pictureFile);
             $user->setPicture($pictureFileName);
