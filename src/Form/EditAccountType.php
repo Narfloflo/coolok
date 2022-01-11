@@ -25,7 +25,7 @@ class EditAccountType extends AbstractType
         $builder
             // ->add('roles')
             ->add('firstname', TextType::class, [
-                'label' => 'Prénom',
+                'label' => 'Prénom' . $options['test'],
                 'attr' => [
                     'placeholder' => 'Camille',
                     'class' => 'form-control',
@@ -119,7 +119,7 @@ class EditAccountType extends AbstractType
             ->add('picture', FileType::class, [
                 'label' => 'Photo de profil',
                 'mapped' => false,
-                'required'=> is_null($builder->getData()->getId()),
+                'required'=> $options['picture'] ? is_null($builder->getData()->getId()) : false,
                 'attr' => [
                     'class' => 'form-control-file',
                 ],
@@ -157,6 +157,8 @@ class EditAccountType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'picture' => null,
+            'test' => null,
         ]);
     }
 }

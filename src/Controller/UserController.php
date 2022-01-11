@@ -108,7 +108,12 @@ class UserController extends AbstractController
         }
 
         $user = $this->getUser();
-        $form = $this->createForm(EditAccountType::class, $user);
+        $picture = $user->getPicture();
+        dump($picture);
+        $form = $this->createForm(EditAccountType::class, $user, [
+            'picture' => $picture,
+            'test' => 'coucou'
+        ]);
 
         $form->handleRequest($request);
         
