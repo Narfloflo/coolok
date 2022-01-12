@@ -41,3 +41,11 @@ strong{
 .description p{
     color: grey;
 }
+
+.hidden{
+    display: none;
+}
+
+.test{
+    width: auto!important;
+}

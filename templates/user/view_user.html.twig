@@ -5,6 +5,7 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/user/user.css') }}">
 {% endblock %}
+{% block script %} <script src="{{ asset('js/mail.js') }} " defer></script> {% endblock %}
 
 {% block body %}
     <div class="img">
@@ -43,12 +44,27 @@
             <p>{{ user.passions }}</p>
         </div>
 
-        <div class="d-flex justify-content-center">
-            <p class="btn btn-outline-danger border border-dark rounded-pill p-2">
-                <ion-icon name="chatbox-ellipses-outline"></ion-icon>
-                Contacter {{ user.firstname }}
-                <ion-icon name="chevron-forward-outline"></ion-icon>
-            </p>
+        
+        <div class="d-flex flex-column align-items-center test">
+                <button id="see-user-mail" class="btn btn-outline-danger border border-dark rounded-pill p-2">
+                    <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+                        Contacter {{ user.firstname }}
+                    <ion-icon name="chevron-forward-outline"></ion-icon>
+                </button>
+                <div id="user-mail" class="hidden">         
+                    <p>{{ user.email }}</p>
+                </div>
         </div>
+    
+          
+    <!-- <script> -->
+        <!-- var divPrecedent=document.getElementById('mail');
+        function visibilite(divId)
+        {
+            divPrecedent.style.display='none'; -->
+            <!-- divPrecedent=document.getElementById(divId); -->
+            <!-- divPrecedent.style.display=''; -->
+        <!-- } -->
+    <!-- </script> -->
 
 {% endblock %}
