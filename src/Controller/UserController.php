@@ -2,16 +2,22 @@
 
 namespace App\Controller;
 
+use App\Entity\Flat;
 use App\Entity\User;
 use App\Form\UserType;
-use App\Repository\UserRepository;
+use App\Form\AddFlatType;
+use App\Repository\FlatRepository;
 use App\Service\UserService;
+use App\Form\EditAccountType;
+use App\Repository\UserRepository;
+use App\Service\FileUploaderService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 
 #[Route('', name:'user_')]
 class UserController extends AbstractController
@@ -25,12 +31,13 @@ class UserController extends AbstractController
         EntityManagerInterface $em,
         UserPasswordHasherInterface $hasher,
         UserRepository $userRepository,
-        UserService $userService
+        UserService $userService,
     ){
         $this->em = $em;
         $this->hasher = $hasher;
         $this->userRepository = $userRepository;
         $this->userService = $userService;
+        // $this->fileUploader = $fileUploader;
     }
 
     #[Route('/inscription', name: 'register')]
@@ -76,24 +83,70 @@ class UserController extends AbstractController
     }
 
 
-    #[Route('/compte/{id}', name: 'profil', requirements: ['id' => '\d+'])]
-    public function compte(int $id): Response
+    #[Route('/compte', name: 'profil')]
+    public function compte(): Response
     {
         // Allow access if User id = User connected
-        $profil = $this->userRepository->find($id);
-        if ($profil !== $this->getUser()) {
+        if (!$this->getUser()) {
             throw $this->createAccessDeniedException();
         }
 
-        return $this->render('user/index.html.twig', [
-            'user' => $profil,
+        if($this->getUser()->getFirstname() === null){
+            return $this->redirectToRoute('user_edit');
+        }else{
+            return $this->render('user/index.html.twig', [
+                'user' => $this->getUser(),
+            ]);
+        }
+    }
+
+    #[Route('/compte/edit', name: 'edit')]
+    public function edit(Request $request, FileUploaderService $fileUploader) : Response
+    {
+        if (!$this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+        $user = $this->getUser();
+
+        if($user->getPicture() != null){
+            $hadPicture = false;
+        }else{
+            $hadPicture = 'is_null($builder->getData()->getId())';
+        }
+
+        $form = $this->createForm(EditAccountType::class, $user, [
+            'picture' => $hadPicture,
+        ]);
+
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+            // Upload picture file via service
+            $pictureFile = $form->get('picture')->getData();
+            if ($pictureFile) {
+            $pictureFileName = $fileUploader->upload($pictureFile);
+            $user->setPicture($pictureFileName);
+            }
+
+            $this->em->persist($user);
+            $this->em->flush();
+
+            $message = sprintf('Votre profil est désormais à jour');
+            $this->addFlash('notice', $message);
+
+            return $this->redirectToRoute('user_profil');
+        }
+
+        return $this->render('user/edit_account.html.twig', [
+            'form' => $form->createView(),
+            'profil' => $user,
         ]);
     }
 
-    #[Route('/compte/{id}/favoris', name: 'favorites', requirements: ['id' => '\d+'])]
-    public function showFavorites(int $id) : Response
+    #[Route('/compte/favoris', name: 'favorites')]
+    public function showFavorites() : Response
     {
-        $profil = $this->userRepository->find($id);
+        $profil = $this->getUser();
         $favoritesUser = $profil->getFavoriteUser();
         $favoritesFlat = $profil->getFavoriteFlat();
 
@@ -107,15 +160,72 @@ class UserController extends AbstractController
     }
 
 
-    #[Route('/creation_logement', name: 'AddFlat')]
-    public function AddFlat(): Response
+    #[Route('/compte/desactivate', name: 'desactivation')]
+    public function desactivation() : Response
     {
+        $profil = $this->getUser();
+        $profil->setAvailable(false);
+        
+        $this->em->persist($profil);
+        $this->em->flush();
+
+        $message = sprintf('Votre profil est désormais désactivé');
+        $this->addFlash('notice', $message);
+
+        return $this->redirectToRoute('user_profil');
+    }
+
+    #[Route('/compte/activate', name: 'activation')]
+    public function activation() : Response
+    {
+        $profil = $this->getUser();
+        $profil->setAvailable(true);
+        
+        $this->em->persist($profil);
+        $this->em->flush();
+
+        $message = sprintf('Votre profil est désormais activé');
+        $this->addFlash('notice', $message);
+
+        return $this->redirectToRoute('user_profil');
+    }
+
+
+    #[Route('/creation_logement', name: 'AddFlat')]
+    #[Route('/edit_logement/{id}', name: 'editFlat', requirements: ['id' => '\d+'])]
+
+    public function AddFlat(Request $request, Flat $flat = null): Response
+    {
+        if($flat){
+            $isNew = false;
+        }else{
+            $flat = new Flat();
+            $flat->setOwner($this->getUser());
+            $isNew = true;
+        }
+        $form = $this->createForm(AddFlatType::class, $flat);
+        
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $this->mediaService->handleEvent($flat);
+            $this->em->persist($flat);
+            $this->em->flush();
+
+            $message = sprintf('Votre logement à bien été %s', $isNew ? 'créé' : 'modifié');
+            $this->addFlash('notice', $message);
+            return $this->redirectToRoute('flat_show', [
+                'id' => $flat->getId(),
+            ]);
+        }
+
         return $this->render('user/AddFlat.html.twig', [
-            'controller_name' => 'UserController',
+        'form' => $form->createView(),
+        'isNew' => $isNew
         ]);
     }
 
     #[Route('/profil/{id}', name: 'view_Profil', requirements: ['id' => '\d+'])]
+    
     public function view_Profil($id, User $user): Response
     {
         $view_Profil = $this->userRepository->find($id);
@@ -159,7 +269,7 @@ class UserController extends AbstractController
         $this->em->persist($user);
         $this->em->flush();
 
-        return $this->redirectToRoute('user_view_Profil', ['id' => $id]);
+        return $this->redirectToRoute('user_view_Profil');
     }
 
     private function disallowAccess(): Response

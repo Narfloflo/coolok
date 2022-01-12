@@ -22,7 +22,7 @@
             </li>
             <li id="nav-coolok" class="nav-bottom-list {{ app.request.get('_route') == 'user_favorites' ? 'nav-active' }}">
                 {% if app.user %}
-                <a href="{{ path('user_favorites', {id:app.user.id}) }}">
+                <a href="{{ path('user_favorites') }}">
                 {% else %}
                 <a href="{{ path('user_login') }}">
                 {% endif %}
@@ -33,7 +33,7 @@
                 </a>
             </li>
             <li id="nav-search" class="nav-bottom-list">
-                <a href="#">
+                <a href="{{ path('search')}}?query">
                     <span class="nav-bottom-icon">
                         <ion-icon name="search-outline"></ion-icon>
                     </span>
@@ -42,7 +42,7 @@
             </li>
             <li id="nav-profil" class="nav-bottom-list {{ app.request.get('_route') == 'user_profil' ? 'nav-active' }}">
                 {% if app.user %}
-                <a href="{{ path('user_profil', {id:app.user.id}) }}">
+                <a href="{{ path('user_profil')}}">
                 {% else %}
                 <a href="{{ path('user_login') }}">
                 {% endif %}

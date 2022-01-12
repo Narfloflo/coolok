@@ -21,12 +21,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[Assert\NotBlank(
-        message: 'Vous devez saisir une adresse email.'
-    )]
-    #[Assert\Email(
-        message: 'Vous devez saisir une adresse email valide.',
-    )]
+    // #[Assert\NotBlank(
+    //     message: 'Vous devez saisir une adresse email.'
+    // )]
+    // #[Assert\Email(
+    //     message: 'Vous devez saisir une adresse email valide.',
+    // )]
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     private $email;
 
@@ -42,17 +42,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 50, nullable:true)]
     private $lastname;
 
-    #[Assert\NotBlank(
-        message: 'Vous devez saisir un mot de passe.'
-    )]
-    #[Assert\Length(
-        min: 8,
-        max: 50,
-        minMessage: 'Votre mot de passe doit contenir minimum {{ limit }} caractères',
-        maxMessage: 'Votre mot de passe doit contenir au maximum {{ limit }} caractères',
-    )]
-    #[Assert\Regex('/^(?=.*[A-Za-z])(?=.*\d)(?=.*?[@$!%*#?&])/', message: 'Votre mot de passe doit contenir au minimum 1 chiffre, 1 lettre et 1 caractère spécial')]
-    #[Assert\NotCompromisedPassword(message: 'Ce mot de passe semble avoir déjà été compromis lors d\'une fuite de donnée d\'un autre service.')]
+    // #[Assert\NotBlank(
+    //     message: 'Vous devez saisir un mot de passe.'
+    // )]
+    // #[Assert\Length(
+    //     min: 8,
+    //     max: 50,
+    //     minMessage: 'Votre mot de passe doit contenir minimum {{ limit }} caractères',
+    //     maxMessage: 'Votre mot de passe doit contenir au maximum {{ limit }} caractères',
+    // )]
+    // #[Assert\Regex('/^(?=.*[A-Za-z])(?=.*\d)(?=.*?[@$!%*#?&])/', message: 'Votre mot de passe doit contenir au minimum 1 chiffre, 1 lettre et 1 caractère spécial')]
+    // #[Assert\NotCompromisedPassword(message: 'Ce mot de passe semble avoir déjà été compromis lors d\'une fuite de donnée d\'un autre service.')]
     private$plainPassword;
 
     #[Assert\LessThanOrEqual('- 15 years', message: 'Vous devez avor plus de 15ans pour utiliser ce service')]
@@ -125,12 +125,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'favorite_user')]
     private $users;
 
-    #[Assert\File(
-        maxSize: '2M',
-        mimeTypes: ['image/jpeg', 'image/png'],
-        mimeTypesMessage: 'Veuillez transferer un fichier image valide',
-        maxSizeMessage: 'Ce fichier est trop volumineux: ({{ size }} {{ suffix }}). Poids maximum: {{ limit }} {{ suffix }}.'
-    )]
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $picture;
 

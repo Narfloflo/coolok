@@ -9,7 +9,7 @@
 
 {% block body %}
     <div class="img">
-        <img class="photo" src="{{ user.picture }}" alt="Photo {{ user.firstname }}">
+        <img class="photo" src="/uploads/images/{{ user.picture }}" alt="Photo {{ user.firstname }}">
     </div>
     <div class="me subtitle">
         <p><strong>{{ user.firstname }} {{ user.lastname|u.truncate(1) }}.</strong> - {{ userAge }} ans</p>
@@ -29,7 +29,7 @@
         </span>
     </div>
     <div class="search">
-        <!-- <p>Cherche un(e) coolokataire</p> -->
+        <p>Cherche {{ user.optionSearch }}</p>
     </div>
     <div class="me">
         <ion-icon name="location-outline"></ion-icon>

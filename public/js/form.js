@@ -32,4 +32,3 @@ function hidePassword(target){
 document.addEventListener('click', (e) => {
     hidePassword(e.target);
 } )
-

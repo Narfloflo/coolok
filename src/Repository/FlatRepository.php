@@ -35,25 +35,50 @@ class FlatRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
-    public function search(string $q)
+    public function search(string $q, $option = null)
     {
         $stmt = $this->createQueryBuilder('e');
 
 
             $stmt->where('e.city LIKE :query');
-            $stmt->orWhere('e.furnished LIKE :query');
-            $stmt->orWhere('e.rent LIKE :query');
-            $stmt->orWhere('e.gender LIKE :query');
-            $stmt->orWhere('e.free_space LIKE :query');
+
+            switch ($option)
+            {
+                case 'furnished':
+                    $stmt->orWhere('e.furnished LIKE :query');
+                    break;
+
+                case 'space':
+                    $stmt->orWhere('e.free_space LIKE :query');
+                    break;
+
+                    case 'surface':
+                        $stmt->orWhere('e.surface LIKE :query');
+                        break;    
+
+                case 'rent':
+                    $stmt->orWhere('e.rent LIKE :query');
+                    break;
+
+                case 'gender':
+                    $stmt->orWhere('e.gender LIKE :query');
+                    break;
+                
+                default:
+
+            }
 
             $stmt->setParameter(':query', '%' . $q . '%');
         
         
         return $stmt->getQuery()->getResult();
 
-        
-
+        if(!empty($criteria['flat'])){
+            $stmt->andWhere('e.flat = :flat');
+            $stmt->setParameter('flat', $criteria['flat']);
         }
+
+        }        
     }
 
 
