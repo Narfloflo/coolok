@@ -104,8 +104,7 @@ class AddFlatType extends AbstractType
                 'attr' => [
                     'class' => 'input-round',
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
