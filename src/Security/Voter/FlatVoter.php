@@ -52,7 +52,7 @@ class FlatVoter extends Voter
 
     protected function supports(string $attribute, $subject): bool
     {
-        if(!in_array($attribute, self::EDITING)){
+        if(!in_array($attribute, [self::EDITING])){
             return false;
         }
 
