@@ -35,56 +35,85 @@ class FlatRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
-    public function search(string $q, $option = null)
-    {
-        $stmt = $this->createQueryBuilder('e');
+    // public function search(string $q, $option = null)
+    // {
+    //     $stmt = $this->createQueryBuilder('e');
 
 
-            $stmt->where('e.city LIKE :query');
-            $stmt->orWhere('e.furnished LIKE :query');
-            $stmt->orWhere('e.gender LIKE :query');
-            $stmt->orWhere('e.description LIKE :query');
+    //         $stmt->where('e.city LIKE :query');
+    //         $stmt->orWhere('e.furnished LIKE :query');
+    //         $stmt->orWhere('e.gender LIKE :query');
+    //         $stmt->orWhere('e.description LIKE :query');
 
 
-            switch ($option)
-            {
-                case 'furnished':
-                    $stmt->orWhere('e.furnished LIKE :query');
-                    break;
+    //         switch ($option)
+    //         {
+    //             case 'furnished':
+    //                 $stmt->orWhere('e.furnished LIKE :query');
+    //                 break;
 
-                case 'space':
-                    $stmt->orWhere('e.free_space LIKE :query');
-                    break;
+    //             case 'space':
+    //                 $stmt->orWhere('e.free_space LIKE :query');
+    //                 break;
 
-                    case 'surface':
-                        $stmt->orWhere('e.surface LIKE :query');
-                        break;    
+    //                 case 'surface':
+    //                     $stmt->orWhere('e.surface LIKE :query');
+    //                     break;    
 
-                case 'rent':
-                    $stmt->orWhere('e.rent LIKE :query');
-                    break;
+    //             case 'rent':
+    //                 $stmt->orWhere('e.rent LIKE :query');
+    //                 break;
 
-                case 'gender':
-                    $stmt->orWhere('e.gender LIKE :query');
-                    break;
+    //             case 'gender':
+    //                 $stmt->orWhere('e.gender LIKE :query');
+    //                 break;
     
                 
-                default:
+    //             default:
 
-            }
+    //         }
 
-            $stmt->setParameter(':query', '%' . $q . '%');
+    //         $stmt->setParameter(':query', '%' . $q . '%');
         
         
-        return $stmt->getQuery()->getResult();
+    //     return $stmt->getQuery()->getResult();
 
-        if(!empty($criteria['flat'])){
-            $stmt->andWhere('e.flat = :flat');
-            $stmt->setParameter('flat', $criteria['flat']);
+    //     if(!empty($criteria['flat'])){
+    //         $stmt->andWhere('e.flat = :flat');
+    //         $stmt->setParameter('flat', $criteria['flat']);
+    //     }
+
+    //     }        
+    // }
+
+    public function search($criteria){
+        $stmt = $this->createQueryBuilder('flat');
+        
+        if(!empty($criteria['query'])){
+            $stmt->where('flat.type LIKE :query');
+            $stmt->orWhere('flat.city LIKE :query');
+            $stmt->orWhere('flat.description LIKE :query');
+            $stmt->setParameter('query', '%' . $criteria['query'] . '%');
+
+        if(!empty($criteria['type'])){
+            $stmt->andWhere('flat.type LIKE :type');
+            $stmt->setParameter('type', $criteria['type']);
         }
 
-        }        
+        if(!empty($criteria['furnished'])){
+            $stmt->andWhere('flat.furnished LIKE :furnished');
+            $stmt->setParameter('furnished', $criteria['furnished']);
+        }
+
+        if(!empty($criteria['gender'])){
+            $stmt->andWhere('flat.gender LIKE :gender');
+            $stmt->setParameter('gender', $criteria['gender']);
+        }
+
+        return $stmt->getQuery()->getResult();
     }
+}
+
 
 
     // public function searchFurnished(string $q)
@@ -132,3 +161,4 @@ class FlatRepository extends ServiceEntityRepository
         ;
     }
     */
+}

@@ -13,7 +13,27 @@
 {{ form_end(searchFlat) }} #}
 
 <div>
-    <h2>Filtres de recherche</h2>
+    <h1>Votre recherche</h1>
+
+    {# {{ form_start(searchForm) }}
+    <div class="form-row">
+        {{ form_row(searchForm.query) }}
+    </div>
+    <div class="form-row">
+        {{ form_row(searchForm.type) }}
+    </div>
+    <div class="form-row">
+        {{ form_row(searchForm.furnished) }}
+    </div>
+    <div class="form-row">
+        {{ form_row(searchForm.gender) }}
+    </div>
+    <div class="form-row">
+        {{ form_row(searchForm.submit) }}
+    </div>
+    {{ form_end(searchForm) }} #}
+
+    
     <form action="{{ url('search') }}" method="get" class="d-flex">
 
         <label for="search" hidden>Saisir votre recherche</label>

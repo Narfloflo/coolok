@@ -35,11 +35,13 @@
                 <form class="d-flex" action="{{ path('search') }}" method="get">
 
                     <label for="search" hidden>Saisir votre recherche</label>
-                    <input type="search" id="search" name="query" class="form-search" placeholder="Saisir votre recherche" aria-label="Saisir votre recherche">
+                    <input type="search" id="search_flat_query" name="search_flat[query]" class="form-search" placeholder="Saisir votre recherche" aria-label="Saisir votre recherche">
                 
-                    <button type="submit" class="btn-search" aria-label="Rechercher">Rechercher</button>
+                    <button type="submit" id="search_flat_submit" name="search_flat[submit]" class="btn-search" aria-label="Rechercher">Rechercher</button>
                 
                 </form>
+
+                
             </div>
             </div>
         </nav>

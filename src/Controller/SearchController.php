@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\SearchBarType;
+use App\Form\SearchFlatType;
 use App\Repository\FlatRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,21 +20,46 @@ class SearchController extends AbstractController
         $this->flatRepository = $flatRepository;
     }
     
-    #[Route('/search', name: 'search')]
-    public function searchFlat(Request $request): Response
+    // #[Route('/search', name: 'search')]
+    // public function searchFlat(Request $request): Response
+    // {
+    //     $searchFlat = $this->createForm(SearchBarType::class);
+    //     $searchFlat->handleRequest($request);
+    //     $searchCriteria = $searchFlat->getData();
+    //     // $q = $request->query->get('query');
+    //     // $option = $request->query->get('searchAdv');
+
+
+    //     $flats = $this->flatRepository->search($searchCriteria);
+
+    //     return $this->render('search/searchResult.html.twig', [
+    //         'flats' => $flats,
+    //         'searchForm' => $searchFlat->createView(),
+    //     ]);
+    // }
+
+    #[Route('/recherche', name: 'search')]
+    public function searchFull(Request $request): Response
     {
-        $searchFlat = $this->createForm(SearchBarType::class);
-        $searchFlat->handleRequest($request);
-        //$searchCriteria = $searchFlat->getData();
-        $q = $request->query->get('query');
-        $option = $request->query->get('searchAdv');
+        $searchFlat = $request->query->all()['search_flat']['query'];
+        if($searchFlat === ""){
+            $Query = '';
+        }else{
+            $Query = 'Appartement';
+        }
 
-
-        $flats = $this->flatRepository->search($q, $option);
-
-        return $this->render('flat/searchFlat.html.twig', [
-            'flats' => $flats,
-            'searchFlat' => $searchFlat->createView(),
+        $globalSearchForm = $this->createForm(SearchFlatType::class, [
+            'Query' => $Query,
         ]);
+        $globalSearchForm->handleRequest($request);
+        $searchCriteria = $globalSearchForm->getData();
+
+        $flats = $this->flatRepository->search($searchCriteria);
+
+        return $this->render('search/searchResult.html.twig', [
+            'flats' => $flats,
+            'searchForm' => $globalSearchForm->createView(),
+        ]);
+
     }
 }

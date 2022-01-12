@@ -40,6 +40,13 @@ class SearchBarType extends AbstractType
             // ->add('available')
             // ->add('images')
             // ->add('owner')
+            ->add('submit', SubmitType::class, [
+                'label' => '<i class="fas fa-search"></i>',
+                'label_html' => true,
+                'attr' => [
+                    'class' => 'button',
+                ]
+            ])
         ;
 
         $builder->setMethod('GET');
