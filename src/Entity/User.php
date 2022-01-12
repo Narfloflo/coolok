@@ -31,7 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     #[ORM\Column(type: 'json')]
-    private $roles = [];
+    private $roles = ["ROLE_USER"];
 
     #[ORM\Column(type: 'string')]
     private $password;
@@ -126,7 +126,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $users;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $picture;
+    private $picture = "avatar-1577909-640-61df54dfa5303.png";
 
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $available;
