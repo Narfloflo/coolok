@@ -41,6 +41,10 @@ class FlatRepository extends ServiceEntityRepository
 
 
             $stmt->where('e.city LIKE :query');
+            $stmt->orWhere('e.furnished LIKE :query');
+            $stmt->orWhere('e.gender LIKE :query');
+            $stmt->orWhere('e.description LIKE :query');
+
 
             switch ($option)
             {
@@ -63,6 +67,7 @@ class FlatRepository extends ServiceEntityRepository
                 case 'gender':
                     $stmt->orWhere('e.gender LIKE :query');
                     break;
+    
                 
                 default:
 
