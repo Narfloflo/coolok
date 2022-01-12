@@ -42,3 +42,11 @@
     }
     
 }
+
+.hidden{
+    display: none;
+}
+
+.test{
+    width: auto!important;
+}

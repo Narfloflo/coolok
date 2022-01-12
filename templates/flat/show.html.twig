@@ -2,6 +2,7 @@
 
 {% block title %}{{ parent() }} - Trouver une colocation, un colocataire facilement et gratuitement{% endblock %}
 {% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/flat/flat.css') }}">{% endblock %}
+{% block script %} <script src="{{ asset('js/mail.js') }} " defer></script> {% endblock %}
 
 {% block body %}
 <div class="d-flex justify-content-center">
@@ -120,12 +121,15 @@
     </p>
 </div>
 
-<div class="d-flex justify-content-center">
-    <p class="btn btn-outline-danger border border-dark rounded-pill p-2">
+<div class="d-flex flex-column align-items-center test">
+    <button id="see-user-mail" class="btn btn-outline-danger border border-dark rounded-pill p-2">
         <ion-icon name="chatbox-ellipses-outline"></ion-icon>
         Contacter {{flat.owner.firstname}}
         <ion-icon name="chevron-forward-outline"></ion-icon>
-    </p>
+    </button>
+    <div id="user-mail" class="hidden">         
+        <p>{{ flat.owner.email }}</p>
+    </div>
 </div>
 
 {% endblock %}
