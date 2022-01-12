@@ -51,6 +51,8 @@ class AppLoginAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
+        //TODO: add if account deleted
+        
         // For example:
         return new RedirectResponse($this->urlGenerator->generate('main_index'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);

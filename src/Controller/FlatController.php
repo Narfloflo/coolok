@@ -90,6 +90,8 @@ class FlatController extends AbstractController
             $isFav = false;
         }
 
+        
+
         $showFlat = $this->flatRepository->find($id);
         return $this->render('flat/show.html.twig', [
             'flat' => $showFlat,

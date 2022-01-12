@@ -21,7 +21,7 @@
                 </a>
             </li>
             <li id="nav-coolok" class="nav-bottom-list {{ app.request.get('_route') == 'user_favorites' ? 'nav-active' }}">
-                {% if app.user %}
+                {% if is_granted('ROLE_USER') %}
                 <a href="{{ path('user_favorites') }}">
                 {% else %}
                 <a href="{{ path('user_login') }}">
@@ -41,7 +41,7 @@
                 </a>
             </li>
             <li id="nav-profil" class="nav-bottom-list {{ app.request.get('_route') == 'user_profil' ? 'nav-active' }}">
-                {% if app.user %}
+                {% if is_granted('ROLE_USER') %}
                 <a href="{{ path('user_profil')}}">
                 {% else %}
                 <a href="{{ path('user_login') }}">

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes favoris - {{ parent() }}{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/main/card.css') }}">{% endblock %}
+
+
+{% block body %}
+
+<h1 class="text-center fs-3 mt-4">Suppression</h1>
+<div class="container">
+    <div class="row">
+        <div class="d-flex justify-content-center">
+            <div class="col col-md-6 text-center">
+            <p>
+                Attention {{ profil.firstname ? profil.firstname : profil.email }} vous êtes sur le point de supprimer votre compte.
+            </p>
+            <p>En supprimant votre compte vous perdrez vos favoris et ne serez plus visible auprès des autres cooloks.</p>
+            <p></p>
+            <form action="{{ path('user_delete_confirmation') }}" class="d-flex flex-column align-items-center">
+                <label for="confirmation">Pour confirmer la suppression de votre compte, cochez la case : </label>
+                <input type="checkbox" id="confirmation" name="confirmation"required>
+                <button type="submit" class="btn-validate mt-5">Supprimer</button>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

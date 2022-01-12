@@ -175,6 +175,38 @@ class UserController extends AbstractController
         return $this->redirectToRoute('user_profil');
     }
 
+    #[Route('/compte/suppression', name: 'delete')]
+    public function delete() : Response
+    {
+        if (!$this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $profil = $this->getUser();
+        return $this->render('user/delete.html.twig', [
+            'profil' => $profil,
+        ]);
+    }
+
+    #[Route('/compte/suppression/confirmation', name: 'delete_confirmation')]
+    public function deleteSuccess() : Response
+    {
+        if (!$this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $profil = $this->getUser();
+        $profil->setDeleted(true);
+        
+        $this->em->persist($profil);
+        $this->em->flush();
+
+        $message = sprintf('Votre compte est bien supprimé');
+        $this->addFlash('notice', $message);
+
+        return $this->redirectToRoute('main_index');
+    }
+
     #[Route('/compte/activate', name: 'activation')]
     public function activation() : Response
     {
