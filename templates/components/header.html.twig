@@ -8,27 +8,27 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('main_index') }}">Accueil</a>
+                    <a class="nav-link {{ app.request.get('_route') == 'main_index' ? 'active' }}" aria-current="page" href="{{ path('main_index') }}">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('flat_allFlat')}}">Coolokation</a>
+                    <a class="nav-link {{ app.request.get('_route') == 'flat_allFlat' ? 'active' }}" href="{{ path('flat_allFlat')}}">Coolokation</a>
                 </li>
                 {% if is_granted('ROLE_USER') %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('user_favorites') }}">Favoris</a>
+                    <a class="nav-link {{ app.request.get('_route') == 'user_favorites' ? 'active' }}" href="{{ path('user_favorites') }}">Favoris</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('user_profil')}}">Profil</a>
+                    <a class="nav-link {{ app.request.get('_route') == 'user_profil' ? 'active' }}" href="{{ path('user_profil')}}">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_logout')}}">Deconnexion</a>
+                    <a class="nav-link {{ app.request.get('_route') == 'app_logout' ? 'active' }}" href="{{ path('app_logout')}}">Deconnexion</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('user_login') }}">Connexion</a>
+                    <a class="nav-link {{ app.request.get('_route') == 'user_login' ? 'active' }}" href="{{ path('user_login') }}">Connexion</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('user_register') }}">Inscription</a>
+                    <a class="nav-link {{ app.request.get('_route') == 'user_register' ? 'active' }}" href="{{ path('user_register') }}">Inscription</a>
                 </li>
                 {% endif %}
                 </ul>
