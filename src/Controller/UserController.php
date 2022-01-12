@@ -198,6 +198,7 @@ class UserController extends AbstractController
         }
 
         $profil = $this->getUser();
+        $profil->setAvailable(false);
         $profil->setDeleted(true);
         
         $this->em->persist($profil);
@@ -206,7 +207,7 @@ class UserController extends AbstractController
         $message = sprintf('Votre compte est bien supprimé');
         $this->addFlash('notice', $message);
 
-        return $this->redirectToRoute('main_index');
+        return $this->redirectToRoute('app_logout');
     }
 
     #[Route('/compte/activate', name: 'activation')]
