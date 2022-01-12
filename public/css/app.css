@@ -39,7 +39,7 @@ header{
 }
 
 .btn-search{
-    border-radius: 10px;
+    border-radius: 0 10px 10px 0;
     background-color: white;
     color: var(--color-dark);
     border: 1px solid var(--color-secondary);
@@ -66,13 +66,12 @@ header{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border-radius: 10px;
+    border-radius: 10px 0 0 10px;
 }
 
 .form-search:focus{
     outline-color: var(--color-clear);
 }
-
 
 .logo-min{
     width: 200px;
@@ -97,7 +96,7 @@ header{
     height: 70px;
     background-color: #F5F5F5;
     position: relative;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     border-radius: 10px;

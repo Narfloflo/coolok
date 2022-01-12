@@ -122,7 +122,6 @@ class UserController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()){
             // Upload picture file via service
-            
             $pictureFile = $form->get('picture')->getData();
             if ($pictureFile) {
             $pictureFileName = $fileUploader->upload($pictureFile);
@@ -170,6 +169,9 @@ class UserController extends AbstractController
         $this->em->persist($profil);
         $this->em->flush();
 
+        $message = sprintf('Votre profil est désormais désactivé');
+        $this->addFlash('notice', $message);
+
         return $this->redirectToRoute('user_profil');
     }
 
@@ -181,6 +183,9 @@ class UserController extends AbstractController
         
         $this->em->persist($profil);
         $this->em->flush();
+
+        $message = sprintf('Votre profil est désormais activé');
+        $this->addFlash('notice', $message);
 
         return $this->redirectToRoute('user_profil');
     }

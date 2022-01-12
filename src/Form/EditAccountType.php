@@ -6,16 +6,14 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
-use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class EditAccountType extends AbstractType
@@ -25,7 +23,7 @@ class EditAccountType extends AbstractType
         $builder
             // ->add('roles')
             ->add('firstname', TextType::class, [
-                'label' => 'Prénom' . $options['test'],
+                'label' => 'Prénom',
                 'attr' => [
                     'placeholder' => 'Camille',
                     'class' => 'form-control mb-4',
@@ -49,19 +47,7 @@ class EditAccountType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('city', TextType::class, [
-                'label' => 'Votre emplacement',
-                'attr' => [
-                    'placeholder' => 'Paris',
-                    'class' => 'form-control mb-4',
-                ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Vous devez saisir votre ville.'
-                    ]),
-                ],
-
-            ])
+            ->add('city', HiddenType::class)
             ->add('description', TextareaType::class, [
                 'attr' => [
                     'rows' => 5,
@@ -158,7 +144,6 @@ class EditAccountType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'picture' => null,
-            'test' => null,
         ]);
     }
 }

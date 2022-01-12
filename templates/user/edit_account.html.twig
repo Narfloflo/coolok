@@ -1,17 +1,16 @@
 {% extends 'base.html.twig' %}
-
+{% block script %}
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCPNnOtaburBLkxWi5AKIhwF58oFvWway0"></script>
+<script src="{{ asset('js/edit_account.js') }} " defer></script>
+{% endblock %}
 {% block title %}Editer mon profil - {{ parent() }}{% endblock %}
-{% block stylesheets %}{% endblock %}
-
 
 {% block body %}
-
-
-
 <div class="container">
     <div class="row">
         <div class="d-flex justify-content-center">
             <div class="col col-md-6">
+
                 {% if profil.firstname == null %}
                 <h1 class="text-center fs-2 mt-3">Mon profil</h1>
                 <p>Renseignez vos informations afin de pouvoir contacter des cooloks et être visible des utilisateurs.</p>
@@ -23,6 +22,7 @@
                     </a>
                 </div>
                 {% endif %}
+
                 {{ form_start(form) }}
                 {% if profil.picture %}
                 <div class="form_group text-center">
@@ -39,7 +39,10 @@
                     {{ form_row(form.lastname) }}
                 </div>
                 <div class="form_group">
+                    <label for="city_autocomplete">Votre emplacement</label>
+                    <input class="form-control mb-4" type="text" id="city_autocomplete" name="city_autocomplete" placeholder="Paris" required>
                     {{ form_row(form.city) }}
+                    
                 </div>
                 <div class="form_group">
                     {{ form_row(form.description) }}
@@ -60,6 +63,5 @@
             </div>
         </div>
     </div>
-
 </div>
 {% endblock %}
