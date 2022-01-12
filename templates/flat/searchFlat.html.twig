@@ -44,8 +44,8 @@
 {# coolok.com/search.php?q=lille  #}
 
 
-
-{% for flat in flats %}
+<div class="row row-cols-2 row-cols-lg-4 g-4">
+    {% for flat in flats %}
     <div class="col">
         <a href="{{ path('flat_show', {id: flat.id}) }}" class="link-card">
             <div class="card h-100">
@@ -72,5 +72,7 @@
         </a>
     </div>
 {% endfor %}
+</div>
+
 
 {% endblock %}
