@@ -304,7 +304,7 @@ class UserController extends AbstractController
         $this->em->persist($user);
         $this->em->flush();
 
-        return $this->redirectToRoute('user_view_Profil');
+        return $this->redirectToRoute('user_view_Profil', ['id' => $id]);
     }
 
     private function disallowAccess(): Response
