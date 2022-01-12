@@ -12,10 +12,11 @@
     {% endfor %}
     <h1 class="h3 my-3 font-weight-normal">Réinitaliser votre mot de passe</h1>
     <div class="form">
-        {{ form_start(requestForm) }}
-        <div class="form-row">
-            {{ form_row(requestForm.email) }}
-        </div>
+        <div class="form-box">
+            {{ form_start(requestForm) }}
+            <div class="form-row">
+                {{ form_row(requestForm.email) }}
+            </div>
             <div>
                 <small>
                     Entrez votre adresse email afin que nous vous envoyons un lien pour réinitialiser votre mot de passe.
@@ -25,7 +26,6 @@
                 <button class="btn-outline">Envoyer l'email</button>
                 {{ form_end(requestForm) }} 
             </div>
+        </div>
     </div>
-
-
 {% endblock %}
