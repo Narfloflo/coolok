@@ -20,7 +20,7 @@
                     <img class="photo" src="/uploads/images/{{ user.picture }}" alt="Photo {{ user.firstname }}">
                 </div>
                 <div class="me text-center">
-                    <p><strong>{{ user.firstname }} {{ user.lastname }}</strong> - 32 ans</p>
+                    <p><strong>{{ user.firstname }} {{ user.lastname }}</strong> - {{ userAge }} ans</p>
                 </div>
                 <div class="me fs-4">
                     <ion-icon name="location-outline"></ion-icon>{{ user.city }}
@@ -36,7 +36,7 @@
                 </div>
             <h2>Date de naissance</h2>
                 <div>
-                    <p>{{ user.birthday|date("m/d/Y") }}</p>
+                    <p>{{ user.birthday|date("d/m/Y") }}</p>
                 </div>
                 <hr>
             {# 
@@ -73,7 +73,7 @@
                     {% endif %}
                 </div>
                 <div class="delete">
-                    <a class="supp" href="#">Supprimer le compte</a>
+                    <a class="supp" href="{{ path('user_delete') }} ">Supprimer le compte</a>
                 </div>
             </div>
         </div> 

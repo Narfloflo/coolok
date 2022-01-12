@@ -94,8 +94,10 @@ class UserController extends AbstractController
         if($this->getUser()->getFirstname() === null){
             return $this->redirectToRoute('user_edit');
         }else{
+            $userAge = $this->userService->calculAge($this->getUser());
             return $this->render('user/index.html.twig', [
                 'user' => $this->getUser(),
+                'userAge' => $userAge,
             ]);
         }
     }
