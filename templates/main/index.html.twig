@@ -8,7 +8,7 @@
     <!-- Nouveaux logements -->
     <div class="row mb-2">
         <div class="col header-section">
-            <h2 class="fs-5">Derniers logements</h2>
+            <h2 class="fs-5"><ion-icon name="home-outline"></ion-icon> Derniers logements</h2>
             <a href="{{ path('flat_allFlat') }}">Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></a>
         </div>
     </div>
@@ -25,11 +25,11 @@
                     <div class="card-flat-info">
                         <div>
                             <h3 class="card-flat-title">{{ flat.type }}</h3>
-                            <span class="card-flat-subtitle">{{ flat.city|u.truncate(20, '...') }}</span>
+                            <span class="card-flat-subtitle"><ion-icon name="location-outline"></ion-icon> {{ flat.city|u.truncate(20, '...')  }}</span>
                         </div>
                         <div>
-                            <span class="flat-surface">{{ flat.surface }} m2</span>
-                            <span class="flat-place">{{ flat.totalspace }} pers</span>
+                            <span class="flat-surface"><ion-icon name="expand-outline"></ion-icon> {{ flat.surface }} m2</span>
+                            <span class="flat-place"><ion-icon name="people-circle-outline"></ion-icon> {{ flat.totalspace }} pers</span>
                         </div>
                     </div>
                     <button class="btn-see-more"><span>Voir plus</span></button>
@@ -43,7 +43,7 @@
     <!-- Nouveaux inscrits -->
     <div class="row mt-5 mb-2">
         <div class="col header-section">
-            <h2 class="fs-5">Les nouveaux coolok</h2>
+            <h2 class="fs-5"><ion-icon name="people-outline"></ion-icon> Les nouveaux coolok</h2>
             <a href="{{ path('user_coloc') }} ">Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></a>
         </div>
     </div>
@@ -82,7 +82,7 @@
     <!-- Logements Mixte -->
     <div class="row mt-5 mb-2">
         <div class="col header-section">
-            <h2 class="fs-5">Colocations mixte</h2>
+            <h2 class="fs-5"><ion-icon name="male-female-outline"></ion-icon><ion-icon name="transgender-outline"></ion-icon> Colocations mixte</h2>
             <a href="{{ path('flat_mixedFlat') }}">Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></a>
         </div>
     </div>
@@ -99,11 +99,11 @@
                     <div class="card-flat-info">
                         <div>
                             <h3 class="card-flat-title">{{ flat.type }}</h3>
-                            <span class="card-flat-subtitle">{{ flat.city|u.truncate(20, '...')  }}</span>
+                            <span class="card-flat-subtitle"><ion-icon name="location-outline"></ion-icon> {{ flat.city|u.truncate(20, '...')  }}</span>
                         </div>
                         <div>
-                            <span class="flat-surface">{{ flat.surface }} m2</span>
-                            <span class="flat-place">{{ flat.totalspace }} pers</span>
+                            <span class="flat-surface"><ion-icon name="expand-outline"></ion-icon> {{ flat.surface }} m2</span>
+                            <span class="flat-place"><ion-icon name="people-circle-outline"></ion-icon> {{ flat.totalspace }} pers</span>
                         </div>
                     </div>
                     <button class="btn-see-more"><span>Voir plus</span></button>
@@ -116,7 +116,7 @@
     <!-- Nouveaux logements -->
     <div class="row mt-5 mb-2">
         <div class="col header-section">
-            <h2 class="fs-5">Colocations meublées</h2>
+            <h2 class="fs-5"><ion-icon name="bed-outline"></ion-icon> Colocations meublées</h2>
             <a href="{{ path('flat_furnishedFlat') }}">Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></a>
         </div>
     </div>
@@ -133,11 +133,11 @@
                     <div class="card-flat-info">
                         <div>
                             <h3 class="card-flat-title">{{ flat.type }}</h3>
-                            <span class="card-flat-subtitle">{{ flat.city|u.truncate(20, '...')  }}</span>
+                            <span class="card-flat-subtitle"><ion-icon name="location-outline"></ion-icon> {{ flat.city|u.truncate(20, '...')  }}</span>
                         </div>
                         <div>
-                            <span class="flat-surface">{{ flat.surface }} m2</span>
-                            <span class="flat-place">{{ flat.totalspace }} pers</span>
+                            <span class="flat-surface"><ion-icon name="expand-outline"></ion-icon> {{ flat.surface }} m2</span>
+                            <span class="flat-place"><ion-icon name="people-circle-outline"></ion-icon> {{ flat.totalspace }} pers</span>
                         </div>
                     </div>
                     <button class="btn-see-more"><span>Voir plus</span></button>
@@ -150,7 +150,7 @@
     <!-- Villes -->
     <div class="row mt-5 mb-2 text-center">
         <div class="col">
-            <h2 class="fs-5">Colocations par ville</h2>
+            <h2 class="fs-5"><ion-icon name="business-outline"></ion-icon> Colocations par ville</h2>
         </div>
     </div>
     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 row-cols-lg-6 g-4">
