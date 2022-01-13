@@ -20,20 +20,19 @@ class AddFlatType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('type', CheckboxType::class, [
+            ->add('type', ChoiceType::class, [
                 'label' => 'Type de logement',
-                'mapped' => false,
-                'attr' => [
-                    'class' => 'input-round',
+                'choices' => [
+                    'Studio' => 'Studio',
+                    'Loft' => 'Loft',
+                    'Maison' => 'Maison'
                 ]
             ])
-            ->add('furnished', CheckboxType::class, [
-                'label' => 'Meublé ou non meublé',
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devez choisir une option.'
-                    ])
+            ->add('furnished', ChoiceType::class, [
+                'label' => 'Le Logement est-il meublé ?',
+                'choices' => [
+                    'Oui' => true,
+                    'Non' => false
                 ]
             ])
             ->add('city', TextType::class, [
@@ -68,19 +67,19 @@ class AddFlatType extends AbstractType
                     'class' => 'input-round',
                 ]
             ])
-            ->add('gender', CheckboxType::class, [
+            ->add('gender', ChoiceType::class, [
                 'label' => 'Genre',
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devez choisir une option'
-                    ])
+                'choices' => [
+                    'Homme' => 'Homme',
+                    'Femme' => 'Femme',
+                    'Mixte' => 'Mixte'
                 ]
             ])
             ->add('available', ChoiceType::class, [
+                'label' => 'Le logement est-il disponible ?',
                 'choices' => [
-                    'Yes' => true,
-                    'No' => false
+                    'Oui' => true,
+                    'Non' => false
                 ]
             ])
             ->add('images', FileType::class, [
@@ -94,7 +93,7 @@ class AddFlatType extends AbstractType
                 ]
             ])
             ->add('Zipcode', NumberType::class, [
-                'label' => 'Adresse du logement',
+                'label' => 'Code Postal',
                 'attr' => [
                     'classe' => 'input-round',
                 ]
@@ -102,7 +101,7 @@ class AddFlatType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer',
                 'attr' => [
-                    'class' => 'mt-3 btn-validate',
+                    'class' => 'btn-validate',
                 ]
             ])
             ;
