@@ -8,54 +8,59 @@
 {% block script %} <script src="{{ asset('js/mail.js') }} " defer></script> {% endblock %}
 
 {% block body %}
-    <div class="img">
-        <img class="photo" src="/uploads/images/{{ user.picture }}" alt="Photo {{ user.firstname }}">
-    </div>
-    <div class="me subtitle">
-        <p><strong>{{ user.firstname }} {{ user.lastname|u.truncate(1) }}.</strong> - {{ userAge }} ans</p>
-        <span>
-            {% if app.user %}
-            <a href="{{ path('user_favorite', { id:user.id })}} ">
-                {% if isFav %}
-                <i class="fas fa-heart"></i>
-                {% else %}
-                <i class="far fa-heart"></i>
-                {% endif %}
-            {% else %}
-            <a href="{{ path('user_login') }} ">
-                <i class="far fa-heart"></i>
-            {% endif %}
-            </a>
-        </span>
-    </div>
-    <div class="search">
-        <p>Cherche {{ user.optionSearch }}</p>
-    </div>
-    <div class="me">
-        <ion-icon name="location-outline"></ion-icon>
-        <p>{{ user.city }}</p>
-    </div>
-    <div class="description">
-        <p>{{ user.description }}</p>
-    </div>
-
-    <h2>Passions</h2>
-        <div>
-            <p>{{ user.passions }}</p>
+<div class="row justify-content-center">
+    <div class="col col-lg-6">
+        <div class="img">
+            <img class="photo" src="/uploads/images/{{ user.picture }}" alt="Photo {{ user.firstname }}">
         </div>
-
-        
-        <div class="d-flex flex-column align-items-center test">
-                <button id="see-user-mail" class="btn btn-outline-danger border border-dark rounded-pill p-2">
-                    <ion-icon name="chatbox-ellipses-outline"></ion-icon>
-                        Contacter {{ user.firstname }}
-                    <ion-icon name="chevron-forward-outline"></ion-icon>
-                </button>
-                <div id="user-mail" class="hidden">         
-                    <p>{{ user.email }}</p>
-                </div>
+        <div class="me subtitle">
+            <p><strong>{{ user.firstname }} {{ user.lastname|u.truncate(1) }}.</strong> - {{ userAge }} ans</p>
+            <span>
+                {% if app.user %}
+                <a href="{{ path('user_favorite', { id:user.id })}} ">
+                    {% if isFav %}
+                    <i class="fas fa-heart"></i>
+                    {% else %}
+                    <i class="far fa-heart"></i>
+                    {% endif %}
+                {% else %}
+                <a href="{{ path('user_login') }} ">
+                    <i class="far fa-heart"></i>
+                {% endif %}
+                </a>
+            </span>
+        </div>
+        <div class="search">
+            <p>Cherche {{ user.optionSearch }}</p>
+        </div>
+        <div class="me">
+            <ion-icon name="location-outline"></ion-icon>
+            <p>{{ user.city }}</p>
+        </div>
+        <div class="description">
+            <p>{{ user.description }}</p>
         </div>
     
+        <h2>Passions</h2>
+            <div>
+                <p>{{ user.passions }}</p>
+            </div>
+    
+            
+            <div class="d-flex flex-column align-items-center test">
+                    <button id="see-user-mail" class="btn btn-outline-danger border border-dark rounded-pill p-2">
+                        <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+                            Contacter {{ user.firstname }}
+                        <ion-icon name="chevron-forward-outline"></ion-icon>
+                    </button>
+                    <div id="user-mail" class="hidden">         
+                        <p>{{ user.email }}</p>
+                    </div>
+            </div>
+        
+    </div>
+</div>
+
           
     <!-- <script> -->
         <!-- var divPrecedent=document.getElementById('mail');

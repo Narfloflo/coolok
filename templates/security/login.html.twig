@@ -5,7 +5,7 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/user/form.css') }}">
 {% endblock %}
-
+{% block script %} <script src="{{ asset('js/form.js') }} " defer></script> {% endblock %}
 
 {% block body %}
 <h1 class="h3 my-3 font-weight-normal">Connexion</h1>
@@ -44,7 +44,7 @@
                 <button class="btn-validate" type="submit">
                     Connexion
                 </button>
-                <a href="{{ path('user_register') }}" class="btn-outline">Créer un compte</a>
+                <a href="{{ path('user_register') }}" class="btn-outline">M'inscrire</a>
                 {% if not app.user %}
                 <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
                 {% endif %}

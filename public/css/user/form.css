@@ -34,10 +34,7 @@ form input:not([type="checkbox"]), form textarea, form select{
     width: 100%;
 }
 
-a{
-    text-decoration: none;
-    color: #FCA311;
-}
+
 
 h1{
     display: flex;
