@@ -281,8 +281,9 @@ class UserController extends AbstractController
             $isFav = false;
         }
         $mailSender = $user->getEmail();
+        $nameSender = $user->getFirstname();
         $mailReceiver = $view_Profil->getEmail();
-       
+
         $form = $this->createForm(ContactUserType::class);
         $form->handleRequest($request);
         
@@ -294,16 +295,14 @@ class UserController extends AbstractController
                 ->replyTo($mailSender)
                 //->priority(Email::PRIORITY_HIGH)
                 ->subject('Nouveau contact sur Coolok')
-                ->text($message)
-                ->html('<p>' . $message .'</p>');
+                ->text('Bonjour vous avez un nouveau message Coolok de la part de ' . $nameSender . ' : ' . $message)
+                ->html('<p>Bonjour vous avez un nouveau message Coolok de la part de ' . $nameSender . '</p><p>' . $message .'</p>');
 
                 $mailer->send($email);
 
                 $infoSucces = sprintf('Votre mail a bien été envoyé');
                 $this->addFlash('notice', $infoSucces);
-
         }
-
 
         return $this->render('user/view_user.html.twig', [
             'userAge' => $userAge,
