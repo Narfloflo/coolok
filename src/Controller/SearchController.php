@@ -56,7 +56,7 @@ class SearchController extends AbstractController
 
         $flats = $this->flatRepository->search($searchCriteria);
 
-        return $this->render('search/searchResult.html.twig', [
+        return $this->render('search/search_result.html.twig', [
             'flats' => $flats,
             'searchForm' => $globalSearchForm->createView(),
         ]);

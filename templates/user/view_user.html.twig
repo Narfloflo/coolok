@@ -53,8 +53,16 @@
                             Contacter {{ user.firstname }}
                         <ion-icon name="chevron-forward-outline"></ion-icon>
                     </button>
-                    <div id="user-mail" class="hidden">         
-                        <p>{{ user.email }}</p>
+                    <div id="user-mail" class="text-center hidden">         
+                        {% if app.user %}
+                        {{ form_start(form) }}
+                        {{ form_row(form.message)}}
+                        {{ form_row(form.submit)}}
+                        {{ form_end(form) }}
+                        {% else %}
+                        <p class="mt-3">Pour contacter {{ user.firstname}} vous devez être connecté</p>
+                        <button class="btn-outline"><a href="{{ path('user_login')}}" >Me connecter</a></button>
+                        {% endif %}
                     </div>
             </div>
         

@@ -90,8 +90,8 @@ class EditAccountType extends AbstractType
                 'label' => 'Vous recherchez ?',
                 'choices'  => [
                     'Un logement' => 'un logement',
-                    'Un(e) colocatair(e)' => 'un(e) colocatair(e)',
-                    'Les deux' => 'un logement et des colocataires',
+                    'Un(e) colocataire' => 'un(e) colocataire',
+                    'Les deux' => 'un logement et coloc',
                 ],
                 'attr' => [
                     'class' => 'form-control mb-4',

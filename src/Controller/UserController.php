@@ -6,13 +6,16 @@ use App\Entity\Flat;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Form\AddFlatType;
-use App\Repository\FlatRepository;
+use App\Form\ContactUserType;
 use App\Service\UserService;
 use App\Form\EditAccountType;
+use App\Repository\FlatRepository;
 use App\Repository\UserRepository;
 use App\Service\FileUploaderService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -261,7 +264,7 @@ class UserController extends AbstractController
 
     #[Route('/profil/{id}', name: 'view_Profil', requirements: ['id' => '\d+'])]
     
-    public function view_Profil($id, User $user): Response
+    public function view_Profil($id, User $user, MailerInterface $mailer, Request $request): Response
     {
         $view_Profil = $this->userRepository->find($id);
         $userAge = $this->userService->calculAge($view_Profil);
@@ -277,12 +280,67 @@ class UserController extends AbstractController
         }else{
             $isFav = false;
         }
+        $mailSender = $user->getEmail();
+        $mailReceiver = $view_Profil->getEmail();
+       
+        $form = $this->createForm(ContactUserType::class);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()){
+            $message = $form->get('message')->getData();
+            $email = (new Email())
+                ->from('verajor.verajor@gmail.com')
+                ->to($mailReceiver)
+                ->replyTo($mailSender)
+                //->priority(Email::PRIORITY_HIGH)
+                ->subject('Nouveau contact sur Coolok')
+                ->text($message)
+                ->html('<p>' . $message .'</p>');
+
+                $mailer->send($email);
+
+                $infoSucces = sprintf('Votre mail a bien été envoyé');
+                $this->addFlash('notice', $infoSucces);
+
+        }
+
+
         return $this->render('user/view_user.html.twig', [
             'userAge' => $userAge,
             'user' => $view_Profil,
             'isFav' => $isFav,
+            'form' => $form->createView(),
         ]);
     }
+
+    // #[Route('/profil/{id}/mail', name: 'sendingMail', requirements: ['id' => '\d+'])]
+    // public function sendMail($id, MailerInterface $mailer, User $user, Request $request) : Response
+    // {
+    //     $user = $this->getUser();
+    //     $mailSender = $user->getEmail();
+    //     $view_Profil = $this->userRepository->find($id);
+    //     $mailReceiver = $view_Profil->getEmail();
+
+    //     $form = $this->createForm(ContactUserType::class);
+    //     $form->handleRequest($request);
+    //     if ($form->isSubmitted() && $form->isValid()){
+    //         $message = $form->get('message');
+
+    //         $email = (new Email())
+    //             ->from('verajor.verajor@gmail.com')
+    //             ->to($mailReceiver)
+    //             ->replyTo($mailSender)
+    //             //->priority(Email::PRIORITY_HIGH)
+    //             ->subject('Nouveau contact sur Coolok')
+    //             ->text($message)
+    //             ->html('<p>' . $message .'</p>');
+
+    //             $mailer->send($email);
+
+    //     }
+        
+    //     return $this->redirectToRoute('main_index');
+    // }
 
     #[Route('/profil/{id}/success', name: 'favorite', requirements: ['id' => '\d+'])]
     public function favoriteUser($id) : Response

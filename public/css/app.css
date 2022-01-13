@@ -57,6 +57,16 @@ main{
     border: none;
 }
 
+.btn-global-search{
+    color: var(--color-dark);
+    border: 1px solid var(--color-secondary);
+    width: 100%;
+}
+
+.input-search{
+    border-radius: 30px;
+}
+
 .form-search{
     display: block;
     width: 100%!important;

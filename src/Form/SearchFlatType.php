@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Flat;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
@@ -18,32 +17,36 @@ class SearchFlatType extends AbstractType
         $builder
             ->add('query', SearchType::class, [
                 'label' => false,
+                'empty_data' => '',
                 'attr' => [
+                    'class' => 'form-control input-search',
                     'placeholder' => 'Recherche un logement, une ville',
+                    'required' => false,
                 ],
             ])
             ->add('type', ChoiceType::class, [
                 'label' => 'Type de logement',
                 'choices'  => [
-                    'Tous' => 'Appartement' || 'Maison' || 'Loft',
+                    'Tous' => '',
                     'Appartement' => 'Appartement',
                     'Maison' => 'Maison',
                     'Loft' => 'Loft',
                 ],
                 'attr' => [
-                    'class' => '',
+                    'class' => 'form-select input-search',
                 ],
             ])
+
             ->add('furnished', ChoiceType::class, [
                 'label' => 'Equipement',
                 'choices'  => [
-                    'Indifférent' => 'yes' || 'no' || 'half',
+                    'Indifférent' => '',
                     'Meublé' => 'yes',
                     'Non meublé' => 'no',
                     'Semi meublé' => 'half',
                 ],
                 'attr' => [
-                    'class' => '',
+                    'class' => 'form-select input-search',
                 ],
             ])
             // ->add('city')
@@ -54,15 +57,15 @@ class SearchFlatType extends AbstractType
             // ->add('rent')
             // ->add('description')
             ->add('gender', ChoiceType::class, [
-                'label' => 'Vous recherchez une colocation',
+                'label' => 'Préférence',
                 'choices'  => [
-                    'Indifférent' => 'men' || 'women' || 'all',
-                    'Masculine' => 'men',
-                    'Féminine' => 'women',
-                    'Mixte' => 'all',
+                    'Indifférent' => '',
+                    'Colocation Masculine' => 'men',
+                    'Colocation Féminine' => 'women',
+                    'Colocation Mixte' => 'all',
                 ],
                 'attr' => [
-                    'class' => '',
+                    'class' => 'form-select input-search',
                 ],
             ])
             //->add('available')
@@ -70,7 +73,7 @@ class SearchFlatType extends AbstractType
                 'label' => '<i class="fas fa-search"></i>',
                 'label_html' => true,
                 'attr' => [
-                    'class' => 'button',
+                    'class' => 'btn btn-global-search input-search',
                 ]
             ])
         ;
