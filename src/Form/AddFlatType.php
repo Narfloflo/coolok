@@ -7,13 +7,17 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class AddFlatType extends AbstractType
 {
@@ -23,63 +27,126 @@ class AddFlatType extends AbstractType
             ->add('type', ChoiceType::class, [
                 'label' => 'Type de logement',
                 'choices' => [
-                    'Studio' => 'Studio',
+                    'Appartement' => 'Appartement',
+                    'Maison' => 'Maison',
                     'Loft' => 'Loft',
-                    'Maison' => 'Maison'
+                    'Studio' => 'Studio'
+                ],
+                'attr' => [
+                    'class' => 'input-round',
                 ]
             ])
             ->add('furnished', ChoiceType::class, [
                 'label' => 'Le Logement est-il meublé ?',
                 'choices' => [
-                    'Oui' => true,
-                    'Non' => false
-                ]
-            ])
-            ->add('city', TextType::class, [
-                'label' => 'Ville',
+                    'Oui' => 'yes',
+                    'Non' => 'no',
+                    'Semi-meublé' => 'half',
+                ],
                 'attr' => [
                     'class' => 'input-round',
                 ]
+            ])
+            ->add('city', HiddenType::class, [
             ])
             ->add('surface', NumberType::class,  [
-                'label' => 'Surface du logement',
+                'label' => 'Surface du logement (en m2)',
                 'attr' => [
                     'class' => 'input-round',
-                ]
+                    'placeholder' => '85'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez saisir une surface'
+                    ]),
+                ],
             ])
             ->add('rooms', NumberType::class, [
-                'label' => 'Nombre de pieces',
+                'label' => 'Nombre de pièces',
                 'attr' => [
                     'class' => 'input-round',
-                ]
+                    'placeholder' => '6'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez saisir un nombre'
+                    ]),
+                ],
             ])
-            ->add('free_space')
-            ->add('total_space')
+            ->add('free_space', NumberType::class, [
+                'label' => 'Chambres disponibles',
+                'attr' => [
+                    'class' => 'input-round',
+                    'placeholder' => '2'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez saisir un nombre'
+                    ]),
+                ],
+            ])
+            ->add('total_space', NumberType::class, [
+                'label' => 'Nombre total de personne',
+                'attr' => [
+                    'class' => 'input-round',
+                    'placeholder' => '3'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez saisir un nombre'
+                    ]),
+                ],
+            ])
             ->add('rent', NumberType::class, [
-                'label' => 'Loyer',
+                'label' => 'Loyer par personne (€)',
                 'attr' => [
                     'class' => 'input-round',
-                ]
+                    'placeholder' => '400'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez saisir un loyer'
+                    ]),
+                ],
             ])
-            ->add('description', TextType::class, [
+            ->add('description', TextareaType::class, [
                 'label' => 'Description du logement',
                 'attr' => [
                     'class' => 'input-round',
-                ]
+                    'rows' => 6,
+                    'placeholder' => 'Décrivez ici le logement et la colocation.'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vous devez saisir une description.'
+                    ]),
+                    new Length([
+                        'min' => 10,
+                        'max'=> 1000,
+                        'minMessage' => 'Votre description doit contenir minimum {{ limit }} caractères',
+                        'maxMessage' => 'Votre mot de passe doit contenir au maximum {{ limit }} caractères',
+                    ]),
+                ],
             ])
             ->add('gender', ChoiceType::class, [
-                'label' => 'Genre',
+                'label' => 'Type de colocation',
                 'choices' => [
-                    'Homme' => 'Homme',
-                    'Femme' => 'Femme',
-                    'Mixte' => 'Mixte'
+                    '100% masculine' => 'men',
+                    '100% féminine' => 'women',
+                    'Mixte' => 'all'
+                ],
+                'attr' => [
+                    'class' => 'input-round',
                 ]
             ])
             ->add('available', ChoiceType::class, [
-                'label' => 'Le logement est-il disponible ?',
+                'label' => 'Mettre en ligne le logement ?',
                 'choices' => [
                     'Oui' => true,
                     'Non' => false
+                ],
+                'attr' => [
+                    'class' => 'input-round',
                 ]
             ])
             ->add('images', FileType::class, [
@@ -88,15 +155,16 @@ class AddFlatType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k'
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg',
+                        ],
+                        'mimeTypesMessage' => 'Merci de transferer un fichier image valide',
                     ])
-                ]
+                ],
             ])
-            ->add('Zipcode', NumberType::class, [
-                'label' => 'Code Postal',
-                'attr' => [
-                    'classe' => 'input-round',
-                ]
+            ->add('zipcode', HiddenType::class, [
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer',

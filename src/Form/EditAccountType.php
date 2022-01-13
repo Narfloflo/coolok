@@ -65,7 +65,6 @@ class EditAccountType extends AbstractType
                         'maxMessage' => 'Votre mot de passe doit contenir au maximum {{ limit }} caractères',
                     ]),
                 ],
-
             ])
             ->add('passions', TextareaType::class, [
                 'attr' => [

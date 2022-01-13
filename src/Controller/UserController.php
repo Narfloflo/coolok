@@ -233,6 +233,10 @@ class UserController extends AbstractController
 
     public function AddFlat(Request $request, Flat $flat = null): Response
     {
+        if (!$this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+        
         if($flat){
             $isNew = false;
         }else{

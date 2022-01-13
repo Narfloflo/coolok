@@ -11,8 +11,8 @@ function initialize() {
         let place = autocomplete.getPlace();
         let zipcode = place.address_components[place.address_components.length - 1].long_name;
         let city = place.address_components[2].long_name;
-        document.getElementById('city').value = city;  
-        document.getElementById('zipcode').value = zipcode;           
+        document.getElementById('add_flat_city').value = city;  
+        document.getElementById('add_flat_zipcode').value = zipcode;           
         });
 }
 google.maps.event.addDomListener(window, 'load', initialize);
