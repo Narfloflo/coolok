@@ -24,8 +24,9 @@
 .badgeounnet{
     display: flex;
     border: solid;
-    border-color: #ffc107;
-    color: white;
+    border-color: #f3be00  ;
+    background-color: #f3be00  !important ;
+    color: #fffbf0;
     border-radius: 15px;
     width: 170px;
     height: 20px;
@@ -41,6 +42,11 @@
         flex-direction: column;
     }
     
+}
+
+.contact-color{
+    color: #d13241 ;
+    border-color: #d13241!important ;
 }
 
 .hidden{

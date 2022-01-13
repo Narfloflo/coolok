@@ -11,7 +11,7 @@
 }
 
 .supp{
-    color: grey;
+    color: #726f6f ;
 }
 
 .perso{
@@ -21,9 +21,9 @@
 }
 
 button{
-    border-color: grey;
+    border-color: #726f6f ;
     background-color: rgb(250, 249, 249);
-    color: grey;
+    color: #726f6f ;
     justify-content: center;
 }
 
@@ -61,7 +61,7 @@ h3{
 }
 
 hr{
-    color: #FCA311;
+    color: #cc830d;
 }
 
 h1{
@@ -71,7 +71,7 @@ h1{
 
 a{
     text-decoration: none;
-    color: #FCA311;
+    color: #fca311  ;
 }
 
 strong{

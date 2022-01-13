@@ -1,10 +1,10 @@
 /* global css */
 :root{
     --color-bg: rgb(252, 252, 252);
-    --color-primary : #FC5E5E;
-    --color-secondary : #FCA311;
+    --color-primary : #c14747 ;
+    --color-secondary : #fca311 ;
     --color-dark : #011627;
-    --color-clear : #A8A3A3;
+    --color-clear : #726f6f  ;
 
 }
 a{
@@ -61,6 +61,11 @@ main{
     color: var(--color-dark);
     border: 1px solid var(--color-secondary);
     width: 100%;
+}
+
+.coloor{
+    color: #fca311 ;
+    border-color: #fca311 ;
 }
 
 .input-search{
@@ -179,7 +184,7 @@ footer{
     top: -50%;
     width: 70px;
     height: 70px;
-    background:#FCA311;
+    background:#9b6308 ;
     border-radius: 50%;
     border: 6px solid var(--color-bg);
     transition: 0.5s;
