@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Form\SearchBarType;
+use App\Form\ContactUserType;
+use Symfony\Component\Mime\Email;
 use App\Repository\FlatRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -75,7 +79,7 @@ class FlatController extends AbstractController
 
 
     #[Route('/{id}', name: 'show', requirements: ['id' => '\d+'])]
-    public function show($id): Response
+    public function show($id, User $user, MailerInterface $mailer, Request $request): Response
     {
         $flat = $this->flatRepository->find($id);
         if($this->getUser()){
@@ -90,12 +94,36 @@ class FlatController extends AbstractController
             $isFav = false;
         }
 
+        $mailSender = $user->getEmail();
+        $nameSender = $user->getFirstname();
+        $mailReceiver = $flat->getOwner()->getEmail();
+
+        $form = $this->createForm(ContactUserType::class);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()){
+            $message = $form->get('message')->getData();
+            $email = (new Email())
+                ->from('verajor.verajor@gmail.com')
+                ->to($mailReceiver)
+                ->replyTo($mailSender)
+                //->priority(Email::PRIORITY_HIGH)
+                ->subject('Nouveau contact sur Coolok')
+                ->text('Bonjour vous avez un nouveau message Coolok de la part de ' . $nameSender . ' : ' . $message)
+                ->html('<p>Bonjour vous avez un nouveau message Coolok de la part de ' . $nameSender . '</p><p>' . $message .'</p>');
+
+                $mailer->send($email);
+
+                $infoSucces = sprintf('Votre mail a bien été envoyé');
+                $this->addFlash('notice', $infoSucces);
+        }
         
 
         $showFlat = $this->flatRepository->find($id);
         return $this->render('flat/show.html.twig', [
             'flat' => $showFlat,
-            'isFav' => $isFav
+            'isFav' => $isFav,
+            'form' => $form->createView(),
         ]);
     }
 

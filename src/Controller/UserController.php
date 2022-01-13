@@ -40,7 +40,6 @@ class UserController extends AbstractController
         $this->hasher = $hasher;
         $this->userRepository = $userRepository;
         $this->userService = $userService;
-        // $this->fileUploader = $fileUploader;
     }
 
     #[Route('/inscription', name: 'register')]
@@ -312,35 +311,6 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-    // #[Route('/profil/{id}/mail', name: 'sendingMail', requirements: ['id' => '\d+'])]
-    // public function sendMail($id, MailerInterface $mailer, User $user, Request $request) : Response
-    // {
-    //     $user = $this->getUser();
-    //     $mailSender = $user->getEmail();
-    //     $view_Profil = $this->userRepository->find($id);
-    //     $mailReceiver = $view_Profil->getEmail();
-
-    //     $form = $this->createForm(ContactUserType::class);
-    //     $form->handleRequest($request);
-    //     if ($form->isSubmitted() && $form->isValid()){
-    //         $message = $form->get('message');
-
-    //         $email = (new Email())
-    //             ->from('verajor.verajor@gmail.com')
-    //             ->to($mailReceiver)
-    //             ->replyTo($mailSender)
-    //             //->priority(Email::PRIORITY_HIGH)
-    //             ->subject('Nouveau contact sur Coolok')
-    //             ->text($message)
-    //             ->html('<p>' . $message .'</p>');
-
-    //             $mailer->send($email);
-
-    //     }
-        
-    //     return $this->redirectToRoute('main_index');
-    // }
 
     #[Route('/profil/{id}/success', name: 'favorite', requirements: ['id' => '\d+'])]
     public function favoriteUser($id) : Response
