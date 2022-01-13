@@ -19,7 +19,22 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    // public function matchSuggest(int $maxLimit)
+    // {
+    //     $stmt = $this->createQueryBuilder('user');
+    //     // $stmt->select(array('flat.city', 'flat.available' ,'count(flat.city) AS length'));
+    //     $stmt->where('user.available LIKE :available');
+    //     $stmt->add('where', $qb->expr()->orX(
+    //         $qb->expr()->eq('u.id', '?1'),
+    //         $qb->expr()->like('u.nickname', '?2')
+    //     ))
+    //     $stmt->groupBy('flat.city');
+    //     $stmt->orderBy('count(flat.city)', 'DESC');
+    //     $stmt->setMaxResults($maxLimit);
+    //     $stmt->setParameter('available', 1);
 
+    //     return $stmt->getQuery()->getResult();
+    // }
 
     // /**
     //  * @return User[] Returns an array of User objects

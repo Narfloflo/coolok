@@ -134,12 +134,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $deleted;
 
+    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'matchusers')]
+    #[ORM\JoinTable(name: "match_user")]
+    private $matching;
+
+    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'matching')]
+    private $matchusers;
+
+    #[ORM\OneToMany(mappedBy: 'userA', targetEntity: Matching::class)]
+    private $mymatch;
+
+    #[ORM\OneToMany(mappedBy: 'userB', targetEntity: Matching::class)]
+    private $matchinginput;
+
     public function __construct()
     {
         $this->ownerflats = new ArrayCollection();
         $this->favorite_flat = new ArrayCollection();
         $this->favorite_user = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->matching = new ArrayCollection();
+        $this->matchusers = new ArrayCollection();
+        $this->mymatch = new ArrayCollection();
+        $this->matchinginput = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -536,6 +553,117 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDeleted(?bool $deleted): self
     {
         $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getMatching(): Collection
+    {
+        return $this->matching;
+    }
+
+    public function addMatching(self $matching): self
+    {
+        if (!$this->matching->contains($matching)) {
+            $this->matching[] = $matching;
+        }
+
+        return $this;
+    }
+
+    public function removeMatching(self $matching): self
+    {
+        $this->matching->removeElement($matching);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getMatchusers(): Collection
+    {
+        return $this->matchusers;
+    }
+
+    public function addMatchuser(self $matchuser): self
+    {
+        if (!$this->matchusers->contains($matchuser)) {
+            $this->matchusers[] = $matchuser;
+            $matchuser->addMatching($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMatchuser(self $matchuser): self
+    {
+        if ($this->matchusers->removeElement($matchuser)) {
+            $matchuser->removeMatching($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Matching[]
+     */
+    public function getMymatch(): Collection
+    {
+        return $this->mymatch;
+    }
+
+    public function addMymatch(Matching $mymatch): self
+    {
+        if (!$this->mymatch->contains($mymatch)) {
+            $this->mymatch[] = $mymatch;
+            $mymatch->setUserA($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMymatch(Matching $mymatch): self
+    {
+        if ($this->mymatch->removeElement($mymatch)) {
+            // set the owning side to null (unless already changed)
+            if ($mymatch->getUserA() === $this) {
+                $mymatch->setUserA(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Matching[]
+     */
+    public function getMatchinginput(): Collection
+    {
+        return $this->matchinginput;
+    }
+
+    public function addMatchinginput(Matching $matchinginput): self
+    {
+        if (!$this->matchinginput->contains($matchinginput)) {
+            $this->matchinginput[] = $matchinginput;
+            $matchinginput->setUserB($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMatchinginput(Matching $matchinginput): self
+    {
+        if ($this->matchinginput->removeElement($matchinginput)) {
+            // set the owning side to null (unless already changed)
+            if ($matchinginput->getUserB() === $this) {
+                $matchinginput->setUserB(null);
+            }
+        }
 
         return $this;
     }

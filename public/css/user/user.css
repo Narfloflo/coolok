@@ -60,3 +60,20 @@ strong{
     width: 250px;
     height: 50px;
 }
+
+.like{
+    display:flex;
+    justify-content: center;
+}
+
+.like  a{
+    font-size: 3rem;
+}
+
+.like  a:first-child{
+    color: var(--color-primary);
+}
+
+.like  a:last-child{
+    color: green;
+}
