@@ -76,4 +76,9 @@ class MainController extends AbstractController
     public function legal(): Response{
         return $this->render('pages/legal.html.twig');
     }
+
+    #[Route('/conditions-generales-d-utilisation', name: 'cgu')]
+    public function cgu(): Response{
+        return $this->render('pages/cgu.html.twig');
+    }
 }
