@@ -241,6 +241,7 @@ class UserController extends AbstractController
             $flat->setOwner($this->getUser());
             $isNew = true;
         }
+
         $form = $this->createForm(AddFlatType::class, $flat);
         
         $form->handleRequest($request);

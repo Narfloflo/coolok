@@ -5,14 +5,15 @@ namespace App\Form;
 use App\Entity\Flat;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\IsTrue;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class AddFlatType extends AbstractType
 {
@@ -91,7 +92,6 @@ class AddFlatType extends AbstractType
                         'maxSize' => '1024k'
                     ])
                 ]
-
             ])
             ->add('Zipcode', NumberType::class, [
                 'label' => 'Adresse du logement',
@@ -99,12 +99,13 @@ class AddFlatType extends AbstractType
                     'classe' => 'input-round',
                 ]
             ])
-            ->add('owner', TextType::class, [
-                'label' => 'Nom du proprietaire',
+            ->add('submit', SubmitType::class, [
+                'label' => 'Enregistrer',
                 'attr' => [
-                    'class' => 'input-round',
+                    'class' => 'mt-3 btn-validate',
                 ]
-            ]);
+            ])
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
