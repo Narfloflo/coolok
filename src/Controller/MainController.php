@@ -71,4 +71,9 @@ class MainController extends AbstractController
             'usersAge' => $newUserAge,
         ]);
     }
+
+    #[Route('/mentions-legale', name: 'legal')]
+    public function legal(): Response{
+        return $this->render('pages/legal.html.twig');
+    }
 }
