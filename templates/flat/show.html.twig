@@ -64,7 +64,16 @@
         </a>
     </span>
 </div>
+{% if is_granted('ROLE_ADMIN') %}
+<p class="badge bg-danger rounded-pill p-2 fs-5">
+<!-- lien a mettre pour edition de contenu, par defaut role_admin  -->
 
+    <a href="{{ path('user_editFlat', {id: flat.id}) }}">
+        <i class="far fa-edit"></i> Éditer
+    </a>
+
+</p>
+{% endif %}
 
 <br>
 <div class="badge-price d-flex justify-content-between">
@@ -78,20 +87,11 @@
 
 <div>
     <p class="badge bg-danger rounded-pill p-2 fs-5">
-       {{ flat.furnished }}
+        {{ (flat.furnished == 'yes') ? 'Meublé' : (flat.furnished == 'no') ? 'Non meublé' : 'Semi-meublé' }}
     </p>
     {% if flat.gender != null %}
-        <p class="badge bg-danger rounded-pill p-2 fs-5">{{ flat.gender }}</p>
-    {% endif %}
-    
-    {% if is_granted('ROLE_ADMIN') %}
         <p class="badge bg-danger rounded-pill p-2 fs-5">
-        <!-- lien a mettre pour edition de contenu, par defaut role_admin  -->
-
-            <a href="{{ path('user_editFlat', {id: flat.id}) }}">
-                <i class="far fa-edit"></i> Éditer
-            </a>
-
+            Colocation 100% {{ (flat.gender == 'men') ? 'masculine' : (flat.gender == 'women') ? 'féminine' : 'mixte' }}
         </p>
     {% endif %}
     
