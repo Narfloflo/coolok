@@ -10,31 +10,51 @@
 
 {% block script %}
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCPNnOtaburBLkxWi5AKIhwF58oFvWway0"></script>
-<script defer src="{{ asset('js/flat.js')}} "></script>
 {% endblock %}
 
 
 {% block body %}
-<h1>{{ isNew ? 'Création' : 'Modification' }} Logement</h1>
-
-<form method="post" class="form-box">
-        <div class="form-error">
-            
+<h1>{{ isNew ? 'Création' : 'Modification' }}   Logement</h1>
+<div class="form">
+        {{ form_start(form) }}
+        <div class="form-row">
+            {{ form_row(form.type) }}
         </div>
-    <div class="form-row">
-        <div>
-            <label for="city_autocomplete"></label>
-            <input type="adress" name="city_autocomplete" id="city_autocomplete" placeholder="Ville">
-            <input type="text" id="city" name="city">
-            <input type="text" id="zipcode" name="zipcode" />
+        <div class="form-row">
+            {{ form_row(form.furnished) }}
         </div>
-    </div>
-
-    <div class="form-end">
-        <button type="button" class="btn btn-dark">Ajoute le Logement</button>
-    </div>
-
-    <input type="hidden" name="_token" value="{{ csrf_token('authenticate') }}">
-</form>
-
+        <div class="form_group">
+            <label for="city_autocomplete">Emplacement du logement</label>
+            <input class ="form-control mb-4" type="text" id="city_autocomplete"
+            {{ form_row(form.city) }}
+        </div>
+        <div class="form-row">
+            {{ form_row(form.surface) }}
+        </div>
+        <div class="form-row">
+            {{ form_row(form.rooms) }}
+        </div>
+        <div class="form-row">
+            {{ form_row(form.rent) }}
+        </div>
+        <div class="form-row">
+            {{ form_row(form.description) }}
+        </div>
+        <div class="form-row">
+            {{ form_row(form.gender) }}
+        </div>
+        <div class="form-row">
+            {{ form_row(form.available) }}
+        </div>
+        <div class="form-row">
+            {{ form_row(form.images) }}
+        </div>
+        <div class="form-row">
+            {{ form_row(form.owner) }}
+        </div>
+        <div class="form-end">
+            {{ form_row(form.submit) }}
+        </div>
+        {{ form_end(form) }}
+</div>
 {% endblock %}
