@@ -10,6 +10,7 @@
 
 {% block script %}
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCPNnOtaburBLkxWi5AKIhwF58oFvWway0"></script>
+<script src="{{ asset('js/flat.js') }} " defer></script>
 {% endblock %}
 
 
@@ -23,10 +24,17 @@
         <div class="form-row">
             {{ form_row(form.furnished) }}
         </div>
-        <div class="form_group">
-            <label for="city_autocomplete">Emplacement du logement</label>
-            <input class ="form-control mb-4" type="text" id="city_autocomplete"
+        <div class="form-row">
+            {{ form_row(form.free_space) }}
+        </div>
+        <div class="form-row">
+            {{ form_row(form.total_space) }}
+        </div>
+        <div class="form_row">
+            <label for="city_autocomplete">Adresse du logement (seule la ville sera visible)</label>
+            <input class ="input-round mb-3" type="text" id="city_autocomplete" placeholder="22 rue des peupliers 59800 Lille">
             {{ form_row(form.city) }}
+            {{ form_row(form.zipcode) }}
         </div>
         <div class="form-row">
             {{ form_row(form.surface) }}

@@ -31,6 +31,7 @@ class SearchFlatType extends AbstractType
                     'Appartement' => 'Appartement',
                     'Maison' => 'Maison',
                     'Loft' => 'Loft',
+                    'Studio' => 'Studio'
                 ],
                 'attr' => [
                     'class' => 'form-select input-search',

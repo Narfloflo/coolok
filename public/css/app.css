@@ -5,8 +5,8 @@
     --color-secondary : #FCA311;
     --color-dark : #011627;
     --color-clear : #A8A3A3;
-
 }
+
 a{
     text-decoration: none;
     color:var(--color-dark)
@@ -32,6 +32,7 @@ main{
 .active{
     text-decoration: underline;
 }
+
 .btn-validate{
     border: none;
     color: white;
