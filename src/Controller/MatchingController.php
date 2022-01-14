@@ -58,7 +58,6 @@ class MatchingController extends AbstractController
         // on recupere les utilisateurs déjà matché
         $alreadyMatch = $this->matchingRepository->listFirstMatch($currentUser);
 
-
         // on supprime les utilisateurs déjà matché des profils à présenter
         if(count($alreadyMatch) != 0){
             foreach($usersAvailable as $keyA => $user)
@@ -78,7 +77,7 @@ class MatchingController extends AbstractController
         $userToDisplayAge = $this->userService->calculAge($userToDisplay);
 
         
-        //Verif si déjà eu premier Match
+        // Verif si déjà eu premier Match
         $isMatch = false;
         $allFirstMatch = $this->matchingRepository->alreadyMatch($currentUser);
 
@@ -106,7 +105,6 @@ class MatchingController extends AbstractController
         $userB = $this->userRepository->find($id);
         
         $alreadyMatch = $this->matchingRepository->alreadyMatch($currentUser);
-        // dd($alreadyMatch);
         if(count($alreadyMatch) != 0){
             for($i = 0; $i < count($alreadyMatch) ; $i++){
                 // Verification si A à déjà match B
@@ -155,10 +153,11 @@ class MatchingController extends AbstractController
                     break;
                 }
         }}else{
-            //Sinon on crée le premier match
+            //Sinon on crée le match et on rempli MatchingBAt pour empecher le match (à faire évoluer)
             $matching = new Matching();
             $matching->setUserA($currentUser);
             $matching->setUserB($userB);
+            $matching->setMatchingBAt(new \DateTime());
         }
 
         $this->em->persist($matching);
