@@ -81,4 +81,10 @@ class MainController extends AbstractController
     public function cgu(): Response{
         return $this->render('pages/cgu.html.twig');
     }
+
+    #[Route('/politique-de-confidentialite', name: 'confidentialite')]
+    public function confidentialite(): Response{
+        return $this->render('pages/confidentialite.html.twig');
+    }
+    
 }
