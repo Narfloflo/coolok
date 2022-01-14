@@ -6,9 +6,6 @@
 
 {% block body %}
 <div class="d-flex justify-content-center">
-    
-
-
     <div id="carouselExampleIndicators" class="carousel slide">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -31,9 +28,6 @@
             <span class="visually-hidden">Next</span>
         </button>
         </div>
-
-
-
     <!-- {% for key, image in flat.images %}
 
         <div>
@@ -41,14 +35,13 @@
         </div>
 
     {% endfor %} -->
-    
 </div>
 
 <br>
 
 <div class="row justify-content-center">
     <div class="col col-xl-8">
-        <h1>{{ flat.type }} - {{ flat.surface }}m² - {{ flat.totalSpace }}Pers</h1>
+        <h1>{{ flat.type }} - {{ flat.surface }}m² - {{ flat.totalSpace }}Pers</h1> 
         <div class="sub-title">
             <p>Proposé par {{flat.owner.firstname}} - 
                 <a href="{{ path('user_view_Profil', {id: flat.owner.id} )}}">Voir son profil</a>
@@ -69,6 +62,13 @@
                 </a>
             </span>
         </div>
+        {% if is_granted('ROLE_ADMIN') %}
+        <p class="badge rounded-pill bg-warning">
+            <a href="{{ path('user_editFlat', {id: flat.id}) }}">
+                <i class="far fa-edit"></i> Éditer
+            </a>
+        </p>
+        {% endif %}
         <br>
         <div class="badge-price d-flex justify-content-between">
             <h2>
@@ -112,16 +112,7 @@
                 {{ flat.description }}    
             </p>
         </div>
-        {% if is_granted('ROLE_ADMIN') %}
-        <p class="badge bg-danger rounded-pill p-2 fs-5">
-        <!-- lien a mettre pour edition de contenu, par defaut role_admin  -->
-        
-            <a href="{{ path('user_editFlat', {id: flat.id}) }}">
-                <i class="far fa-edit"></i> Éditer
-            </a>
-        
-        </p>
-        {% endif %}
+
         <div class="d-flex flex-column align-items-center mb-3">
             <button id="see-user-mail" class="btn btn-outline-danger contact-color border border-dark rounded-pill p-2">
                 <ion-icon name="chatbox-ellipses-outline"></ion-icon>

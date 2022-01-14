@@ -7,6 +7,40 @@
 {% block body %}
 
 <h1 class="text-center fs-3 mt-4">Mes favoris</h1>
+<h2 class="fs-5">Mes matchs</h2>
+{% if matchList|length != 0 %}
+<div class="row row-cols-2 row-cols-sm-3  row-cols-lg-6 g-4">
+    {% for key, user in matchList %}
+    <div class="col">
+        <a href="{{ path('user_view_Profil',{ id:user.id }) }}" class="link-card">
+            <div class="user-card">
+                <div class="card-user-top">
+                    <img src="/uploads/images/{{ user.picture }}" alt="Photo {{ user.firstname }}">
+                </div>
+                <div class="card-user-info">
+                    <div>
+                        <h3 class="card-user-title">{{ user.firstname }} {{ user.lastname|u.truncate(1) }}.</h3>
+                    </div>
+                    <div>
+                        <span class="card-user-subtitle">{{ user.city|u.truncate(20, '...') }}</span>
+                        <span class="user-age">{{ matchUserAge[key]}} ans</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="row">
+    <div class="col d-flex flex-column align-items-center">
+        <p>
+        Vous n'avez aucun match. Découvrez de nouveaux coolok.
+        </p>
+        <a href="{{ path('matching_list')}}" class="d-block text-center btn-see-more">Découvrir</a>
+    </div>
+</div>
+{% endif %}
 <div class="col header-section mt-4">
     <h2 class="fs-5">Mes logements favoris</h2>
 </div>

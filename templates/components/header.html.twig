@@ -15,7 +15,7 @@
                 </li>
                 {% if is_granted('ROLE_USER') %}
                 <li class="nav-item">
-                    <a class="nav-link {{ app.request.get('_route') == 'user_favorites' ? 'active' }}" href="{{ path('user_match') }}"><ion-icon name="magnet-outline"></ion-icon> Mes Matchs</a>
+                    <a class="nav-link {{ app.request.get('_route') == 'matching_list' ? 'active' }}" href="{{ path('matching_list') }}"><ion-icon name="magnet-outline"></ion-icon> Matching</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ app.request.get('_route') == 'user_favorites' ? 'active' }}" href="{{ path('user_favorites') }}"><ion-icon name="heart-outline"></ion-icon> Favoris</a>

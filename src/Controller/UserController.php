@@ -154,16 +154,34 @@ class UserController extends AbstractController
     #[Route('/compte/favoris', name: 'favorites')]
     public function showFavorites() : Response
     {
+        if (!$this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $profil = $this->getUser();
+
         $favoritesUser = $profil->getFavoriteUser();
         $favoritesFlat = $profil->getFavoriteFlat();
-
         $favoritesUserAge = $this->userService->calculAges($favoritesUser);
+
+        $matchList = $this->matchingRepository->findMyFullMatch($profil);
+        $userMatched = [];
+        // récupération des profils matché
+        foreach($matchList as $key => $match){
+            if($match->getuserA() === $profil->getId()){
+                $userMatched[] = $match->getUserB();
+            }else{
+                $userMatched[] = $match->getUserA();
+            }
+        }
+        $matchUserAge = $this->userService->calculAges($userMatched);
 
         return $this->render('user/favorites.html.twig', [
             'favoritesUser' => $favoritesUser,
             'favoritesUserAge' => $favoritesUserAge,
             'favoritesFlat' => $favoritesFlat,
+            'matchList' => $userMatched,
+            'matchUserAge' => $matchUserAge,
         ]);
     }
 
@@ -235,33 +253,33 @@ class UserController extends AbstractController
         return $this->redirectToRoute('user_profil');
     }
 
-    #[Route('/compte/match', name: 'match')]
-    public function showMatch() : Response
-    {
-        if (!$this->getUser()) {
-            throw $this->createAccessDeniedException();
-        }
+    // #[Route('/compte/match', name: 'match')]
+    // public function showMatch() : Response
+    // {
+    //     if (!$this->getUser()) {
+    //         throw $this->createAccessDeniedException();
+    //     }
 
-        $profil = $this->getUser();
-        $matchList = $this->matchingRepository->findMyFullMatch($profil);
+    //     $profil = $this->getUser();
+    //     $matchList = $this->matchingRepository->findMyFullMatch($profil);
         
-        $userMatched = [];
-        // récupération des profils matché
-        foreach($matchList as $key => $match){
-            if($match->getuserA() === $profil->getId()){
-                $userMatched[] = $match->getUserB();
-            }else{
-                $userMatched[] = $match->getUserA();
-            }
-        }
+    //     $userMatched = [];
+    //     // récupération des profils matché
+    //     foreach($matchList as $key => $match){
+    //         if($match->getuserA() === $profil->getId()){
+    //             $userMatched[] = $match->getUserB();
+    //         }else{
+    //             $userMatched[] = $match->getUserA();
+    //         }
+    //     }
 
-        $matchUserAge = $this->userService->calculAges($userMatched);
+    //     $matchUserAge = $this->userService->calculAges($userMatched);
 
-        return $this->render('user/matchs.html.twig', [
-            'matchList' => $userMatched,
-            'matchUserAge' => $matchUserAge,
-        ]);
-    }
+    //     return $this->render('user/matchs.html.twig', [
+    //         'matchList' => $userMatched,
+    //         'matchUserAge' => $matchUserAge,
+    //     ]);
+    // }
 
     #[Route('/creation_logement', name: 'AddFlat')]
     #[Route('/edit_logement/{id}', name: 'editFlat', requirements: ['id' => '\d+'])]
