@@ -19,6 +19,17 @@ class MatchingRepository extends ServiceEntityRepository
         parent::__construct($registry, Matching::class);
     }
 
+
+    public function alreadyMatch($value)
+    {
+        $stmt = $this->createQueryBuilder('matching');
+        $stmt->where('matching.userA = :val');
+        $stmt->andWhere('matching.matchingA_at IS NOT NULL');
+        $stmt->setParameter('val', $value);
+
+        return $stmt->getQuery()->getResult();
+
+    }
     // /**
     //  * @return Matching[] Returns an array of Matching objects
     //  */

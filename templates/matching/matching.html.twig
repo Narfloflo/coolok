@@ -8,18 +8,17 @@
 
 {% block body %}
 <div class="row justify-content-center">
-    {% for key, user in users%}
     <div class="col col-lg-6">
         <div class="img">
             <img class="photo" src="/uploads/images/{{ user.picture }}" alt="Photo {{ user.firstname }}">
         </div>
         <div class="like">
-            <a href=""><ion-icon name="close-circle-outline"></ion-icon></a>
+            <a href="{{ path('matching_deny', {id: user.id} ) }}"><ion-icon name="close-circle-outline"></ion-icon></a>
             
             <a href="{{ path('matching_accept', {id: user.id} ) }} "><ion-icon name="heart-circle-outline"></ion-icon></a>
         </div>
         <div class="me subtitle">
-            <p><strong>{{ user.firstname }} {{ user.lastname|u.truncate(1) }}.</strong> - {{ usersAvailableAge[key]}} ans</p>
+            <p><strong>{{ user.firstname }} {{ user.lastname|u.truncate(1) }}.</strong> - {{ userAge }} ans</p>
             <span>
                 {# {% if app.user %}
                 <a href="{{ path('user_favorite', { id:user.id })}} ">
@@ -72,7 +71,7 @@
             </div> #}
         
     </div>
-    {% endfor %}
+
 </div>
 
           
