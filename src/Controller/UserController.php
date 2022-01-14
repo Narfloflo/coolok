@@ -266,7 +266,7 @@ class UserController extends AbstractController
     #[Route('/creation_logement', name: 'AddFlat')]
     #[Route('/edit_logement/{id}', name: 'editFlat', requirements: ['id' => '\d+'])]
 
-    public function AddFlat(Request $request, Flat $flat = null): Response
+    public function AddFlat(Request $request, Flat $flat = null, FileUploaderService $fileUploader): Response
     {
         if (!$this->getUser()) {
             throw $this->createAccessDeniedException();
@@ -283,7 +283,14 @@ class UserController extends AbstractController
         $form = $this->createForm(AddFlatType::class, $flat);
         
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()){
+            $pictureFile = $form->get('images')->getData();
+            if ($pictureFile) {
+                $pictureFileName = $fileUploader->upload($pictureFile);
+                $flat->setPicture($pictureFileName);
+        }
+
             $this->mediaService->handleEvent($flat);
             $this->em->persist($flat);
             $this->em->flush();
