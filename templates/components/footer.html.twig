@@ -24,6 +24,18 @@
                     <span class="nav-bottom-text">Accueil</span>
                 </a>
             </li>
+            <li id="nav-coolok" class="nav-bottom-list {{ app.request.get('_route') == 'matching_list' ? 'nav-active' }}">
+                {% if is_granted('ROLE_USER') %}
+                <a href="{{ path('matching_list') }}">
+                {% else %}
+                <a href="{{ path('user_login') }}">
+                {% endif %}
+                    <span class="nav-bottom-icon">
+                        <ion-icon name="magnet-outline"></ion-icon>
+                    </span>
+                    <span class="nav-bottom-text">Matching</span>
+                </a>
+            </li>
             <li id="nav-coolok" class="nav-bottom-list {{ app.request.get('_route') == 'user_favorites' ? 'nav-active' }}">
                 {% if is_granted('ROLE_USER') %}
                 <a href="{{ path('user_favorites') }}">
@@ -34,14 +46,6 @@
                         <ion-icon name="heart-outline"></ion-icon>
                     </span>
                     <span class="nav-bottom-text">Favoris</span>
-                </a>
-            </li>
-            <li id="nav-search" class="nav-bottom-list">
-                <a href="{{ path('search')}}?query">
-                    <span class="nav-bottom-icon">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </span>
-                    <span class="nav-bottom-text">Recherche</span>
                 </a>
             </li>
             <li id="nav-profil" class="nav-bottom-list {{ app.request.get('_route') == 'user_profil' ? 'nav-active' }}">
@@ -59,6 +63,7 @@
             {% if app.request.get('_route') == 'main_index' 
             or app.request.get('_route') == 'user_favorites' 
             or app.request.get('_route') == 'user_profil' 
+            or app.request.get('_route') == 'matching_list'
             %}
             <div class="nav-indicator"></div>
             {% endif %}

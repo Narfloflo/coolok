@@ -7,31 +7,31 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link {{ app.request.get('_route') == 'main_index' ? 'active' }}" aria-current="page" href="{{ path('main_index') }}">Accueil</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
-                    <a class="nav-link {{ app.request.get('_route') == 'flat_allFlat' ? 'active' }}" href="{{ path('flat_allFlat')}}">Logements</a>
+                    <a class="nav-link {{ app.request.get('_route') == 'flat_allFlat' ? 'active' }}" href="{{ path('flat_allFlat')}}"><ion-icon name="business-outline"></ion-icon> Logements</a>
                 </li>
                 {% if is_granted('ROLE_USER') %}
                 <li class="nav-item">
-                    <a class="nav-link {{ app.request.get('_route') == 'user_favorites' ? 'active' }}" href="{{ path('user_match') }}">Mes Matchs</a>
+                    <a class="nav-link {{ app.request.get('_route') == 'user_favorites' ? 'active' }}" href="{{ path('user_match') }}"><ion-icon name="magnet-outline"></ion-icon> Mes Matchs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ app.request.get('_route') == 'user_favorites' ? 'active' }}" href="{{ path('user_favorites') }}">Favoris</a>
+                    <a class="nav-link {{ app.request.get('_route') == 'user_favorites' ? 'active' }}" href="{{ path('user_favorites') }}"><ion-icon name="heart-outline"></ion-icon> Favoris</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ app.request.get('_route') == 'user_profil' ? 'active' }}" href="{{ path('user_profil')}}">Mon Compte</a>
+                    <a class="nav-link {{ app.request.get('_route') == 'user_profil' ? 'active' }}" href="{{ path('user_profil')}}"><ion-icon name="person-outline"> </ion-icon>Mon Compte</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ app.request.get('_route') == 'app_logout' ? 'active' }}" href="{{ path('app_logout')}}">Déconnexion</a>
+                    <a class="nav-link {{ app.request.get('_route') == 'app_logout' ? 'active' }}" href="{{ path('app_logout')}}"><ion-icon name="exit-outline"></ion-icon> Déconnexion</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link {{ app.request.get('_route') == 'user_login' ? 'active' }}" href="{{ path('user_login') }}">Connexion</a>
+                    <a class="nav-link {{ app.request.get('_route') == 'user_login' ? 'active' }}" href="{{ path('user_login') }}"><ion-icon name="enter-outline"></ion-icon> Connexion</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ app.request.get('_route') == 'user_register' ? 'active' }}" href="{{ path('user_register') }}">Inscription</a>
+                    <a class="nav-link {{ app.request.get('_route') == 'user_register' ? 'active' }}" href="{{ path('user_register') }}"><ion-icon name="person-add-outline"></ion-icon> Inscription</a>
                 </li>
                 {% endif %}
                 </ul>
