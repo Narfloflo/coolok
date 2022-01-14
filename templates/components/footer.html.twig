@@ -1,3 +1,7 @@
+{# <div class="fixed-bottom bg-info hidden">
+    {{ render_esi(path('ch_cookie_consent.show')) }}
+    {{ render_esi(path('ch_cookie_consent.show_if_cookie_consent_not_set')) }}
+</div> #}
 <footer class="container">
     <div class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">© 2021–{{ "now"|date("Y")}} Coolok</p>
@@ -60,4 +64,3 @@
         </ul>
     </div>
 </div>
-

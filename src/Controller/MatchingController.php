@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Matching;
+use App\Repository\MatchingRepository;
 use App\Service\UserService;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,15 +17,18 @@ class MatchingController extends AbstractController
     private $em;
     private $userRepository;
     private $userService;
+    private $matchingRepository;
 
     public function __construct(
         EntityManagerInterface $em,
         UserRepository $userRepository,
         UserService $userService,
+        MatchingRepository $matchingRepository,
     ){
         $this->em = $em;;
         $this->userRepository = $userRepository;
         $this->userService = $userService;
+        $this->matchingRepository = $matchingRepository;
     }
 
 
@@ -46,8 +51,6 @@ class MatchingController extends AbstractController
             };
         }
         
-
-        
         $usersAvailableAge = $this->userService->calculAges($usersAvailable);
 
         return $this->render('matching/matching.html.twig', [
@@ -63,11 +66,23 @@ class MatchingController extends AbstractController
             throw $this->createAccessDeniedException();
         }
         $currentUser = $this->getUser();
-
         $userB = $this->userRepository->find($id);
         
-        // bug sur add matching
-        $currentUser->addMatching($userB);
+        
+        // // Add match_user ok 
+        // $currentUser->addMatching($userB);
+        // $this->em->persist($currentUser);
+        // $this->em->flush();
+
+
+        // Add first matching
+        $newMatching = new Matching();
+        $newMatching->setUserA($currentUser);
+        $newMatching->setUserB($userB);
+        $this->em->persist($newMatching);
+        $this->em->flush();
+
+        
 
         return $this->redirectToRoute('matching_list');
     }

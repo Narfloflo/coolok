@@ -13,9 +13,6 @@ class Matching
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'datetime')]
-    private $matchingAt;
-
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'mymatch')]
     #[ORM\JoinColumn(nullable: false)]
     private $userA;
@@ -33,21 +30,14 @@ class Matching
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $fullMatchingAt;
 
+    public function __construct()
+    {
+        $this->matchingA_at = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMatchingAt(): ?\DateTimeInterface
-    {
-        return $this->matchingAt;
-    }
-
-    public function setMatchingAt(\DateTimeInterface $matchingAt): self
-    {
-        $this->matchingAt = $matchingAt;
-
-        return $this;
     }
 
     public function getUserA(): ?User

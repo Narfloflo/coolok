@@ -10,3 +10,14 @@ when@prod:
     framework:
         router:
             strict_requirements: null
+
+ch_cookie_consent:
+    theme: 'light' # light, dark
+    categories: # Below are the default supported categories
+        - 'analytics'
+        - 'tracking'
+        - 'marketing'
+    use_logger: false # Logs user actions to database
+    position: 'top' # top, bottom
+    simplified: false # When set to true the user can only deny or accept all cookies at once
+    http_only: false # Sets HttpOnly on cookies
