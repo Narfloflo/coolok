@@ -8,6 +8,8 @@
 
 {% block body %}
 <div class="row justify-content-center">
+    <div class="col match-success hidden">Félicitations {{ user.firstname }} aimerait aussi être votre coolok</div>
+
     <div class="col col-lg-6">
         <div class="img">
             <img class="photo" src="/uploads/images/{{ user.picture }}" alt="Photo {{ user.firstname }}">
@@ -15,8 +17,18 @@
         <div class="like">
             <a href="{{ path('matching_deny', {id: user.id} ) }}"><ion-icon name="close-circle-outline"></ion-icon></a>
             
-            <a href="{{ path('matching_accept', {id: user.id} ) }} "><ion-icon name="heart-circle-outline"></ion-icon></a>
+            <a href="{{ path('matching_accept', {id: user.id} ) }} " id="like" data-ismatch=""><ion-icon name="heart-circle-outline"></ion-icon></a>
         </div>
+        {% if isMatch == true %}
+        <script>
+            let btnLike = document.getElementById('like');
+            btnLike.addEventListener('click', e => {
+                alert('Félicitations vous voulez être coolok tous les deux !');
+                console.log(btnLike.dataset.ismatch);
+            })
+        </script>
+        {% endif %}
+
         <div class="me subtitle">
             <p><strong>{{ user.firstname }} {{ user.lastname|u.truncate(1) }}.</strong> - {{ userAge }} ans</p>
             <span>
@@ -73,16 +85,5 @@
     </div>
 
 </div>
-
-          
-    <!-- <script> -->
-        <!-- var divPrecedent=document.getElementById('mail');
-        function visibilite(divId)
-        {
-            divPrecedent.style.display='none'; -->
-            <!-- divPrecedent=document.getElementById(divId); -->
-            <!-- divPrecedent.style.display=''; -->
-        <!-- } -->
-    <!-- </script> -->
 
 {% endblock %}

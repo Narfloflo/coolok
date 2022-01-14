@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-xl navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="{{ path('main_index') }}"><img src="https://coolokbucket.s3.eu-west-3.amazonaws.com/images/logo_coolok.png" style="height:30px;" alt="Logo Coolok"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,6 +14,9 @@
                     <a class="nav-link {{ app.request.get('_route') == 'flat_allFlat' ? 'active' }}" href="{{ path('flat_allFlat')}}">Logements</a>
                 </li>
                 {% if is_granted('ROLE_USER') %}
+                <li class="nav-item">
+                    <a class="nav-link {{ app.request.get('_route') == 'user_favorites' ? 'active' }}" href="{{ path('user_match') }}">Mes Matchs</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link {{ app.request.get('_route') == 'user_favorites' ? 'active' }}" href="{{ path('user_favorites') }}">Favoris</a>
                 </li>

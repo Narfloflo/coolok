@@ -19,13 +19,36 @@ class MatchingRepository extends ServiceEntityRepository
         parent::__construct($registry, Matching::class);
     }
 
-
-    public function alreadyMatch($value)
+    public function listFirstMatch($currentUser)
     {
         $stmt = $this->createQueryBuilder('matching');
         $stmt->where('matching.userA = :val');
         $stmt->andWhere('matching.matchingA_at IS NOT NULL');
-        $stmt->setParameter('val', $value);
+        $stmt->andWhere('matching.matchingB_at IS NULL');
+        $stmt->setParameter('val', $currentUser);
+
+        return $stmt->getQuery()->getResult();
+
+    }
+
+    public function alreadyMatch($currentUser)
+    {
+        $stmt = $this->createQueryBuilder('matching');
+        $stmt->where('matching.userB = :val');
+        $stmt->andWhere('matching.matchingB_at IS NULL');
+        $stmt->setParameter('val', $currentUser);
+
+        return $stmt->getQuery()->getResult();
+
+    }
+
+    public function findMyFullMatch($currentUser)
+    {
+        $stmt = $this->createQueryBuilder('matching');
+        $stmt->where('matching.userA = :val');
+        $stmt->orWhere('matching.userB = :val');
+        $stmt->andWhere('matching.fullMatchingAt IS NOT NULL');
+        $stmt->setParameter('val', $currentUser);
 
         return $stmt->getQuery()->getResult();
 

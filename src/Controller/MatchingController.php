@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Validator\Constraints\NotNull;
 
 #[Route('/matching', name:'matching_')]
@@ -55,7 +56,8 @@ class MatchingController extends AbstractController
         }
 
         // on recupere les utilisateurs déjà matché
-        $alreadyMatch = $this->matchingRepository->alreadyMatch($currentUser);
+        $alreadyMatch = $this->matchingRepository->listFirstMatch($currentUser);
+
 
         // on supprime les utilisateurs déjà matché des profils à présenter
         if(count($alreadyMatch) != 0){
@@ -63,21 +65,34 @@ class MatchingController extends AbstractController
             {
                 foreach($alreadyMatch as $keyB => $match)
                 {
-                    if($user->getId() === $match->getId()){
+                    if($user->getId() === $match->getUserB()->getId()){
                         unset($usersAvailable[$keyA]);
                     }
                 }
             }
         }
 
+        // on recupère un profil aléatoire à afficher
         $random_keys = array_rand($usersAvailable,1);
         $userToDisplay = $usersAvailable[$random_keys];
-
         $userToDisplayAge = $this->userService->calculAge($userToDisplay);
+
+        
+        //Verif si déjà eu premier Match
+        $isMatch = false;
+        $allFirstMatch = $this->matchingRepository->alreadyMatch($currentUser);
+
+        foreach($allFirstMatch as $keyA => $firstMatch){
+            ($firstMatch->getUserB());
+            if($firstMatch->getUserB() === $currentUser){
+                $isMatch = true;
+            }
+        }
 
         return $this->render('matching/matching.html.twig', [
             'user' => $userToDisplay,
             'userAge' => $userToDisplayAge,
+            'isMatch' => $isMatch,
         ]);
     }
 
@@ -90,10 +105,8 @@ class MatchingController extends AbstractController
         $currentUser = $this->getUser();
         $userB = $this->userRepository->find($id);
         
-        $alreadyMatch = $this->matchingRepository->findBy(
-            ['userB' => $currentUser],
-        );
-
+        $alreadyMatch = $this->matchingRepository->alreadyMatch($currentUser);
+        // dd($alreadyMatch);
         if(count($alreadyMatch) != 0){
             for($i = 0; $i < count($alreadyMatch) ; $i++){
                 // Verification si A à déjà match B
@@ -104,12 +117,15 @@ class MatchingController extends AbstractController
                     $matching->setFullMatchingAt(new \DateTime());
                     break;
                 }
-        }}else{
+            }
+
+        }else{
             //Sinon on crée le premier match
             $matching = new Matching();
             $matching->setUserA($currentUser);
             $matching->setUserB($userB);
         }
+        
         $this->em->persist($matching);
         $this->em->flush();
 

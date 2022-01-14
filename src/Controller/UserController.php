@@ -6,16 +6,17 @@ use App\Entity\Flat;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Form\AddFlatType;
-use App\Form\ContactUserType;
 use App\Service\UserService;
+use App\Form\ContactUserType;
 use App\Form\EditAccountType;
+use Symfony\Component\Mime\Email;
 use App\Repository\FlatRepository;
 use App\Repository\UserRepository;
 use App\Service\FileUploaderService;
+use App\Repository\MatchingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,17 +30,20 @@ class UserController extends AbstractController
     private $hasher;
     private $userRepository;
     private $userService;
+    private $matchingRepository;
 
     public function __construct(
         EntityManagerInterface $em,
         UserPasswordHasherInterface $hasher,
         UserRepository $userRepository,
         UserService $userService,
+        MatchingRepository $matchingRepository,
     ){
         $this->em = $em;
         $this->hasher = $hasher;
         $this->userRepository = $userRepository;
         $this->userService = $userService;
+        $this->matchingRepository = $matchingRepository;
     }
 
     #[Route('/inscription', name: 'register')]
@@ -215,6 +219,10 @@ class UserController extends AbstractController
     #[Route('/compte/activate', name: 'activation')]
     public function activation() : Response
     {
+        if (!$this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $profil = $this->getUser();
         $profil->setAvailable(true);
         
@@ -227,6 +235,33 @@ class UserController extends AbstractController
         return $this->redirectToRoute('user_profil');
     }
 
+    #[Route('/compte/match', name: 'match')]
+    public function showMatch() : Response
+    {
+        if (!$this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $profil = $this->getUser();
+        $matchList = $this->matchingRepository->findMyFullMatch($profil);
+        
+        $userMatched = [];
+        // récupération des profils matché
+        foreach($matchList as $key => $match){
+            if($match->getuserA() === $profil->getId()){
+                $userMatched[] = $match->getUserB();
+            }else{
+                $userMatched[] = $match->getUserA();
+            }
+        }
+
+        $matchUserAge = $this->userService->calculAges($userMatched);
+
+        return $this->render('user/matchs.html.twig', [
+            'matchList' => $userMatched,
+            'matchUserAge' => $matchUserAge,
+        ]);
+    }
 
     #[Route('/creation_logement', name: 'AddFlat')]
     #[Route('/edit_logement/{id}', name: 'editFlat', requirements: ['id' => '\d+'])]
