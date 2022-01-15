@@ -7,10 +7,12 @@
 <main class="container">
     <!-- Nouveaux logements -->
     <div class="row mb-2">
-        <div class="col header-section">
-            <h2 class="fs-5"><ion-icon name="home-outline"></ion-icon> Derniers logements</h2>
-            <a href="{{ path('flat_allFlat') }}">Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></a>
-        </div>
+        <a href="{{ path('flat_allFlat') }}">
+            <div class="col header-section">
+                <h2 class="fs-5"><ion-icon name="home-outline"></ion-icon> Derniers logements</h2>
+                <span>Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></span>
+            </div>
+        </a>
     </div>
     <div class="row row-cols-2 row-cols-lg-4 g-4">
         {% for flat in lastFlat %}
@@ -42,10 +44,12 @@
 
     <!-- Nouveaux inscrits -->
     <div class="row mt-5 mb-2">
-        <div class="col header-section">
-            <h2 class="fs-5"><ion-icon name="people-outline"></ion-icon> Les nouveaux coolok</h2>
-            <a href="{{ path('user_coloc') }} ">Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></a>
-        </div>
+        <a href="{{ path('user_coloc') }} ">
+            <div class="col header-section">
+                <h2 class="fs-5"><ion-icon name="people-outline"></ion-icon> Les nouveaux coolok</h2>
+                <span>Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></span>
+            </div>
+        </a>
     </div>
     <div class="row row-cols-2 row-cols-sm-3  row-cols-lg-6 g-4">
         {% for key, user in newUser %}
@@ -81,10 +85,12 @@
 
     <!-- Logements Mixte -->
     <div class="row mt-5 mb-2">
-        <div class="col header-section">
-            <h2 class="fs-5"><ion-icon name="male-female-outline"></ion-icon><ion-icon name="transgender-outline"></ion-icon> Colocations mixte</h2>
-            <a href="{{ path('flat_mixedFlat') }}">Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></a>
-        </div>
+        <a href="{{ path('flat_mixedFlat') }}">
+            <div class="col header-section">
+                <h2 class="fs-5"><ion-icon name="male-female-outline"></ion-icon><ion-icon name="transgender-outline"></ion-icon> Colocations mixte</h2>
+                <span>Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></span>
+            </div>
+        </a>
     </div>
     <div class="row row-cols-2 row-cols-lg-4 g-4">
         {% for flat in mixedFlat %}
@@ -115,10 +121,12 @@
 
     <!-- Nouveaux logements -->
     <div class="row mt-5 mb-2">
-        <div class="col header-section">
-            <h2 class="fs-5"><ion-icon name="bed-outline"></ion-icon> Colocations meublées</h2>
-            <a href="{{ path('flat_furnishedFlat') }}">Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></a>
-        </div>
+        <a href="{{ path('flat_furnishedFlat') }}">
+            <div class="col header-section">
+                <h2 class="fs-5"><ion-icon name="bed-outline"></ion-icon> Colocations meublées</h2>
+                <span>Voir plus<ion-icon name="chevron-forward-outline"></ion-icon></span>
+            </div>
+        </a>
     </div>
     <div class="row row-cols-2 row-cols-lg-4 g-4">
         {% for flat in furnishedFlat %}
@@ -155,7 +163,7 @@
     </div>
     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 row-cols-lg-6 g-4">
         {% for key, city in flatBiggestCity %}
-        <div class="col">
+        <div class="col card-city">
             <a href="{{ path('flat_cityFlat', {city: city.city}) }}" class="link-card">
                 <div class="card-city-top">
                     <img src="https://coolokbucket.s3.eu-west-3.amazonaws.com/images/city/city{{key}}.png" alt="...">

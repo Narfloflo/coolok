@@ -1,4 +1,5 @@
 /* global css */
+
 :root{
     --color-bg: rgb(252, 252, 252);
     --color-primary : #c14747 ;
@@ -20,6 +21,7 @@ a:hover{
 body{
     background-color: var(--color-bg);
     position: relative;
+    font-family: 'Roboto', sans-serif;
 }
 
 header{

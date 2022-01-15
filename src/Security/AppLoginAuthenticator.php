@@ -50,8 +50,6 @@ class AppLoginAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
-
-        //TODO: add if account deleted
         
         // For example:
         return new RedirectResponse($this->urlGenerator->generate('main_index'));
