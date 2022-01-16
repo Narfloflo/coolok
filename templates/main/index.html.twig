@@ -64,7 +64,7 @@
                             <h3 class="card-user-title">{{ user.firstname|capitalize }} {{ user.lastname|capitalize|u.truncate(1) }}.</h3>
                         </div>
                         <div>
-                            <span class="card-user-subtitle">{{ user.city|capitalize|u.truncate(20, '...') }}</span>
+                            <span class="card-user-subtitle">{{ user.city|u.truncate(20, '...') }}</span>
                             <span class="user-age">{{ usersAge[key]}} ans</span>
                         </div>
                     </div>

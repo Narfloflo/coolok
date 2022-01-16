@@ -40,7 +40,7 @@ class ResetPasswordController extends AbstractController
     public function request(Request $request, MailerInterface $mailer): Response
     {
         $form = $this->createForm(ResetPasswordRequestFormType::class);
-        
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->processSendingPasswordResetEmail(
