@@ -33,9 +33,8 @@ class MatchingController extends AbstractController
         $this->matchingRepository = $matchingRepository;
     }
 
-
     #[Route('', name: 'list')]
-    public function index(): Response
+    public function displayUserToMatch(): Response
     {
         if (!$this->getUser()) {
             throw $this->createAccessDeniedException();
@@ -71,22 +70,45 @@ class MatchingController extends AbstractController
             }
         }
 
-        // on recupère un profil aléatoire à afficher
-        $random_keys = array_rand($usersAvailable,1);
-        $userToDisplay = $usersAvailable[$random_keys];
-        $userToDisplayAge = $this->userService->calculAge($userToDisplay);
-
+        // on recupere les profils ayant refusé
+        $notToDisplay = $this->matchingRepository->notToDisplay($currentUser);
         
-        // Verif si déjà eu premier Match
-        $isMatch = false;
-        $allFirstMatch = $this->matchingRepository->alreadyMatch($currentUser);
-
-        foreach($allFirstMatch as $keyA => $firstMatch){
-            ($firstMatch->getUserB());
-            if($firstMatch->getUserB() === $currentUser){
-                $isMatch = true;
+        // on supprime les refus de match des profils à présenter
+        if(count($notToDisplay) != 0){
+            foreach($usersAvailable as $keyA => $user)
+            {
+                foreach($notToDisplay as $keyB => $match)
+                {
+                    if($user->getId() === $match->getUserB()->getId()){
+                        unset($usersAvailable[$keyA]);
+                    }
+                }
             }
         }
+
+        // on recupère un profil aléatoire à afficher
+        if($usersAvailable){
+            $random_keys = array_rand($usersAvailable,1);
+            $userToDisplay = $usersAvailable[$random_keys];
+            $userToDisplayAge = $this->userService->calculAge($userToDisplay);
+
+            // vérification si déjà eu premier Match
+            $isMatch = false;
+            $allFirstMatch = $this->matchingRepository->alreadyMatch($currentUser);
+
+            foreach($allFirstMatch as $keyA => $firstMatch){
+                ($firstMatch->getUserB());
+                if($firstMatch->getUserB() === $currentUser){
+                    $isMatch = true;
+                }
+            }
+        }else{
+            $userToDisplay = null;
+            $userToDisplayAge = null;
+            $isMatch = null;
+        }
+
+
 
         return $this->render('matching/matching.html.twig', [
             'user' => $userToDisplay,

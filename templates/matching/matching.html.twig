@@ -8,16 +8,14 @@
 
 {% block body %}
 <div class="row justify-content-center">
-    <div class="col match-success hidden">Félicitations {{ user.firstname }} aimerait aussi être votre coolok</div>
-
     <div class="col col-lg-6">
+        {% if user %}
         <div class="img">
             <img class="photo" src="/uploads/images/{{ user.picture }}" alt="Photo {{ user.firstname }}">
         </div>
         <div class="like">
-            <a href="{{ path('matching_deny', {id: user.id} ) }}"><ion-icon name="close-circle-outline"></ion-icon></a>
-            
-            <a href="{{ path('matching_accept', {id: user.id} ) }} " id="like" data-ismatch=""><ion-icon name="heart-circle-outline"></ion-icon></a>
+            <a href="{{ path('matching_deny', {id: user.id} ) }}" class="me-2"><ion-icon name="close-circle-outline"></ion-icon></a>
+            <a href="{{ path('matching_accept', {id: user.id} ) }} " id="like" data-ismatch="" class="ms-2"><ion-icon name="heart-circle-outline"></ion-icon></a>
         </div>
         {% if isMatch == true %}
         <script>
@@ -81,7 +79,10 @@
                 <button class="btn-outline"><a href="{{ path('user_login')}}" >Me connecter</a></button>
                 {% endif %}
             </div> #}
-        
+        {% else %}
+        <h1 class="text-center fs-3 mt-4">Il n'y a plus de profil à afficher.</h1>
+        <p class="text-center mt-3">Revenez bientôt...</p>
+        {% endif %}
     </div>
 
 </div>

@@ -28,7 +28,6 @@ class MatchingRepository extends ServiceEntityRepository
         $stmt->setParameter('val', $currentUser);
 
         return $stmt->getQuery()->getResult();
-
     }
 
     public function alreadyMatch($currentUser)
@@ -39,7 +38,17 @@ class MatchingRepository extends ServiceEntityRepository
         $stmt->setParameter('val', $currentUser);
 
         return $stmt->getQuery()->getResult();
+    }
 
+    public function notToDisplay($currentUser)
+    {
+        $stmt = $this->createQueryBuilder('matching');
+        $stmt->where('matching.userB = :val');
+        $stmt->andWhere('matching.matchingB_at IS NOT NULL');
+        $stmt->andWhere('matching.fullMatchingAt IS  NULL');
+        $stmt->setParameter('val', $currentUser);
+
+        return $stmt->getQuery()->getResult();
     }
 
     public function findMyFullMatch($currentUser)
@@ -51,7 +60,6 @@ class MatchingRepository extends ServiceEntityRepository
         $stmt->setParameter('val', $currentUser);
 
         return $stmt->getQuery()->getResult();
-
     }
     // /**
     //  * @return Matching[] Returns an array of Matching objects
